@@ -1,0 +1,19 @@
+﻿:root {
+  color-scheme: light;
+}
+
+html, body, #root {
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--surface-muted);
+  color: var(--brand-secondary);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
