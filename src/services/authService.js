@@ -1,7 +1,7 @@
 import supabase from '../lib/supabase';
 import { ROLES } from '../config/permissions';
 
-const PROFILE_SELECT = 'id, auth_user_id, full_name, email, phone, avatar_url, role, created_at';
+const PROFILE_SELECT = 'id, auth_user_id, full_name, email, phone, avatar_url, role, is_active, created_at';
 
 export async function getProfileById(id) {
   return supabase.from('profiles').select(PROFILE_SELECT).eq('id', id).single();

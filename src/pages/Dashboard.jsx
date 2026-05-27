@@ -1,125 +1,139 @@
-import { useEffect, useState } from 'react';
-import { fetchDashboardMetrics } from '../services/dashboardService';
+import {
+  Users,
+  IndianRupee,
+} from "lucide-react";
+
+import { useEffect, useState } from "react";
+
+import { fetchProductionJobs } from "../services/productionService";
+
+import PageContainer from "../components/ui/PageContainer";
+
+import KpiGrid from "../features/dashboard/KpiGrid";
+import LiveProductionFeed from "../features/dashboard/LiveProductionFeed";
+import ActivityFeed from "../features/dashboard/ActivityFeed";
+import DepartmentStatus from "../features/dashboard/DepartmentStatus";
 
 export default function Dashboard() {
-  const [dashboard, setDashboard] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
-    let mounted = true;
-    async function loadDashboard() {
-      setLoading(true);
-      const { data, error: fetchError } = await fetchDashboardMetrics();
-      if (!mounted) return;
-      if (fetchError) {
-        setError(fetchError.message || 'Unable to load dashboard metrics.');
-        setDashboard(null);
-      } else {
-        setError('');
-        setDashboard(data);
+    async function loadJobs() {
+      try {
+        const result = await fetchProductionJobs();
+
+        if (result.data) {
+          setJobs(result.data);
+        }
+
+        console.log("Production Jobs:", result);
+      } catch (error) {
+        console.error("Dashboard Error:", error);
       }
-      setLoading(false);
     }
-    loadDashboard();
-    return () => {
-      mounted = false;
-    };
+
+    loadJobs();
   }, []);
 
-  const metrics = dashboard?.metrics || [
-    { value: loading ? '...' : '0', label: 'Active Quotes' },
-    { value: loading ? '...' : '0', label: 'Orders Running' },
-    { value: loading ? '...' : '0%', label: 'Production Efficiency' },
-    { value: loading ? '...' : '0', label: 'Low Stock Alerts' },
-  ];
-
   return (
-    <main className="min-h-screen bg-[#0B1020] text-white px-6 lg:px-10 py-24">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-16">
-          <h1 className="text-5xl lg:text-6xl font-bold mb-6">Dashboard</h1>
-          <p className="text-slate-400 text-lg">
-            Enterprise control center for quotes, orders, production,
-            and operational workflows.
-          </p>
-        </div>
+    <PageContainer
+      title="Dashboard"
+      subtitle="Monitor production workflows, operational metrics, inventory health and manufacturing activity in real time."
+    >
+      {/* HERO */}
+      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#111827] via-[#0B1020] to-black p-8 shadow-2xl">
+        <div className="absolute right-0 top-0 h-72 w-72 rounded-full bg-orange-500/10 blur-3xl" />
 
-        {error ? (
-          <div className="mb-8 rounded-3xl border border-rose-600/20 bg-rose-600/10 p-4 text-sm text-rose-100">{error}</div>
-        ) : null}
+        <div className="relative z-10 flex flex-col gap-8 xl:flex-row xl:items-center xl:justify-between">
+          <div>
+            <p className="mb-3 text-sm uppercase tracking-[0.35em] text-orange-400">
+              Manufacturing ERP Workspace
+            </p>
 
-        <div className="grid md:grid-cols-4 gap-6 mb-12">
-          {metrics.map(({ value, label }) => (
-            <div key={label} className="glass rounded-3xl p-8 card-hover">
-              <div className="text-4xl font-bold text-blue-400 mb-3">{value}</div>
-              <div className="text-slate-400">{label}</div>
-            </div>
-          ))}
-        </div>
+            <h1 className="max-w-3xl text-5xl font-black leading-tight text-white">
+              Daily Operations Control Center
+            </h1>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 glass rounded-3xl p-8 card-hover">
-            <div className="flex items-center justify-between mb-8">
-              <div>
-                <h2 className="text-3xl font-bold mb-2">Recent Production</h2>
-                <p className="text-slate-400">Live manufacturing workflow overview</p>
+            <p className="mt-5 max-w-2xl text-lg text-slate-400">
+              Track quotations, inventory, production workflows,
+              procurement cycles and operational efficiency in real time.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-4">
+              <div className="rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur-xl">
+                <p className="text-sm text-slate-400">
+                  Employees Active
+                </p>
+
+                <h2 className="mt-2 flex items-center gap-2 text-3xl font-bold text-white">
+                  <Users size={24} />
+                  48
+                </h2>
               </div>
-            </div>
 
-            <div className="space-y-5">
-              {(dashboard?.productionJobs || []).map((job) => {
-                const status = String(job.production_stage || 'pending').replace(/_/g, ' ');
-                const progressMap = {
-                  pending: 10,
-                  paper_ordered: 20,
-                  printing: 35,
-                  punching: 50,
-                  pasting: 65,
-                  qc: 78,
-                  dispatch_ready: 88,
-                  dispatched: 95,
-                  delivered: 100,
-                };
-                const progress = progressMap[String(job.production_stage || '').toLowerCase()] || 10;
-                return (
-                  <div key={job.id} className="glass rounded-2xl p-5">
-                    <div className="flex items-center justify-between mb-4">
-                      <div>
-                        <div className="font-semibold text-lg">{job.box_type || job.order_number || 'Production job'}</div>
-                        <div className="text-slate-400 text-sm capitalize">{status}</div>
-                      </div>
-                      <div className="text-blue-400 font-bold">{progress}%</div>
-                    </div>
-                    <div className="h-3 bg-black/30 rounded-full overflow-hidden">
-                      <div className="h-full bg-blue-500 rounded-full" style={{ width: `${progress}%` }} />
-                    </div>
-                  </div>
-                );
-              })}
+              <div className="rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur-xl">
+                <p className="text-sm text-slate-400">
+                  Monthly Revenue
+                </p>
 
-              {!loading && !dashboard?.productionJobs?.length ? (
-                <div className="glass rounded-2xl p-5 text-sm text-slate-400">No production jobs are available.</div>
-              ) : null}
+                <h2 className="mt-2 flex items-center gap-2 text-3xl font-bold text-white">
+                  <IndianRupee size={24} />
+                  12.4L
+                </h2>
+              </div>
             </div>
           </div>
 
-          <div className="glass rounded-3xl p-8 card-hover h-fit">
-            <h2 className="text-2xl font-bold mb-8">Recent Activity</h2>
-            <div className="space-y-4">
-              {(dashboard?.activityLogs || []).map((activity) => (
-                <div key={activity.id} className="glass rounded-2xl p-4 text-sm text-slate-300">
-                  <p className="font-semibold text-white">{activity.activity_type?.replace(/_/g, ' ') || 'Activity'}</p>
-                  <p className="mt-2 text-slate-400">{activity.message}</p>
-                </div>
-              ))}
-              {!loading && !dashboard?.activityLogs?.length ? (
-                <div className="glass rounded-2xl p-5 text-sm text-slate-400">No activity logs are available.</div>
-              ) : null}
+          {/* ADMIN CARD */}
+          <div className="rounded-3xl border border-white/10 bg-black/40 p-8 backdrop-blur-xl">
+            <div className="mb-5 flex items-center gap-3">
+              <div className="h-4 w-4 rounded-full bg-green-500 animate-pulse" />
+
+              <span className="text-green-400">
+                ERP System Online
+              </span>
+            </div>
+
+            <p className="text-slate-400">
+              Signed in as
+            </p>
+
+            <h2 className="mt-2 text-4xl font-black text-white">
+              Admin
+            </h2>
+
+            <p className="mt-1 text-orange-400">
+              Full Access Role
+            </p>
+
+            <div className="mt-6 rounded-2xl bg-white/5 p-4">
+              <p className="text-sm text-slate-400">
+                Server Performance
+              </p>
+
+              <div className="mt-3 h-3 overflow-hidden rounded-full bg-white/10">
+                <div className="h-full w-[92%] rounded-full bg-green-500" />
+              </div>
+
+              <p className="mt-2 text-sm text-green-400">
+                92% Stable
+              </p>
             </div>
           </div>
         </div>
       </div>
-    </main>
+
+      {/* KPI GRID */}
+      <KpiGrid jobs={jobs} />
+
+      {/* LIVE JOBS */}
+      <LiveProductionFeed jobs={jobs} />
+
+      {/* LOWER GRID */}
+      <div className="grid gap-6 xl:grid-cols-2">
+        <ActivityFeed />
+        <DepartmentStatus />
+      </div>
+    </PageContainer>
   );
 }

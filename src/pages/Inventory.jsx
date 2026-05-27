@@ -1,190 +1,115 @@
-import { useEffect, useMemo, useState } from 'react';
-import Container from '../components/ui/Container';
-import SectionHeading from '../components/ui/SectionHeading';
-import StatCard from '../components/ui/StatCard';
-import InventoryFilters from '../features/inventory/InventoryFilters';
-import InventoryTable from '../features/inventory/InventoryTable';
-import InventoryCard from '../features/inventory/InventoryCard';
-import InventoryFlow from '../features/inventory/InventoryFlow';
-import LowStockAlert from '../features/inventory/LowStockAlert';
-import MaterialForm from '../features/inventory/MaterialForm';
-import StockMovementTable from '../features/inventory/StockMovementTable';
-import { fetchInventoryItems, fetchInventoryItemById, insertInventoryItem, updateInventoryItem, deleteInventoryItem, fetchStockMovements } from '../services/inventoryService';
-import { fetchSuppliers } from '../services/supplierService';
-import { isLowStock } from '../utils/inventoryHelpers';
+import { useEffect, useState } from "react";
+
+import PageContainer from "../components/ui/PageContainer";
+import DataTable from "../components/tables/DataTable";
+
+import { fetchInventoryItems } from "../services/inventoryService";
+
+const inventoryColumns = [
+  {
+    key: "material_code",
+    label: "Material Code",
+  },
+  {
+    key: "material_name",
+    label: "Material",
+  },
+  {
+    key: "category",
+    label: "Category",
+  },
+  {
+    key: "gsm",
+    label: "GSM",
+  },
+  {
+    key: "current_stock",
+    label: "Stock",
+  },
+  {
+    key: "minimum_stock",
+    label: "Min Stock",
+  },
+  {
+    key: "warehouse_location",
+    label: "Warehouse",
+  },
+];
 
 export default function Inventory() {
   const [items, setItems] = useState([]);
-  const [suppliers, setSuppliers] = useState([]);
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [editingItem, setEditingItem] = useState(null);
-  const [movements, setMovements] = useState([]);
-  const [filters, setFilters] = useState({ category: '', supplier: '', query: '' });
-  const [loading, setLoading] = useState(false);
-  const [saving, setSaving] = useState(false);
-  const [error, setError] = useState('');
-
-  const loadData = async () => {
-    setLoading(true);
-    setError('');
-    const [itemsResult, suppliersResult] = await Promise.all([fetchInventoryItems(), fetchSuppliers()]);
-    if (itemsResult.error || suppliersResult.error) {
-      setError(itemsResult.error?.message || suppliersResult.error?.message || 'Unable to load inventory data.');
-      setItems([]);
-      setSuppliers([]);
-    } else {
-      setItems(itemsResult.data || []);
-      setSuppliers(suppliersResult.data || []);
-      if (!selectedItem && itemsResult.data?.length) setSelectedItem(itemsResult.data[0]);
-    }
-    setLoading(false);
-  };
 
   useEffect(() => {
-    loadData();
+    async function loadInventory() {
+      try {
+        const result = await fetchInventoryItems();
+
+        if (result.data) {
+          setItems(result.data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    loadInventory();
   }, []);
 
-  useEffect(() => {
-    const loadMovements = async () => {
-      if (!selectedItem) {
-        setMovements([]);
-        return;
-      }
-      const { data, error: movementError } = await fetchStockMovements(selectedItem.id);
-      if (!movementError) {
-        setMovements(data || []);
-      }
-    };
-    loadMovements();
-  }, [selectedItem]);
+  const lowStockItems = items.filter(
+    (item) =>
+      Number(item.current_stock) <=
+      Number(item.minimum_stock)
+  );
 
-  const handleSaveMaterial = async (material) => {
-    setSaving(true);
-    setError('');
-    const payload = {
-      ...material,
-      current_stock: Number(material.current_stock || 0),
-      minimum_stock: Number(material.minimum_stock || 0),
-      gsm: material.gsm ? Number(material.gsm) : null,
-      cost_per_unit: Number(material.cost_per_unit || 0),
-      created_at: material.id ? undefined : new Date().toISOString(),
-    };
-
-    const response = material.id
-      ? await updateInventoryItem(material.id, payload)
-      : await insertInventoryItem(payload);
-
-    if (response.error) {
-      setError(response.error.message);
-    } else {
-      await loadData();
-      setEditingItem(null);
-    }
-    setSaving(false);
-  };
-
-  const handleDeleteMaterial = async (id) => {
-    setSaving(true);
-    const { error: deleteError } = await deleteInventoryItem(id);
-    if (deleteError) {
-      setError(deleteError.message);
-    } else {
-      await loadData();
-      setEditingItem(null);
-      if (selectedItem?.id === id) setSelectedItem(null);
-    }
-    setSaving(false);
-  };
-
-  const filteredItems = useMemo(() => {
-    return items.filter((item) => {
-      const categoryMatch = filters.category ? item.category === filters.category : true;
-      const supplierMatch = filters.supplier ? (item.supplier || item.supplier_id) === filters.supplier : true;
-      const queryMatch = filters.query ? item.material_name?.toLowerCase().includes(filters.query.toLowerCase()) : true;
-      return categoryMatch && supplierMatch && queryMatch;
-    });
-  }, [items, filters]);
-
-  const categories = useMemo(() => [...new Set(items.map((item) => item.category).filter(Boolean))], [items]);
-
-  const metrics = useMemo(
-    () => [
-      { value: items.length, label: 'Materials tracked' },
-      { value: items.filter((item) => isLowStock(item)).length, label: 'Low stock items' },
-      { value: [...new Set(items.map((item) => item.warehouse_location || item.storage_location).filter(Boolean))].length, label: 'Warehouse zones' },
-    ],
-    [items]
+  const totalStock = items.reduce(
+    (sum, item) =>
+      sum + Number(item.current_stock || 0),
+    0
   );
 
   return (
-    <main className="min-h-screen bg-[#0B1020] text-white pt-28">
-      <Container className="space-y-10 py-16">
-        <div className="grid gap-10 xl:grid-cols-[1.6fr_0.95fr] xl:items-start">
-          <SectionHeading
-            eyebrow="Raw material control"
-            title="Inventory management and raw material tracking"
-            description="Manage material stock, prevent shortages, and keep warehouse movements aligned with production demand."
-          />
-          <div className="grid gap-4 sm:grid-cols-3">
-            {metrics.map((metric) => (
-              <StatCard key={metric.label} value={metric.value} label={metric.label} />
-            ))}
-          </div>
+    <PageContainer
+      title="Inventory"
+      subtitle="Track paper rolls, consumables, warehouse stock and material availability."
+    >
+      {/* INVENTORY KPI */}
+      <div className="grid gap-6 md:grid-cols-3">
+        <div className="rounded-3xl border border-white/10 bg-[#111827] p-6">
+          <p className="text-slate-400">
+            Inventory Items
+          </p>
+
+          <h2 className="mt-4 text-5xl font-black text-orange-400">
+            {items.length}
+          </h2>
         </div>
 
-        {error ? (
-          <div className="rounded-[28px] border border-rose-600/20 bg-rose-600/10 p-4 text-sm text-rose-100">{error}</div>
-        ) : null}
+        <div className="rounded-3xl border border-white/10 bg-[#111827] p-6">
+          <p className="text-slate-400">
+            Low Stock Alerts
+          </p>
 
-        <InventoryFilters filters={filters} onChange={setFilters} categories={categories} suppliers={suppliers} />
-
-        <InventoryFlow items={items} selectedItem={selectedItem} movements={movements} onSelectItem={setSelectedItem} />
-
-        <div className="grid gap-8 xl:grid-cols-[1.4fr_0.75fr]">
-          <div className="space-y-8">
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-              {filteredItems.slice(0, 3).map((item) => (
-                <InventoryCard key={item.id} item={item} onSelect={setSelectedItem} />
-              ))}
-            </div>
-            <InventoryTable
-              items={filteredItems}
-              suppliers={suppliers}
-              onSelectItem={setSelectedItem}
-              onEditItem={(item) => {
-                setEditingItem(item);
-                setSelectedItem(item);
-              }}
-            />
-          </div>
-
-          <div className="space-y-8">
-            <LowStockAlert items={items} />
-            <MaterialForm
-              item={editingItem}
-              suppliers={suppliers}
-              onSubmit={handleSaveMaterial}
-              onDelete={handleDeleteMaterial}
-              loading={saving}
-            />
-          </div>
+          <h2 className="mt-4 text-5xl font-black text-red-400">
+            {lowStockItems.length}
+          </h2>
         </div>
 
-        <div className="grid gap-8 xl:grid-cols-[1fr_0.9fr]">
-          <div className="rounded-[32px] border border-slate-700 bg-slate-950/95 p-6 shadow-xl shadow-black/20">
-            <div className="mb-5">
-              <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Stock movement</p>
-              <h2 className="mt-2 text-2xl font-black text-white">Recent material transactions</h2>
-            </div>
-            <StockMovementTable movements={movements} />
-          </div>
-          <div className="rounded-[32px] border border-slate-700 bg-slate-950/95 p-6 shadow-xl shadow-black/20">
-            <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Selected material</p>
-            <h2 className="mt-2 text-2xl font-black text-white">{selectedItem?.material_name || 'No material selected'}</h2>
-            <p className="mt-3 text-sm text-slate-400">{selectedItem?.category || 'Choose a material to inspect stock movement and warehouse data.'}</p>
-          </div>
+        <div className="rounded-3xl border border-white/10 bg-[#111827] p-6">
+          <p className="text-slate-400">
+            Total Stock
+          </p>
+
+          <h2 className="mt-4 text-5xl font-black text-green-400">
+            {totalStock}
+          </h2>
         </div>
-      </Container>
-    </main>
+      </div>
+
+      {/* INVENTORY TABLE */}
+      <DataTable
+        columns={inventoryColumns}
+        data={items}
+      />
+    </PageContainer>
   );
 }

@@ -14,6 +14,7 @@ const defaultForm = {
 
 export default function VendorForm({ vendor, onSubmit, onCancel, saving }) {
   const [form, setForm] = useState(defaultForm);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (vendor) {
@@ -31,18 +32,29 @@ export default function VendorForm({ vendor, onSubmit, onCancel, saving }) {
     } else {
       setForm(defaultForm);
     }
+    setErrors({});
   }, [vendor]);
+
+  const validate = () => {
+    const newErrors = {};
+    if (!form.vendor_name.trim()) newErrors.vendor_name = 'Vendor name is required';
+    if (!form.phone.trim()) newErrors.phone = 'Phone number is required';
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (form.email && !emailRegex.test(form.email)) newErrors.email = 'Invalid email format';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleChange = (field, value) => {
     setForm((current) => ({ ...current, [field]: value }));
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: null }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!form.vendor_name || !form.phone) return;
+    if (!validate()) return;
     await onSubmit({
       ...form,
-      supplied_materials: form.supplied_materials,
       updated_at: new Date().toISOString(),
     });
   };
@@ -55,13 +67,16 @@ export default function VendorForm({ vendor, onSubmit, onCancel, saving }) {
       </div>
 
       <div className="grid gap-4">
-        <input
-          type="text"
-          value={form.vendor_name}
-          onChange={(event) => handleChange('vendor_name', event.target.value)}
-          placeholder="Vendor name"
-          className="w-full rounded-3xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-sm text-white outline-none"
-        />
+        <div>
+          <input
+            type="text"
+            value={form.vendor_name}
+            onChange={(event) => handleChange('vendor_name', event.target.value)}
+            placeholder="Vendor name"
+            className={`w-full rounded-3xl border ${errors.vendor_name ? 'border-rose-500' : 'border-slate-700'} bg-slate-900/90 px-4 py-3 text-sm text-white outline-none`}
+          />
+          {errors.vendor_name && <p className="mt-1 ml-4 text-xs text-rose-500">{errors.vendor_name}</p>}
+        </div>
         <input
           type="text"
           value={form.contact_person}
@@ -69,20 +84,26 @@ export default function VendorForm({ vendor, onSubmit, onCancel, saving }) {
           placeholder="Contact person"
           className="w-full rounded-3xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-sm text-white outline-none"
         />
-        <input
-          type="tel"
-          value={form.phone}
-          onChange={(event) => handleChange('phone', event.target.value)}
-          placeholder="Phone"
-          className="w-full rounded-3xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-sm text-white outline-none"
-        />
-        <input
-          type="email"
-          value={form.email}
-          onChange={(event) => handleChange('email', event.target.value)}
-          placeholder="Email"
-          className="w-full rounded-3xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-sm text-white outline-none"
-        />
+        <div>
+          <input
+            type="tel"
+            value={form.phone}
+            onChange={(event) => handleChange('phone', event.target.value)}
+            placeholder="Phone"
+            className={`w-full rounded-3xl border ${errors.phone ? 'border-rose-500' : 'border-slate-700'} bg-slate-900/90 px-4 py-3 text-sm text-white outline-none`}
+          />
+          {errors.phone && <p className="mt-1 ml-4 text-xs text-rose-500">{errors.phone}</p>}
+        </div>
+        <div>
+          <input
+            type="email"
+            value={form.email}
+            onChange={(event) => handleChange('email', event.target.value)}
+            placeholder="Email"
+            className={`w-full rounded-3xl border ${errors.email ? 'border-rose-500' : 'border-slate-700'} bg-slate-900/90 px-4 py-3 text-sm text-white outline-none`}
+          />
+          {errors.email && <p className="mt-1 ml-4 text-xs text-rose-500">{errors.email}</p>}
+        </div>
         <input
           type="text"
           value={form.gst_number}

@@ -2,7 +2,6 @@ import { Routes, Route } from 'react-router-dom';
 import AppLayout from '../layouts/AppLayout';
 import ProtectedRoute from '../components/auth/ProtectedRoute';
 import RoleProtectedRoute from '../components/auth/RoleProtectedRoute';
-import Landing from '../pages/Landing';
 import Login from '../pages/auth/Login';
 import Register from '../pages/auth/Register';
 import ForgotPassword from '../pages/auth/ForgotPassword';
@@ -46,7 +45,17 @@ export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<AppLayout />}>
-        <Route index element={<Landing />} />
+        {/* Absolute Entry Point: Dashboard is the internal home */}
+        <Route
+          index
+          element={
+            <ProtectedRoute>
+              <RoleProtectedRoute allowedRoles={['staff', 'admin', 'sales', 'production', 'hr', 'finance', 'procurement']}>
+                <StaffDashboard />
+              </RoleProtectedRoute>
+            </ProtectedRoute>
+          }
+        />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
@@ -55,7 +64,7 @@ export default function AppRoutes() {
           path="dashboard"
           element={
             <ProtectedRoute>
-              <RoleProtectedRoute allowedRoles={['staff', 'admin']}>
+              <RoleProtectedRoute allowedRoles={['staff', 'admin', 'sales', 'production', 'hr', 'finance', 'procurement']}>
                 <StaffDashboard />
               </RoleProtectedRoute>
             </ProtectedRoute>
@@ -107,7 +116,9 @@ export default function AppRoutes() {
           path="analytics"
           element={
             <ProtectedRoute>
-              <Analytics />
+              <RoleProtectedRoute allowedRoles={['admin', 'staff']}>
+                <Analytics />
+              </RoleProtectedRoute>
             </ProtectedRoute>
           }
         />
@@ -115,7 +126,9 @@ export default function AppRoutes() {
           path="employees"
           element={
             <ProtectedRoute>
-              <Employees />
+              <RoleProtectedRoute allowedRoles={['admin', 'hr', 'staff']}>
+                <Employees />
+              </RoleProtectedRoute>
             </ProtectedRoute>
           }
         />
@@ -123,7 +136,9 @@ export default function AppRoutes() {
           path="attendance"
           element={
             <ProtectedRoute>
-              <Attendance />
+              <RoleProtectedRoute allowedRoles={['admin', 'hr', 'staff']}>
+                <Attendance />
+              </RoleProtectedRoute>
             </ProtectedRoute>
           }
         />
@@ -131,7 +146,9 @@ export default function AppRoutes() {
           path="payroll"
           element={
             <ProtectedRoute>
-              <Payroll />
+              <RoleProtectedRoute allowedRoles={['admin', 'hr', 'finance']}>
+                <Payroll />
+              </RoleProtectedRoute>
             </ProtectedRoute>
           }
         />
@@ -139,7 +156,9 @@ export default function AppRoutes() {
           path="hr"
           element={
             <ProtectedRoute>
-              <HRDashboard />
+              <RoleProtectedRoute allowedRoles={['admin', 'hr']}>
+                <HRDashboard />
+              </RoleProtectedRoute>
             </ProtectedRoute>
           }
         />
@@ -147,7 +166,7 @@ export default function AppRoutes() {
           path="inventory"
           element={
             <ProtectedRoute>
-              <RoleProtectedRoute allowedRoles={['admin', 'staff', 'production']}>
+              <RoleProtectedRoute allowedRoles={['admin', 'staff', 'production', 'procurement']}>
                 <Inventory />
               </RoleProtectedRoute>
             </ProtectedRoute>
@@ -157,7 +176,9 @@ export default function AppRoutes() {
           path="procurement"
           element={
             <ProtectedRoute>
-              <Procurement />
+              <RoleProtectedRoute allowedRoles={['admin', 'staff', 'procurement']}>
+                <Procurement />
+              </RoleProtectedRoute>
             </ProtectedRoute>
           }
         />
@@ -165,7 +186,9 @@ export default function AppRoutes() {
           path="purchase-orders"
           element={
             <ProtectedRoute>
-              <PurchaseOrders />
+              <RoleProtectedRoute allowedRoles={['admin', 'staff', 'procurement', 'finance']}>
+                <PurchaseOrders />
+              </RoleProtectedRoute>
             </ProtectedRoute>
           }
         />
@@ -173,7 +196,9 @@ export default function AppRoutes() {
           path="production-planning"
           element={
             <ProtectedRoute>
-              <ProductionPlanning />
+              <RoleProtectedRoute allowedRoles={['admin', 'staff', 'production']}>
+                <ProductionPlanning />
+              </RoleProtectedRoute>
             </ProtectedRoute>
           }
         />
@@ -201,7 +226,9 @@ export default function AppRoutes() {
           path="suppliers"
           element={
             <ProtectedRoute>
-              <Suppliers />
+              <RoleProtectedRoute allowedRoles={['admin', 'staff', 'procurement']}>
+                <Suppliers />
+              </RoleProtectedRoute>
             </ProtectedRoute>
           }
         />
@@ -209,7 +236,9 @@ export default function AppRoutes() {
           path="vendors"
           element={
             <ProtectedRoute>
-              <Vendors />
+              <RoleProtectedRoute allowedRoles={['admin', 'staff', 'procurement']}>
+                <Vendors />
+              </RoleProtectedRoute>
             </ProtectedRoute>
           }
         />
@@ -247,7 +276,9 @@ export default function AppRoutes() {
           path="payments"
           element={
             <ProtectedRoute>
-              <Payments />
+              <RoleProtectedRoute allowedRoles={['admin', 'staff', 'finance']}>
+                <Payments />
+              </RoleProtectedRoute>
             </ProtectedRoute>
           }
         />
@@ -255,7 +286,9 @@ export default function AppRoutes() {
           path="ledger"
           element={
             <ProtectedRoute>
-              <CustomerLedger />
+              <RoleProtectedRoute allowedRoles={['admin', 'staff', 'finance']}>
+                <CustomerLedger />
+              </RoleProtectedRoute>
             </ProtectedRoute>
           }
         />
@@ -263,7 +296,9 @@ export default function AppRoutes() {
           path="orders"
           element={
             <ProtectedRoute>
-              <Orders />
+              <RoleProtectedRoute allowedRoles={['admin', 'staff', 'sales', 'production']}>
+                <Orders />
+              </RoleProtectedRoute>
             </ProtectedRoute>
           }
         />

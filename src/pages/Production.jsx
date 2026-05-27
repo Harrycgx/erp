@@ -1,110 +1,139 @@
-import { useEffect, useMemo, useState } from 'react';
-import Container from '../components/ui/Container';
-import SectionHeading from '../components/ui/SectionHeading';
-import ProductionTable from '../features/production/ProductionTable';
-import ProductionFilters from '../features/production/ProductionFilters';
-import DispatchReadyBoard from '../features/production/DispatchReadyBoard';
-import { fetchProductionJobs } from '../services/productionService';
-import { isOverdue, normalizeStage, PRODUCTION_STAGES } from '../utils/productionHelpers';
+import { useEffect, useState } from "react";
+
+import PageContainer from "../components/ui/PageContainer";
+
+import StatusBadge from "../components/ui/StatusBadge";
+
+import {
+  addInventoryMovement,
+} from "../services/inventory/inventoryService";
+
+import {
+  fetchProductionJobs,
+  updateProductionJob,
+} from "../services/production/productionService";
+
+const stages = [
+  "pending",
+  "cutting",
+  "printing",
+  "assembly",
+  "qc",
+  "completed",
+];
 
 export default function Production() {
-  const [jobs, setJobs] = useState([]);
-  const [filters, setFilters] = useState({ stage: '', priority: '', staff: '' });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-
-  const loadJobs = async () => {
-    setLoading(true);
-    setError('');
-    const { data, error: fetchError } = await fetchProductionJobs();
-    if (fetchError) {
-      setError(fetchError.message || 'Unable to load production jobs.');
-      setJobs([]);
-    } else {
-      setJobs(data || []);
-    }
-    setLoading(false);
-  };
+  const [jobs, setJobs] =
+    useState([]);
 
   useEffect(() => {
     loadJobs();
   }, []);
 
-  const filteredJobs = useMemo(() => {
-    return jobs.filter((job) => {
-      const stageMatch = filters.stage ? normalizeStage(job.production_stage) === filters.stage : true;
-      const priorityMatch = filters.priority ? job.priority === filters.priority : true;
-      const staffMatch = filters.staff
-        ? [job.assigned_to, job.order_number, job.box_type, job.production_number].some((field) =>
-            field?.toLowerCase().includes(filters.staff.toLowerCase())
-          )
-        : true;
-      return stageMatch && priorityMatch && staffMatch;
-    });
-  }, [jobs, filters]);
+  async function loadJobs() {
+    const data =
+      await fetchProductionJobs();
 
-  const queueSummary = useMemo(
-    () => ({
-      active: jobs.filter((j) => !['delivered', 'dispatched'].includes(normalizeStage(j.production_stage))).length,
-      pending: jobs.filter((j) => normalizeStage(j.production_stage) === 'pending').length,
-      dispatchReady: jobs.filter((j) => normalizeStage(j.production_stage) === 'dispatch_ready').length,
-      delayed: jobs.filter((j) => isOverdue(j)).length,
-    }),
-    [jobs]
-  );
+    setJobs(data || []);
+  }
 
-  const dispatchReady = filteredJobs.filter((job) => normalizeStage(job.production_stage) === 'dispatch_ready');
+  async function moveStage(job) {
+    const currentIndex =
+      stages.indexOf(job.stage);
+
+    const nextStage =
+      stages[currentIndex + 1];
+
+    if (!nextStage) {
+      return;
+    }
+
+    await updateProductionJob(
+      job.id,
+      {
+        stage: nextStage,
+      }
+    );
+    if (nextStage === "cutting") {
+  await addInventoryMovement({
+    material_name:
+      "Kraft Paper",
+
+    movement_type:
+      "production_usage",
+
+    quantity:
+      -job.quantity,
+
+    reference_number:
+      job.quotation_number,
+
+    notes:
+      "Production consumption",
+  });
+}
+
+    loadJobs();
+  }
 
   return (
-    <main className="min-h-screen bg-[#090d16] pt-28 text-white">
-      <Container className="space-y-6 py-12">
-        <SectionHeading
-          eyebrow="Factory floor"
-          title="Production queue"
-          description="Active jobs, stage progress, and dispatch readiness from confirmed sales orders."
-        />
+    <PageContainer
+      title="Production"
+      subtitle="Manufacturing execution and workflow tracking."
+    >
+      <div className="grid gap-4">
+        {jobs.map((job) => (
+          <div
+            key={job.id}
+            className="
+              rounded-2xl
+              border border-white/10
+              bg-white/5
+              p-5
+            "
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-lg font-semibold text-white">
+                  {job.job_name}
+                </h3>
 
-        {error ? (
-          <div className="rounded-lg border border-rose-600/30 bg-rose-950/40 px-4 py-3 text-sm text-rose-100">{error}</div>
-        ) : null}
+                <p className="text-sm text-slate-400">
+                  {job.customer_name}
+                </p>
+              </div>
 
-        <div className="flex flex-wrap gap-4 text-sm text-slate-300">
-          <span className="rounded-lg border border-slate-700 bg-slate-950/80 px-3 py-1.5">
-            Active: <strong className="text-white">{queueSummary.active}</strong>
-          </span>
-          <span className="rounded-lg border border-slate-700 bg-slate-950/80 px-3 py-1.5">
-            Pending: <strong className="text-white">{queueSummary.pending}</strong>
-          </span>
-          <span className="rounded-lg border border-slate-700 bg-slate-950/80 px-3 py-1.5">
-            Dispatch ready: <strong className="text-white">{queueSummary.dispatchReady}</strong>
-          </span>
-          <span className="rounded-lg border border-amber-700/50 bg-amber-950/30 px-3 py-1.5">
-            Delayed: <strong className="text-amber-100">{queueSummary.delayed}</strong>
-          </span>
-        </div>
+              <StatusBadge
+                status={job.stage}
+              />
+            </div>
 
-        <ProductionFilters filters={filters} onChange={setFilters} />
+            <div className="mt-4 flex items-center justify-between">
+              <div className="text-sm text-slate-300">
+                Qty: {job.quantity}
+              </div>
 
-        <div className="grid gap-6 xl:grid-cols-[1.4fr_0.8fr]">
-          <div className="space-y-6">
-            {loading ? (
-              <p className="text-sm text-slate-400">Loading jobs…</p>
-            ) : (
-              <ProductionTable jobs={filteredJobs} linkToDetail />
-            )}
-          </div>
-
-          <div className="space-y-6">
-            <DispatchReadyBoard jobs={dispatchReady} linkToDetail />
-            <div className="rounded-xl border border-slate-700 bg-slate-950/90 p-4 text-sm text-slate-400">
-              <p className="font-medium text-slate-300">Stages</p>
-              <p className="mt-2 text-xs leading-relaxed">
-                {PRODUCTION_STAGES.map((s) => s.replace(/_/g, ' ')).join(' → ')}
-              </p>
+              {job.stage !==
+                "completed" && (
+                <button
+                  onClick={() =>
+                    moveStage(job)
+                  }
+                  className="
+                    rounded-xl
+                    bg-orange-500
+                    px-4 py-2
+                    text-sm font-medium
+                    text-white
+                  "
+                >
+                  Move Forward
+                </button>
+              )}
             </div>
           </div>
-        </div>
-      </Container>
-    </main>
+        ))}
+      </div>
+    </PageContainer>
   );
 }

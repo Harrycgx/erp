@@ -48,80 +48,86 @@ export async function generateQuotePDF(quote, customer) {
   page.drawText(customer?.email || 'info@example.com', { x: customerX, y: sectionY - 3 * lineHeight, size: 9, font: timesRomanFont, color: rgb(0.1, 0.1, 0.1) });
   page.drawText(customer?.phone || '+91 99999 99999', { x: customerX, y: sectionY - 4 * lineHeight, size: 9, font: timesRomanFont, color: rgb(0.1, 0.1, 0.1) });
 
-  const detailStart = sectionY - 120;
-  page.drawText('Specification', { x: margin, y: detailStart, size: 11, font: titleFont, color: rgb(0, 0, 0) });
-  const detailLines = [
-    `Box type: ${quote.box_type || 'Corrugated'}`,
-    `Dimensions: ${quote.length || 0} × ${quote.width || 0} × ${quote.height || 0} mm`,
-    `Quantity: ${quote.quantity || 0}`,
-    `Flute: ${quote.flute_type || 'Standard'}`,
-    `Ply: ${quote.ply || 'N/A'}`,
-    `GSM: ${quote.gsm || 'N/A'}`,
-    `Printing: ${quote.printing_type || 'None'}`,
-    `Lamination: ${quote.lamination || 'None'}`,
-    `Urgency: ${quote.urgency || 'Standard'}`,
+  const detailStart = sectionY - 110;
+  page.drawText('Quotation details', { x: margin, y: detailStart, size: 12, font: titleFont, color: rgb(0, 0, 0) });
+
+  const tableHeaderY = detailStart - 25;
+  const colX = [margin, 240, 310, 400, 480];
+  const headers = ['Item / Description', 'Qty', 'Unit price', 'Tax', 'Amount'];
+  
+  headers.forEach((h, i) => {
+    page.drawText(h, { x: colX[i], y: tableHeaderY, size: 9, font: titleFont, color: rgb(0.1, 0.1, 0.1) });
+  });
+
+  page.drawLine({
+    start: { x: margin, y: tableHeaderY - 8 },
+    end: { x: 545, y: tableHeaderY - 8 },
+    thickness: 1,
+    color: rgb(0.8, 0.8, 0.8),
+  });
+
+  const items = quote.items?.length 
+    ? quote.items 
+    : [{ 
+        item_name: quote.box_type || 'Custom Corrugated Box', 
+        quantity: quote.quantity || 0, 
+        unit_price: (quote.subtotal || 0) / (quote.quantity || 1),
+        tax_amount: quote.gst || 0,
+        total_price: quote.total || 0 
+      }];
+
+  let itemY = tableHeaderY - 24;
+  items.slice(0, 10).forEach((item) => {
+    page.drawText(String(item.item_name || '').slice(0, 35), { x: colX[0], y: itemY, size: 9, font: timesRomanFont });
+    page.drawText(String(item.quantity || 0), { x: colX[1], y: itemY, size: 9, font: timesRomanFont });
+    page.drawText(formatCurrency(item.unit_price || 0), { x: colX[2], y: itemY, size: 9, font: timesRomanFont });
+    page.drawText(formatCurrency(item.tax_amount || 0), { x: colX[3], y: itemY, size: 9, font: timesRomanFont });
+    page.drawText(formatCurrency(item.total_price || item.total || 0), { x: colX[4], y: itemY, size: 9, font: titleFont });
+    itemY -= 20;
+  });
+
+  const summaryY = itemY - 20;
+  page.drawLine({
+    start: { x: 350, y: summaryY + 12 },
+    end: { x: 545, y: summaryY + 12 },
+    thickness: 1,
+    color: rgb(0.8, 0.8, 0.8),
+  });
+
+  const summaryLines = [
+    { label: 'Subtotal', value: quote.subtotal || 0 },
+    { label: 'Discount', value: quote.discount_amount || 0 },
+    { label: 'GST (18%)', value: quote.gst || quote.gst_amount || 0 },
+    { label: 'Grand total', value: quote.total || quote.total_amount || 0, bold: true },
   ];
 
-  detailLines.forEach((line, index) => {
-    page.drawText(line, {
-      x: margin,
-      y: detailStart - (index + 1) * lineHeight,
-      size: 9,
-      font: timesRomanFont,
-      color: rgb(0.1, 0.1, 0.1),
-    });
+  summaryLines.forEach((line, index) => {
+    const ly = summaryY - index * 18;
+    page.drawText(line.label, { x: 380, y: ly, size: 9, font: line.bold ? titleFont : timesRomanFont });
+    page.drawText(formatCurrency(line.value), { x: 480, y: ly, size: 9, font: line.bold ? titleFont : timesRomanFont });
   });
 
-  const pricingY = detailStart - (detailLines.length + 2) * lineHeight;
-  page.drawText('Pricing', { x: margin, y: pricingY, size: 11, font: titleFont, color: rgb(0, 0, 0) });
-  const pricingLines = [
-    `Subtotal: ${formatCurrency(quote.subtotal || 0)}`,
-    `GST: ${formatCurrency(quote.gst || 0)}`,
-    `Total: ${formatCurrency(quote.total || 0)}`,
+  const bottomY = summaryY - 80;
+  page.drawText('Standard specification', { x: margin, y: bottomY, size: 10, font: titleFont });
+  const specLines = [
+    `Reference: ${quote.box_type || 'N/A'}`,
+    `Material: ${quote.flute_type || 'Standard'} / ${quote.ply || 'N/A'} ply / ${quote.gsm || 'N/A'} GSM`,
+    `Finishing: ${quote.printing_type || 'None'} / ${quote.lamination || 'None'}`,
+    `Tooling: ₹${quote.tooling_cost || 0}`,
   ];
-  pricingLines.forEach((line, index) => {
-    page.drawText(line, {
-      x: margin,
-      y: pricingY - (index + 1) * lineHeight,
-      size: 9,
-      font: timesRomanFont,
-      color: rgb(0.1, 0.1, 0.1),
-    });
+  specLines.forEach((line, index) => {
+    page.drawText(line, { x: margin, y: bottomY - 15 - (index * 14), size: 8, font: timesRomanFont, color: rgb(0.3, 0.3, 0.3) });
   });
 
-  page.drawText('Validity', { x: margin, y: pricingY - 4 * lineHeight, size: 11, font: titleFont, color: rgb(0, 0, 0) });
-  page.drawText(`Valid until: ${getValidityDate(quote.created_at, 15)}`, {
-    x: margin,
-    y: pricingY - 5 * lineHeight,
-    size: 9,
-    font: timesRomanFont,
-    color: rgb(0.1, 0.1, 0.1),
-  });
-  page.drawText(`Created: ${formatDate(quote.created_at)}`, {
-    x: margin,
-    y: pricingY - 6 * lineHeight,
-    size: 9,
-    font: timesRomanFont,
-    color: rgb(0.1, 0.1, 0.1),
-  });
-
-  const termsY = pricingY - 8 * lineHeight;
-  page.drawText('Terms & conditions', { x: margin, y: termsY, size: 11, font: titleFont, color: rgb(0, 0, 0) });
+  page.drawText('Validity & terms', { x: margin, y: 150, size: 10, font: titleFont, color: rgb(0, 0, 0) });
+  page.drawText(`Valid until: ${getValidityDate(quote.created_at, 15)}`, { x: margin, y: 135, size: 8, font: timesRomanFont });
   page.drawText(
-    quote.terms || 'All quotations are valid for 15 days from the issue date. Delivery schedules depend on material availability and factory capacity. 50% advance payment required on order confirmation.',
-    {
-      x: margin,
-      y: termsY - lineHeight,
-      size: 8,
-      font: timesRomanFont,
-      color: rgb(0.1, 0.1, 0.1),
-      maxWidth: 500,
-      lineHeight: 12,
-    }
+    quote.terms || '50% advance required on order confirmation. Balance before dispatch.',
+    { x: margin, y: 120, size: 7, font: timesRomanFont, maxWidth: 500, lineHeight: 10 }
   );
 
-  page.drawText('Authorized signature', { x: margin, y: 90, size: 9, font: timesRomanFont, color: rgb(0.1, 0.1, 0.1) });
-  page.drawText('Mayur Packaging', { x: margin, y: 70, size: 10, font: titleFont, color: rgb(0, 0, 0) });
+  page.drawText('Authorized signature', { x: margin, y: 80, size: 9, font: timesRomanFont });
+  page.drawText('Mayur Packaging', { x: margin, y: 65, size: 10, font: titleFont });
 
   const pdfBytes = await doc.save();
   return pdfBytes;

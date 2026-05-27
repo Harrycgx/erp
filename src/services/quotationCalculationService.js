@@ -3,6 +3,8 @@
  * All line-item and header totals must flow through this module.
  */
 
+import { calculateQuotePricing } from '../utils/pricingCalculations';
+
 export const DEFAULT_TAX_RATE = 0.18;
 
 /**
@@ -15,9 +17,30 @@ export function normalizeTaxRate(rate, fallback = DEFAULT_TAX_RATE) {
   return value;
 }
 
-export function calculateQuotationItem(item = {}) {
+export function calculateQuotationItem(item = {}, pricingRule = null) {
+  let unitPrice = Number(item.unit_price) || 0;
+
+  // If we have box specs and a pricing rule, calculate the price automatically
+  if (pricingRule && item.length && item.width && item.height && item.gsm) {
+    const calculated = calculateQuotePricing(
+      {
+        length: item.length,
+        width: item.width,
+        height: item.height,
+        gsm: item.gsm,
+        quantity: item.quantity || 1,
+        printing_type: item.printing_type || 'None',
+        lamination: item.lamination || 'None',
+        tooling_cost: item.tooling_cost || 0,
+        urgency: item.urgency || 'Standard',
+      },
+      pricingRule
+    );
+    // Unit price is calculated total / quantity
+    unitPrice = roundMoney(calculated.total_amount / (Number(item.quantity) || 1));
+  }
+
   const quantity = Number(item.quantity) || 0;
-  const unitPrice = Number(item.unit_price) || 0;
   const discountAmount = Math.max(Number(item.discount_amount) || 0, 0);
   const taxRate = normalizeTaxRate(item.tax_rate, DEFAULT_TAX_RATE);
   const lineBase = quantity * unitPrice;
@@ -43,9 +66,10 @@ export function calculateQuotationTotals(items = [], options = {}) {
     headerDiscountPercent = 0,
     headerDiscountAmount = 0,
     toolingCost = 0,
+    pricingRule = null,
   } = options;
 
-  const calculatedItems = (items || []).map(calculateQuotationItem);
+  const calculatedItems = (items || []).map(item => calculateQuotationItem(item, pricingRule));
 
   const itemsSubtotal = calculatedItems.reduce((sum, item) => sum + item.subtotal, 0);
   const itemsDiscount = calculatedItems.reduce((sum, item) => sum + item.discount_amount, 0);
@@ -60,7 +84,6 @@ export function calculateQuotationTotals(items = [], options = {}) {
   const tooling = Math.max(Number(toolingCost) || 0, 0);
   const subtotal = roundMoney(subtotalBeforeTooling + tooling);
 
-  // GST on remaining taxable base after header discount (items tax already per line)
   const taxAmount = roundMoney(itemsTax);
   const total = roundMoney(subtotal + taxAmount);
 
@@ -82,11 +105,12 @@ export function calculateQuotationTotals(items = [], options = {}) {
 /**
  * Merge calculated financials onto a quotation draft for UI and persistence.
  */
-export function buildQuotationFinancials(quotation = {}, items = []) {
+export function buildQuotationFinancials(quotation = {}, items = [], pricingRule = null) {
   const totals = calculateQuotationTotals(items, {
     headerDiscountPercent: quotation.header_discount_percent,
     headerDiscountAmount: quotation.header_discount_amount,
     toolingCost: quotation.tooling_cost,
+    pricingRule,
   });
 
   return {

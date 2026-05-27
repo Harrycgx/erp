@@ -21,7 +21,7 @@ export default function PDFQuoteGenerator({ quote, customer, documents, onDownlo
           <button
             type="button"
             onClick={onConvert}
-            disabled={loading || quote.status !== 'Approved'}
+            disabled={loading || !['approved', 'sent'].includes(String(quote.status || '').toLowerCase())}
             className="rounded-full bg-emerald-500 px-5 py-2 text-sm font-semibold text-white shadow-[0_14px_40px_rgba(16,185,129,0.18)] transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
           >
             Convert to order

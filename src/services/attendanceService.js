@@ -1,17 +1,24 @@
-import supabase from '../lib/supabase';
+import supabase from "../lib/supabase";
 
-export async function fetchAttendanceRecords() {
-  return supabase.from('attendance').select('*').order('attendance_date', { ascending: false });
-}
+export async function fetchAnalyticsEvents() {
+  const { data, error } = await supabase
+    .from("analytics_events")
+    .select("*")
+    .order("created_at", {
+      ascending: false,
+    });
 
-export async function fetchAttendanceByEmployee(employeeId) {
-  return supabase.from('attendance').select('*').eq('employee_id', employeeId).order('attendance_date', { ascending: false });
-}
+  if (error) {
+    console.error(error);
 
-export async function insertAttendance(record) {
-  return supabase.from('attendance').insert([record]);
-}
+    return {
+      data: [],
+      error,
+    };
+  }
 
-export async function updateAttendance(id, updates) {
-  return supabase.from('attendance').update(updates).eq('id', id);
+  return {
+    data,
+    error: null,
+  };
 }

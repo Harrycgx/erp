@@ -1,140 +1,106 @@
-import { useEffect, useState } from 'react';
-import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import { canAccessModule } from '../../config/permissions';
 import MobileMenu from './MobileMenu';
+import { useState } from 'react';
 
-const pageLinks = [
-  { label: 'Home', path: '/' },
-  { label: 'HR dashboard', path: '/hr' },
-  { label: 'Employees', path: '/employees' },
-  { label: 'Attendance', path: '/attendance' },
-  { label: 'Payroll', path: '/payroll' },
-  { label: 'Inventory', path: '/inventory' },
-  { label: 'Production', path: '/production' },
-  { label: 'Procurement', path: '/procurement' },
-  { label: 'Purchase orders', path: '/purchase-orders' },
-  { label: 'Vendors', path: '/vendors' },
-  { label: 'Suppliers', path: '/suppliers' },
-  { label: 'Finance', path: '/finance' },
-  { label: 'Invoices', path: '/invoices' },
-  { label: 'Payments', path: '/payments' },
-  { label: 'Ledger', path: '/ledger' },
-  { label: 'Dashboard', path: '/dashboard' },
-  { label: 'Customer portal', path: '/customer-portal' },
-  { label: 'Orders', path: '/orders' },
-  { label: 'Sales orders', path: '/sales-orders' },
-  { label: 'Admin', path: '/admin' },
-];
-
-const sectionLinks = [
-  { label: 'Trust', section: 'trust' },
-  { label: 'Live quote', section: 'quote' },
-  { label: 'Capacity', section: 'manufacturing' },
-  { label: 'Factory', section: 'factory' },
-  { label: 'Timeline', section: 'timeline' },
+const navItems = [
+  { label: 'Staff dashboard', path: '/dashboard', module: 'internal' },
+  { label: 'Quotations', path: '/quotations', module: 'sales' },
+  { label: 'Sales orders', path: '/sales-orders', module: 'sales' },
+  { label: 'Inventory', path: '/inventory', module: 'inventory' },
+  { label: 'Production', path: '/production', module: 'production' },
+  { label: 'Procurement', path: '/procurement', module: 'procurement' },
+  { label: 'Finance', path: '/finance', module: 'finance' },
+  { label: 'Employees', path: '/employees', module: 'hr' },
+  { label: 'Attendance', path: '/attendance', module: 'hr' },
+  { label: 'Payroll', path: '/payroll', module: 'hr' },
+  { label: 'Admin panel', path: '/admin', module: 'admin' },
 ];
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
-  const location = useLocation();
+  const { profile, logout, isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const filteredLinks = navItems.filter(item => 
+    isAuthenticated && profile && canAccessModule(profile, item.module)
+  );
 
-  useEffect(() => {
-    if (location.pathname !== '/') return undefined;
-    const ids = sectionLinks.map((item) => item.section).concat('hero');
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible[0]) setActiveSection(visible[0].target.id || 'hero');
-      },
-      { threshold: 0.42 }
-    );
-    ids.forEach((id) => document.getElementById(id) && observer.observe(document.getElementById(id)));
-    return () => observer.disconnect();
-  }, [location.pathname]);
-
-  const handleNavigate = (path, section) => {
-    setMenuOpen(false);
-    if (section && location.pathname === '/') {
-      const el = document.getElementById(section);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        return;
-      }
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/login');
+    } catch (error) {
+      console.error('Logout failed:', error);
     }
-    navigate(path);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-40 border-b border-white/10 backdrop-blur-xl transition duration-300 ${scrolled ? 'bg-white/90 shadow-sm' : 'bg-transparent'}`}>
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-slate-800 bg-slate-950/90 backdrop-blur-xl transition duration-300">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link to="/" className="text-lg font-black tracking-tight text-slate-900">
-          BoxIQ
+        <Link to="/" className="text-lg font-black tracking-tight text-white">
+          BoxIQ <span className="ml-2 text-[10px] font-medium text-orange-500 uppercase tracking-widest border border-orange-500/30 px-2 py-0.5 rounded">Internal ERP</span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
-          {pageLinks.map((item) => (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              end={item.path === '/'}
-              className={({ isActive }) =>
-                `text-sm font-semibold transition ${isActive ? 'text-slate-900' : 'text-slate-500 hover:text-slate-900'}`
-              }
-            >
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
+        {isAuthenticated && (
+          <nav className="hidden items-center gap-6 lg:flex">
+            {filteredLinks.map((item) => (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                className={({ isActive }) =>
+                  `text-xs font-bold uppercase tracking-wider transition ${isActive ? 'text-orange-400' : 'text-slate-400 hover:text-white'}`
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </nav>
+        )}
 
-        <div className="hidden items-center gap-4 md:flex">
-          <button
-            type="button"
-            onClick={() => handleNavigate('/quote-builder')}
-            className="rounded-full bg-orange-500 px-5 py-2 text-sm font-semibold text-white shadow-[0_14px_40px_rgba(249,115,22,0.18)] transition hover:-translate-y-0.5 hover:bg-orange-400"
-          >
-            Build a quote
-          </button>
+        <div className="hidden items-center gap-4 lg:flex">
+          {isAuthenticated ? (
+            <div className="flex items-center gap-4 border-l border-slate-800 pl-4">
+              <div className="text-right">
+                <p className="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">{profile?.role}</p>
+                <p className="text-xs font-semibold text-white">{profile?.full_name?.split(' ')[0]}</p>
+              </div>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="rounded-full border border-slate-700 bg-slate-900 px-4 py-1.5 text-xs font-bold text-slate-300 transition hover:border-rose-500 hover:text-white"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => navigate('/login')}
+              className="rounded-full bg-orange-500 px-5 py-2 text-sm font-semibold text-white transition hover:bg-orange-400"
+            >
+              Staff login
+            </button>
+          )}
         </div>
 
-        <button type="button" onClick={() => setMenuOpen(true)} className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-2 text-slate-900 md:hidden">
+        <button 
+          type="button" 
+          onClick={() => setMenuOpen(true)} 
+          className="inline-flex items-center justify-center rounded-full border border-slate-700 bg-slate-900 p-2 text-white lg:hidden"
+        >
           <span className="sr-only">Open menu</span>
           ☰
         </button>
       </div>
 
-      <div className="hidden border-t border-slate-200 bg-slate-950/5 px-6 py-3 md:block">
-        <div className="flex flex-wrap items-center gap-4">
-          {sectionLinks.map((item) => (
-            <button
-              key={item.section}
-              type="button"
-              onClick={() => handleNavigate('/', item.section)}
-              className={`text-sm font-semibold transition ${activeSection === item.section ? 'text-slate-900' : 'text-slate-500 hover:text-slate-900'}`}
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
       <MobileMenu
         open={menuOpen}
         onClose={() => setMenuOpen(false)}
-        pageLinks={pageLinks}
-        sectionLinks={sectionLinks}
-        currentPath={location.pathname}
-        onNavigate={handleNavigate}
+        pageLinks={filteredLinks}
+        isAuthenticated={isAuthenticated}
+        onLogout={handleLogout}
       />
     </header>
   );

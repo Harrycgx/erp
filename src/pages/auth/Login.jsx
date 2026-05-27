@@ -22,10 +22,12 @@ export default function Login() {
     try {
       setLoading(true);
       const { profile } = await login({ email, password });
-      const destination = getRoleHomePath(profile?.role || 'customer');
+      
+      // Strict role-based redirect
+      const destination = getRoleHomePath(profile?.role);
       navigate(destination, { replace: true });
     } catch (err) {
-      setError(err?.message || 'Unable to sign in. Please check your credentials.');
+      setError(err?.message || 'Unable to sign in. Please check your staff credentials.');
     } finally {
       setLoading(false);
     }
@@ -36,8 +38,8 @@ export default function Login() {
       <div className="mx-auto max-w-md rounded-[2rem] border border-white/10 bg-slate-950/80 p-8 shadow-2xl shadow-black/40 backdrop-blur-xl">
         <div className="space-y-3 text-center">
           <p className="text-sm uppercase tracking-[0.3em] text-orange-400">Mayur Packaging</p>
-          <h1 className="text-3xl font-semibold sm:text-4xl">Sign in to your factory workspace</h1>
-          <p className="text-sm text-slate-400">Secure access for admin, staff, customer and vendor roles.</p>
+          <h1 className="text-3xl font-semibold sm:text-4xl">Factory ERP Workspace</h1>
+          <p className="text-sm text-slate-400">Secure staff-only access for manufacturing operations.</p>
         </div>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-5">
@@ -74,12 +76,9 @@ export default function Login() {
           </button>
         </form>
 
-        <div className="mt-6 flex flex-col gap-3 text-sm text-slate-400 sm:flex-row sm:justify-between">
-          <button type="button" onClick={() => navigate('/forgot-password')} className="text-left text-slate-300 hover:text-white">
+        <div className="mt-6 flex flex-col gap-3 text-sm text-slate-400 sm:flex-row sm:justify-center">
+          <button type="button" onClick={() => navigate('/forgot-password')} className="text-center text-slate-300 hover:text-white">
             Forgot password?
-          </button>
-          <button type="button" onClick={() => navigate('/register')} className="text-left text-slate-300 hover:text-white">
-            Create an account
           </button>
         </div>
       </div>

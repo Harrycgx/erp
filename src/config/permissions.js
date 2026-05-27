@@ -35,7 +35,14 @@ export const ROLE_GROUPS = {
 
 export function hasRole(profile, allowedRoles = []) {
   if (!profile?.role) return false;
-  return allowedRoles.includes(profile.role);
+  
+  const userRole = String(profile.role).toLowerCase().trim();
+  
+  // Superuser bypass: admin role has access to everything by default
+  if (userRole === ROLES.ADMIN) return true;
+  
+  const normalizedAllowed = allowedRoles.map(r => String(r).toLowerCase().trim());
+  return normalizedAllowed.includes(userRole);
 }
 
 export function getRoleHomePath(role) {
