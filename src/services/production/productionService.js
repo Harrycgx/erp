@@ -1,6 +1,28 @@
 import supabase from "../../lib/supabase";
 
+export async function createProductionJob(
+  job
+) {
+
+  const { data, error } =
+    await supabase
+      .from("production_jobs")
+      .insert([job])
+      .select()
+      .single();
+
+  if (error) {
+
+    console.error(error);
+
+    return null;
+  }
+
+  return data;
+}
+
 export async function fetchProductionJobs() {
+
   const { data, error } =
     await supabase
       .from("production_jobs")
@@ -10,6 +32,7 @@ export async function fetchProductionJobs() {
       });
 
   if (error) {
+
     console.error(error);
 
     return [];
@@ -17,11 +40,11 @@ export async function fetchProductionJobs() {
 
   return data;
 }
-
 export async function updateProductionJob(
   id,
   updates
 ) {
+
   const { data, error } =
     await supabase
       .from("production_jobs")
@@ -31,6 +54,7 @@ export async function updateProductionJob(
       .single();
 
   if (error) {
+
     console.error(error);
 
     return null;

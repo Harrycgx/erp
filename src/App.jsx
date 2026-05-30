@@ -3,94 +3,267 @@
   RouterProvider,
 } from "react-router-dom";
 
+import {
+  lazy,
+  Suspense,
+} from "react";
+
 import AppLayout from "./AppLayout";
 
 import AI from "./pages/AI";
-import Dashboard from "./pages/Dashboard";
-import Analytics from "./pages/Analytics";
-import Employees from "./pages/Employees";
-import Inventory from "./pages/Inventory";
-import Production from "./pages/Production";
-import Orders from "./pages/Orders";
-import Quotations from "./pages/Quotations";
-import Finance from "./pages/Finance";
-import Procurement from "./pages/Procurement";
-import Customers from "./pages/Customers";
-import ProtectedRoute from "./features/auth/ProtectedRoute";
-import ImportCenter from "./pages/ImportCenter";
-import InventoryLedger from "./pages/InventoryLedger";
-import FinanceLedger from "./pages/FinanceLedger";
-import AIInsights from "./pages/AIInsights";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <AppLayout />,
-    children: [
-      {
-        index: true,
-        element: <Dashboard />,
-      },
-      {
-        path: "finance-ledger",
-       element: <FinanceLedger />,
-      },
-      {
-        path: "ai-insights",
-        element: <AIInsights />,
-      },
-      {
-        path: "dashboard",
-        element: <Dashboard />,
-      },
-      {
-        path: "ai",
-        element: <AI />,
-      },
-      {
-        path: "inventory-ledger",
-        element: <InventoryLedger />,
-      },
-      {
-        path: "analytics",
-        element: <Analytics />,
-      },
-      {
-        path: "employees",
-        element: <Employees />,
-      },
-      {
-        path: "inventory",
-        element: <Inventory />,
-      },
-      {
-        path: "production",
-        element: <Production />,
-      },
-      {
-        path: "orders",
-        element: <Orders />,
-      },
-      {
-        path: "quotations",
-        element: <Quotations />,
-      },
-      {
-        path: "finance",
-        element: <Finance />,
-      },
-      {
-        path: "procurement",
-        element: <Procurement />,
-      },
-      {
-        path: "customers",
-        element: <Customers />,
-      },
-    ],
-  },
-]);
+import ProtectedRoute from "./features/auth/ProtectedRoute";
+
+// Lazy-loaded pages
+const Dashboard = lazy(() =>
+  import("./pages/Dashboard")
+);
+
+const Quotations = lazy(() =>
+  import("./pages/Quotations")
+);
+
+const Production = lazy(() =>
+  import("./pages/Production")
+);
+
+const Analytics = lazy(() =>
+  import("./pages/Analytics")
+);
+
+const AIInsights = lazy(() =>
+  import("./pages/AIInsights")
+);
+
+const Employees = lazy(() =>
+  import("./pages/Employees")
+);
+
+const Inventory = lazy(() =>
+  import("./pages/Inventory")
+);
+
+const Orders = lazy(() =>
+  import("./pages/Orders")
+);
+
+const Finance = lazy(() =>
+  import("./pages/Finance")
+);
+
+const Procurement = lazy(() =>
+  import("./pages/Procurement")
+);
+
+const Customers = lazy(() =>
+  import("./pages/Customers")
+);
+
+const ImportCenter = lazy(() =>
+  import("./pages/ImportCenter")
+);
+
+const InventoryLedger = lazy(() =>
+  import("./pages/InventoryLedger")
+);
+
+const FinanceLedger = lazy(() =>
+  import("./pages/FinanceLedger")
+);
+
+const router =
+  createBrowserRouter([
+    {
+      path: "/",
+
+      element: <AppLayout />,
+
+      children: [
+
+        {
+          index: true,
+
+          element: (
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          ),
+        },
+
+        {
+          path: "dashboard",
+
+          element: (
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          ),
+        },
+
+        {
+          path: "quotations",
+
+          element: (
+            <ProtectedRoute>
+              <Quotations />
+            </ProtectedRoute>
+          ),
+        },
+
+        {
+          path: "production",
+
+          element: (
+            <ProtectedRoute>
+              <Production />
+            </ProtectedRoute>
+          ),
+        },
+
+        {
+          path: "inventory",
+
+          element: (
+            <ProtectedRoute>
+              <Inventory />
+            </ProtectedRoute>
+          ),
+        },
+
+        {
+          path: "inventory-ledger",
+
+          element: (
+            <ProtectedRoute>
+              <InventoryLedger />
+            </ProtectedRoute>
+          ),
+        },
+
+        {
+          path: "finance",
+
+          element: (
+            <ProtectedRoute>
+              <Finance />
+            </ProtectedRoute>
+          ),
+        },
+
+        {
+          path: "finance-ledger",
+
+          element: (
+            <ProtectedRoute>
+              <FinanceLedger />
+            </ProtectedRoute>
+          ),
+        },
+
+        {
+          path: "analytics",
+
+          element: (
+            <ProtectedRoute>
+              <Analytics />
+            </ProtectedRoute>
+          ),
+        },
+
+        {
+          path: "ai-insights",
+
+          element: (
+            <ProtectedRoute>
+              <AIInsights />
+            </ProtectedRoute>
+          ),
+        },
+
+        {
+          path: "employees",
+
+          element: (
+            <ProtectedRoute>
+              <Employees />
+            </ProtectedRoute>
+          ),
+        },
+
+        {
+          path: "orders",
+
+          element: (
+            <ProtectedRoute>
+              <Orders />
+            </ProtectedRoute>
+          ),
+        },
+
+        {
+          path: "procurement",
+
+          element: (
+            <ProtectedRoute>
+              <Procurement />
+            </ProtectedRoute>
+          ),
+        },
+
+        {
+          path: "customers",
+
+          element: (
+            <ProtectedRoute>
+              <Customers />
+            </ProtectedRoute>
+          ),
+        },
+
+        {
+          path: "imports",
+
+          element: (
+            <ProtectedRoute>
+              <ImportCenter />
+            </ProtectedRoute>
+          ),
+        },
+
+        {
+          path: "ai",
+
+          element: (
+            <ProtectedRoute>
+              <AI />
+            </ProtectedRoute>
+          ),
+        },
+
+      ],
+    },
+  ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+
+  return (
+    <Suspense
+      fallback={
+        <div
+          className="
+            flex min-h-screen
+            items-center justify-center
+            bg-[#020617]
+            text-white
+          "
+        >
+          Loading ERP...
+        </div>
+      }
+    >
+      <RouterProvider
+        router={router}
+      />
+    </Suspense>
+  );
 }

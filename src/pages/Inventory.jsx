@@ -1,115 +1,134 @@
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useState,
+} from "react";
 
-import PageContainer from "../components/ui/PageContainer";
-import DataTable from "../components/tables/DataTable";
+import PageContainer
+from "../components/ui/PageContainer";
 
-import { fetchInventoryItems } from "../services/inventoryService";
+import {
 
-const inventoryColumns = [
-  {
-    key: "material_code",
-    label: "Material Code",
-  },
-  {
-    key: "material_name",
-    label: "Material",
-  },
-  {
-    key: "category",
-    label: "Category",
-  },
-  {
-    key: "gsm",
-    label: "GSM",
-  },
-  {
-    key: "current_stock",
-    label: "Stock",
-  },
-  {
-    key: "minimum_stock",
-    label: "Min Stock",
-  },
-  {
-    key: "warehouse_location",
-    label: "Warehouse",
-  },
-];
+  createInventoryItem,
+
+  fetchInventoryHistory,
+
+  getInventoryBalance,
+
+} from "../modules/inventory/services/inventoryLedgerService";
 
 export default function Inventory() {
-  const [items, setItems] = useState([]);
 
-  useEffect(() => {
-    async function loadInventory() {
-      try {
-        const result = await fetchInventoryItems();
+  const [itemName,
+    setItemName] =
+    useState("");
 
-        if (result.data) {
-          setItems(result.data);
-        }
-      } catch (error) {
-        console.error(error);
-      }
+  const [items,
+    setItems] =
+    useState([]);
+
+  async function
+  createItem() {
+
+    if (!itemName) {
+      return;
     }
 
-    loadInventory();
-  }, []);
+    const item =
+      await createInventoryItem({
 
-  const lowStockItems = items.filter(
-    (item) =>
-      Number(item.current_stock) <=
-      Number(item.minimum_stock)
-  );
+        sku:
+          "SKU-" +
+          Date.now(),
 
-  const totalStock = items.reduce(
-    (sum, item) =>
-      sum + Number(item.current_stock || 0),
-    0
-  );
+        material_name:
+          itemName,
+
+        category:
+          "Paper",
+
+        unit:
+          "kg",
+      });
+
+    setItems((prev) => [
+      ...prev,
+      item,
+    ]);
+
+    setItemName("");
+  }
 
   return (
     <PageContainer
       title="Inventory"
-      subtitle="Track paper rolls, consumables, warehouse stock and material availability."
+      subtitle="Inventory ledger system"
     >
-      {/* INVENTORY KPI */}
-      <div className="grid gap-6 md:grid-cols-3">
-        <div className="rounded-3xl border border-white/10 bg-[#111827] p-6">
-          <p className="text-slate-400">
-            Inventory Items
-          </p>
 
-          <h2 className="mt-4 text-5xl font-black text-orange-400">
-            {items.length}
-          </h2>
-        </div>
+      <div className="mb-6 flex gap-4">
 
-        <div className="rounded-3xl border border-white/10 bg-[#111827] p-6">
-          <p className="text-slate-400">
-            Low Stock Alerts
-          </p>
+        <input
+          value={itemName}
 
-          <h2 className="mt-4 text-5xl font-black text-red-400">
-            {lowStockItems.length}
-          </h2>
-        </div>
+          onChange={(e) =>
+            setItemName(
+              e.target.value
+            )
+          }
 
-        <div className="rounded-3xl border border-white/10 bg-[#111827] p-6">
-          <p className="text-slate-400">
-            Total Stock
-          </p>
+          placeholder="Material name"
 
-          <h2 className="mt-4 text-5xl font-black text-green-400">
-            {totalStock}
-          </h2>
-        </div>
+          className="
+            rounded-xl
+            border border-white/10
+            bg-white/5
+            px-4 py-2
+            text-white
+          "
+        />
+
+        <button
+          onClick={createItem}
+
+          className="
+            rounded-xl
+            bg-blue-500
+            px-4 py-2
+            text-white
+          "
+        >
+          Add Material
+        </button>
+
       </div>
 
-      {/* INVENTORY TABLE */}
-      <DataTable
-        columns={inventoryColumns}
-        data={items}
-      />
+      <div className="space-y-4">
+
+        {items.map((item) => (
+
+          <div
+            key={item.id}
+
+            className="
+              rounded-2xl
+              bg-white/5
+              p-5
+            "
+          >
+
+            <h2 className="text-white font-bold">
+              {item.material_name}
+            </h2>
+
+            <p className="text-slate-400">
+              SKU: {item.sku}
+            </p>
+
+          </div>
+
+        ))}
+
+      </div>
+
     </PageContainer>
   );
 }

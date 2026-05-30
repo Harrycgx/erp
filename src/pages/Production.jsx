@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 
 import PageContainer from "../components/ui/PageContainer";
 
-import StatusBadge from "../components/ui/StatusBadge";
-
 import {
   addInventoryMovement,
 } from "../services/inventory/inventoryService";
@@ -13,16 +11,8 @@ import {
   updateProductionJob,
 } from "../services/production/productionService";
 
-const stages = [
-  "pending",
-  "cutting",
-  "printing",
-  "assembly",
-  "qc",
-  "completed",
-];
-
 export default function Production() {
+
   const [jobs, setJobs] =
     useState([]);
 
@@ -31,22 +21,17 @@ export default function Production() {
   }, []);
 
   async function loadJobs() {
+
     const data =
       await fetchProductionJobs();
 
     setJobs(data || []);
   }
 
-  async function moveStage(job) {
-    const currentIndex =
-      stages.indexOf(job.stage);
-
-    const nextStage =
-      stages[currentIndex + 1];
-
-    if (!nextStage) {
-      return;
-    }
+  async function moveStage(
+    job,
+    nextStage
+  ) {
 
     await updateProductionJob(
       job.id,
@@ -54,24 +39,27 @@ export default function Production() {
         stage: nextStage,
       }
     );
-    if (nextStage === "cutting") {
-  await addInventoryMovement({
-    material_name:
-      "Kraft Paper",
 
-    movement_type:
-      "production_usage",
+    // Auto deduct inventory
+    if (
+      nextStage === "cutting"
+    ) {
 
-    quantity:
-      -job.quantity,
+      await addInventoryMovement({
 
-    reference_number:
-      job.quotation_number,
+        material_name:
+          "Kraft Paper",
 
-    notes:
-      "Production consumption",
-  });
-}
+        movement_type:
+          "production_usage",
+
+        quantity:
+          -job.quantity,
+
+        reference_number:
+          job.quotation_number,
+      });
+    }
 
     loadJobs();
   }
@@ -81,59 +69,131 @@ export default function Production() {
       title="Production"
       subtitle="Manufacturing execution and workflow tracking."
     >
-      <div className="grid gap-4">
+
+      <div className="space-y-4">
+
+        {jobs.length === 0 && (
+          <div
+            className="
+              rounded-2xl
+              border border-dashed
+              border-white/10
+              p-10 text-center
+              text-slate-400
+            "
+          >
+            No production jobs yet.
+          </div>
+        )}
+
         {jobs.map((job) => (
+
           <div
             key={job.id}
             className="
               rounded-2xl
-              border border-white/10
               bg-white/5
               p-5
             "
           >
+
             <div className="flex items-center justify-between">
+
               <div>
+
                 <h3 className="text-lg font-semibold text-white">
-                  {job.job_name}
+                  {job.quotation_number}
                 </h3>
 
                 <p className="text-sm text-slate-400">
-                  {job.customer_name}
+                  Stage: {job.stage}
                 </p>
+
               </div>
 
-              <StatusBadge
-                status={job.stage}
-              />
+              <div className="text-right">
+
+                <p className="text-white font-bold">
+                  Qty: {job.quantity}
+                </p>
+
+              </div>
+
             </div>
 
-            <div className="mt-4 flex items-center justify-between">
-              <div className="text-sm text-slate-300">
-                Qty: {job.quantity}
-              </div>
+            <div className="mt-4 flex gap-3">
 
-              {job.stage !==
-                "completed" && (
+              {job.stage ===
+                "planning" && (
+
                 <button
                   onClick={() =>
-                    moveStage(job)
+                    moveStage(
+                      job,
+                      "cutting"
+                    )
+                  }
+                  className="
+                    rounded-xl
+                    bg-blue-500
+                    px-4 py-2
+                    text-sm text-white
+                  "
+                >
+                  Start Cutting
+                </button>
+              )}
+
+              {job.stage ===
+                "cutting" && (
+
+                <button
+                  onClick={() =>
+                    moveStage(
+                      job,
+                      "printing"
+                    )
                   }
                   className="
                     rounded-xl
                     bg-orange-500
                     px-4 py-2
-                    text-sm font-medium
-                    text-white
+                    text-sm text-white
                   "
                 >
-                  Move Forward
+                  Move To Printing
                 </button>
               )}
+
+              {job.stage ===
+                "printing" && (
+
+                <button
+                  onClick={() =>
+                    moveStage(
+                      job,
+                      "completed"
+                    )
+                  }
+                  className="
+                    rounded-xl
+                    bg-green-500
+                    px-4 py-2
+                    text-sm text-white
+                  "
+                >
+                  Complete Job
+                </button>
+              )}
+
             </div>
+
           </div>
+
         ))}
+
       </div>
+
     </PageContainer>
   );
 }

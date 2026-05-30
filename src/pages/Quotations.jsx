@@ -27,10 +27,6 @@ import {
 } from "../utils/validation/quotationValidation";
 
 import {
-  validateQuotation,
-} from "../utils/validation/quotationValidation";
-
-import {
   createLedgerEntry,
 } from "../services/finance/financeService";
 
@@ -41,6 +37,10 @@ import {
 import {
   canTransition,
 } from "../services/workflow/workflowService";
+
+import {
+  createProductionJob,
+} from "../services/production/productionService";
 
 import {
   fetchQuotations,
@@ -249,6 +249,21 @@ if (
         status: "submitted",
       }
     );
+    await createProductionJob({
+
+  quotation_id:
+    quotation.id,
+
+  quotation_number:
+    quotation.quotation_number,
+
+  quantity:
+    quotation.quantity,
+
+  stage: "planning",
+
+  status: "pending",
+});
     await createLedgerEntry({
   entry_type: "debit",
 
@@ -319,6 +334,33 @@ await createLedgerEntry({
 
         permissions,
       });
+      await createLedgerEntry({
+
+  entry_type: "debit",
+
+  account_name:
+    "Accounts Receivable",
+
+  amount:
+    quotation.estimated_price,
+
+  reference_number:
+    quotation.quotation_number,
+});
+
+await createLedgerEntry({
+
+  entry_type: "credit",
+
+  account_name:
+    "Sales Revenue",
+
+  amount:
+    quotation.estimated_price,
+
+  reference_number:
+    quotation.quotation_number,
+});
       await createNotification({
   userId: user.id,
 
