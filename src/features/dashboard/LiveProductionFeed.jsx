@@ -2,21 +2,21 @@ import DataTable from "../../components/tables/DataTable";
 
 const productionColumns = [
   {
-    key: "production_number",
-    label: "Production No",
+    key: "quotation_number",
+    label: "Quotation",
   },
   {
-    key: "status",
-    label: "Status",
+    key: "quantity",
+    label: "Quantity",
   },
   {
-    key: "production_stage",
+    key: "stage",
     label: "Stage",
   },
 ];
 
 export default function LiveProductionFeed({
-  jobs,
+  jobs = [],
 }) {
   return (
     <div className="space-y-6">

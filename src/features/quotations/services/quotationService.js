@@ -55,5 +55,54 @@ export async function updateQuotation(
     return null;
   }
 
+  if (
+    updates.status ===
+    "approved"
+  ) {
+    try {
+      await supabase
+        .from("orders")
+        .insert([
+          {
+            customer_name:
+              data.customer_name,
+
+            quotation_number:
+              data.quotation_number,
+
+            order_number:
+              "ORD-" +
+              Date.now(),
+
+            box_type:
+              data.box_style,
+
+            quantity:
+              data.quantity,
+
+            total_amount:
+              data.estimated_price,
+
+            production_status:
+              "planning",
+
+            dispatch_status:
+              "pending",
+
+            payment_status:
+              "pending",
+
+            status:
+              "active",
+          },
+        ]);
+    } catch (err) {
+      console.error(
+        "ORDER AUTO CREATE FAILED",
+        err
+      );
+    }
+  }
+
   return data;
 }

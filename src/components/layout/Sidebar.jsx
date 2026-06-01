@@ -1,84 +1,76 @@
 import { NavLink } from "react-router-dom";
 
-import useAuth from "../../features/auth/useAuth";
-
 export default function Sidebar() {
-  const { hasRole } = useAuth();
-
   const navItems = [
-    {
-  label: "AI Insights",
-  path: "/ai-insights",
-  roles: [
-    "admin",
-  ],
-},
     {
       label: "Dashboard",
       path: "/dashboard",
-      roles: [
-        "admin",
-        "sales",
-      ],
     },
     {
-  label: "Finance Ledger",
-  path: "/finance-ledger",
-  roles: [
-    "admin",
-    "accounts",
-  ],
-},
-     {
-  label: "Inventory Ledger",
-  path: "/inventory-ledger",
-  roles: [
-    "admin",
-    "inventory",
-  ],
-},
+      label: "Customers",
+      path: "/customers",
+    },
     {
       label: "Quotations",
       path: "/quotations",
-      roles: [
-        "admin",
-        "sales",
-      ],
     },
-
+    {
+      label: "Orders",
+      path: "/orders",
+    },
     {
       label: "Production",
       path: "/production",
-      roles: [
-        "admin",
-        "production",
-      ],
     },
-
     {
-      label: "Import Center",
-      path: "/imports",
-      roles: [
-        "admin",
-      ],
+      label: "Inventory",
+      path: "/inventory",
     },
-
+    {
+      label: "Procurement",
+      path: "/procurement",
+    },
+    {
+      label: "Dispatch",
+      path: "/dispatch",
+    },
     {
       label: "Finance",
       path: "/finance",
-      roles: [
-        "admin",
-        "accounts",
-      ],
     },
+    {
+      label: "Inventory Ledger",
+      path: "/inventory-ledger",
+    },
+    {
+      label: "Finance Ledger",
+      path: "/finance-ledger",
+    },
+    {
+      label: "AI Insights",
+      path: "/ai-insights",
+    },
+    {
+  label: "Analytics",
+  path: "/analytics",
+},
+{
+  label: "Employees",
+  path: "/employees",
+},
+{
+  label: "Import Center",
+  path: "/imports",
+},
+{
+  label: "Audit Logs",
+  path: "/audit-logs",
+},
+{
+  label: "AI",
+  path: "/ai",
+},
   ];
-
-  const filteredNav =
-    navItems.filter((item) =>
-      item.roles.some((role) =>
-        hasRole(role)
-      )
-    );
 
   return (
     <aside
@@ -92,25 +84,28 @@ export default function Sidebar() {
     >
       <div className="mb-10">
         <h1 className="text-4xl font-black text-orange-500">
-          BOXIQ
+          BOXIQ ERP
         </h1>
 
         <p className="mt-2 text-sm text-slate-400">
-          Manufacturing ERP
+          Manufacturing Intelligence Workspace
         </p>
       </div>
 
       <nav className="space-y-2">
-        {filteredNav.map((item) => (
+        {navItems.map((item) => (
           <NavLink
             key={item.path}
             to={item.path}
             className={({ isActive }) =>
               `
-                block rounded-2xl
-                px-4 py-3
+                block
+                rounded-2xl
+                px-4
+                py-3
                 font-medium
-                transition-all duration-300
+                transition-all
+                duration-300
 
                 ${
                   isActive

@@ -1,8 +1,6 @@
 import supabase from "../../../lib/supabase";
 
-export async function
-createInventoryItem(item) {
-
+export async function createInventoryItem(item) {
   const { data, error } =
     await supabase
       .from("inventory_items")
@@ -11,20 +9,16 @@ createInventoryItem(item) {
       .single();
 
   if (error) {
-
     console.error(error);
-
     return null;
   }
 
   return data;
 }
 
-export async function
-addInventoryMovement(
+export async function addInventoryMovement(
   movement
 ) {
-
   const { data, error } =
     await supabase
       .from("inventory_ledger")
@@ -33,51 +27,51 @@ addInventoryMovement(
       .single();
 
   if (error) {
-
     console.error(error);
-
     return null;
   }
 
   return data;
 }
 
-export async function
-getInventoryBalance(
-  itemId
+export async function getInventoryBalance(
+  materialName
 ) {
-
   const { data, error } =
     await supabase
       .from("inventory_ledger")
       .select("quantity")
-      .eq("item_id", itemId);
+      .eq(
+        "material_name",
+        materialName
+      );
 
   if (error) {
-
     console.error(error);
-
     return 0;
   }
 
-  return data.reduce(
-    (sum, row) =>
-      sum +
-      Number(row.quantity),
-    0
+  return (
+    data?.reduce(
+      (sum, row) =>
+        sum +
+        Number(row.quantity || 0),
+      0
+    ) || 0
   );
 }
 
-export async function
-fetchInventoryHistory(
-  itemId
+export async function fetchInventoryHistory(
+  materialName
 ) {
-
   const { data, error } =
     await supabase
       .from("inventory_ledger")
       .select("*")
-      .eq("item_id", itemId)
+      .eq(
+        "material_name",
+        materialName
+      )
       .order(
         "created_at",
         {
@@ -86,9 +80,7 @@ fetchInventoryHistory(
       );
 
   if (error) {
-
     console.error(error);
-
     return [];
   }
 

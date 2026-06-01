@@ -37,7 +37,7 @@ export default function AIInsights() {
       title="AI Insights"
       subtitle="Operational forecasting and intelligent recommendations."
     >
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-5">
         <div className="rounded-2xl bg-white/5 p-6">
           <p className="text-sm text-slate-400">
             Quotation Volume
@@ -64,6 +64,27 @@ export default function AIInsights() {
         <div className="rounded-2xl bg-white/5 p-6">
           <p className="text-sm text-slate-400">
             Inventory Usage
+            <div className="rounded-2xl bg-white/5 p-6">
+  <p className="text-sm text-slate-400">
+    Active Orders
+  </p>
+
+  <h2 className="mt-2 text-3xl font-bold text-white">
+    {forecast.activeOrders}
+  </h2>
+</div>
+
+<div className="rounded-2xl bg-white/5 p-6">
+  <p className="text-sm text-slate-400">
+    Completed Production
+  </p>
+
+  <h2 className="mt-2 text-3xl font-bold text-white">
+    {
+      forecast.completedProduction
+    }
+  </h2>
+</div>
           </p>
 
           <h2 className="mt-2 text-3xl font-bold text-white">

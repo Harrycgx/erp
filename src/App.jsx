@@ -10,9 +10,17 @@ import {
 
 import AppLayout from "./AppLayout";
 
+const AuditLogs = lazy(() =>
+  import("./pages/AuditLogs")
+);
+
 import AI from "./pages/AI";
 
 import ProtectedRoute from "./features/auth/ProtectedRoute";
+
+const Dispatch = lazy(() =>
+  import("./pages/Dispatch")
+);
 
 // Lazy-loaded pages
 const Dashboard = lazy(() =>
@@ -58,6 +66,9 @@ const Procurement = lazy(() =>
 const Customers = lazy(() =>
   import("./pages/Customers")
 );
+const CustomerDetails = lazy(() =>
+  import("./pages/CustomerDetails")
+);
 
 const ImportCenter = lazy(() =>
   import("./pages/ImportCenter")
@@ -65,6 +76,9 @@ const ImportCenter = lazy(() =>
 
 const InventoryLedger = lazy(() =>
   import("./pages/InventoryLedger")
+);
+const OrderDetails = lazy(() =>
+  import("./pages/OrderDetails")
 );
 
 const FinanceLedger = lazy(() =>
@@ -89,6 +103,24 @@ const router =
             </ProtectedRoute>
           ),
         },
+        {
+  path: "customers/:id",
+
+  element: (
+    <ProtectedRoute>
+      <CustomerDetails />
+    </ProtectedRoute>
+  ),
+},
+{
+  path: "orders/:id",
+
+  element: (
+    <ProtectedRoute>
+      <OrderDetails />
+    </ProtectedRoute>
+  ),
+},
 
         {
           path: "dashboard",
@@ -109,6 +141,15 @@ const router =
             </ProtectedRoute>
           ),
         },
+        {
+  path: "audit-logs",
+
+  element: (
+    <ProtectedRoute>
+      <AuditLogs />
+    </ProtectedRoute>
+  ),
+},
 
         {
           path: "production",
@@ -209,7 +250,15 @@ const router =
             </ProtectedRoute>
           ),
         },
+           {
+  path: "dispatch",
 
+  element: (
+    <ProtectedRoute>
+      <Dispatch />
+    </ProtectedRoute>
+  ),
+},
         {
           path: "customers",
 

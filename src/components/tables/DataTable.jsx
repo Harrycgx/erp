@@ -4,6 +4,7 @@ import StatusBadge from "../ui/StatusBadge";
 export default function DataTable({
   columns = [],
   data = [],
+  onRowClick,
 }) {
   if (!data.length) {
     return (
@@ -28,6 +29,10 @@ export default function DataTable({
                   {column.label}
                 </th>
               ))}
+
+              <th className="px-6 py-4 text-left text-sm font-semibold uppercase tracking-[0.15em] text-slate-400">
+                Action
+              </th>
             </tr>
           </thead>
 
@@ -35,22 +40,54 @@ export default function DataTable({
             {data.map((row, index) => (
               <tr
                 key={index}
-                className="border-b border-white/5 transition hover:bg-white/5"
+                className="cursor-pointer border-b border-white/5 transition hover:bg-white/5"
               >
                 {columns.map((column) => (
                   <td
                     key={column.key}
                     className="px-6 py-5 text-slate-200"
                   >
-                    {column.key === "status" ? (
-  <StatusBadge
-    status={row[column.key]}
-  />
-) : (
-  row[column.key]
-)}
+                    {column.key ===
+                    "status" ? (
+                      <StatusBadge
+                        status={
+                          row[
+                            column.key
+                          ]
+                        }
+                      />
+                    ) : (
+                      row[
+                        column.key
+                      ]
+                    )}
                   </td>
                 ))}
+
+                <td className="px-6 py-5">
+                 <button
+  onClick={() =>
+    onRowClick?.(
+      row
+    )
+  }
+  className="
+    rounded-xl
+    bg-gradient-to-r
+    from-orange-500
+    to-orange-600
+    px-4 py-2
+    text-sm
+    font-semibold
+    text-white
+    shadow-lg
+    transition-all
+    hover:scale-105
+  "
+>
+  Open
+</button>
+                </td>
               </tr>
             ))}
           </tbody>

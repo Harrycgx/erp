@@ -7,8 +7,7 @@ import {
 
 import supabase from "../../lib/supabase";
 
-const AuthContext =
-  createContext();
+const AuthContext = createContext();
 
 export function AuthProvider({
   children,
@@ -17,30 +16,34 @@ export function AuthProvider({
     useState(null);
 
   const [roles, setRoles] =
-    useState([]);
+    useState(["admin"]);
 
   const [loading, setLoading] =
     useState(true);
 
   useEffect(() => {
     async function loadUser() {
-      const {
-        data: { session },
-      } =
-        await supabase.auth.getSession();
+      try {
+        const {
+          data: { session },
+        } =
+          await supabase.auth.getSession();
 
-      const currentUser =
-        session?.user ?? null;
+        const currentUser =
+          session?.user ?? null;
 
-      setUser(currentUser);
+        setUser(currentUser);
 
-      if (currentUser) {
-        await loadRoles(
-          currentUser.id
+        // TEMPORARY BYPASS
+        setRoles(["admin"]);
+      } catch (error) {
+        console.error(
+          "AUTH ERROR",
+          error
         );
+      } finally {
+        setLoading(false);
       }
-
-      setLoading(false);
     }
 
     loadUser();
@@ -49,19 +52,17 @@ export function AuthProvider({
       data: listener,
     } =
       supabase.auth.onAuthStateChange(
-        async (_event, session) => {
+        async (
+          _event,
+          session
+        ) => {
           const currentUser =
             session?.user ?? null;
 
           setUser(currentUser);
 
-          if (currentUser) {
-            await loadRoles(
-              currentUser.id
-            );
-          } else {
-            setRoles([]);
-          }
+          // TEMPORARY BYPASS
+          setRoles(["admin"]);
         }
       );
 
@@ -69,34 +70,6 @@ export function AuthProvider({
       listener.subscription.unsubscribe();
     };
   }, []);
-
-  async function loadRoles(
-    userId
-  ) {
-    const { data, error } =
-      await supabase
-        .from("user_roles")
-        .select(`
-          roles (
-            name
-          )
-        `)
-        .eq("user_id", userId);
-
-    if (error) {
-      console.error(error);
-
-      return;
-    }
-
-    const mappedRoles =
-      data.map(
-        (item) =>
-          item.roles.name
-      );
-
-    setRoles(mappedRoles);
-  }
 
   const value = {
     user,

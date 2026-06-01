@@ -1,7 +1,5 @@
 import Input from "../../components/ui/Input";
-
 import FormField from "../../components/forms/FormField";
-
 import SelectField from "../../components/forms/SelectField";
 
 export default function QuoteForm({
@@ -16,8 +14,7 @@ export default function QuoteForm({
           onChange={(e) =>
             setFormData({
               ...formData,
-              customer_name:
-                e.target.value,
+              customer_name: e.target.value,
             })
           }
         />
@@ -57,32 +54,6 @@ export default function QuoteForm({
             {
               label: "Die Cut",
               value: "Die Cut",
-            },
-          ]}
-        />
-      </FormField>
-
-      <FormField label="Print Type">
-        <SelectField
-          value={formData.print_type}
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              print_type: e.target.value,
-            })
-          }
-          options={[
-            {
-              label: "No Print",
-              value: "No Print",
-            },
-            {
-              label: "Flexo",
-              value: "Flexo",
-            },
-            {
-              label: "Offset",
-              value: "Offset",
             },
           ]}
         />

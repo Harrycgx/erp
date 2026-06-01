@@ -37,55 +37,95 @@ const financeColumns = [
 ];
 
 export default function Finance() {
-  const [invoices, setInvoices] = useState([]);
+  const [invoices, setInvoices] =
+    useState([]);
 
   useEffect(() => {
-    async function loadInvoices() {
-      try {
-        const result = await fetchInvoices();
-
-        if (result.data) {
-          setInvoices(result.data);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
     loadInvoices();
   }, []);
 
-  const totalRevenue = invoices.reduce(
-    (sum, invoice) =>
-      sum + Number(invoice.invoice_amount || 0),
-    0
-  );
+  async function loadInvoices() {
+    try {
+      const result =
+        await fetchInvoices();
 
-  const totalDue = invoices.reduce(
-    (sum, invoice) =>
-      sum + Number(invoice.due_amount || 0),
-    0
-  );
+      if (result.data) {
+        setInvoices(result.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-  const pendingPayments = invoices.filter(
-    (invoice) =>
-      invoice.payment_status !== "paid"
-  );
+  const totalRevenue =
+    invoices.reduce(
+      (sum, invoice) =>
+        sum +
+        Number(
+          invoice.invoice_amount || 0
+        ),
+      0
+    );
+
+  const totalPaid =
+    invoices.reduce(
+      (sum, invoice) =>
+        sum +
+        Number(
+          invoice.paid_amount || 0
+        ),
+      0
+    );
+
+  const totalDue =
+    invoices.reduce(
+      (sum, invoice) =>
+        sum +
+        Number(
+          invoice.due_amount || 0
+        ),
+      0
+    );
+
+  const pendingPayments =
+    invoices.filter(
+      (invoice) =>
+        invoice.payment_status !==
+        "paid"
+    );
+
+  const paidInvoices =
+    invoices.filter(
+      (invoice) =>
+        invoice.payment_status ===
+        "paid"
+    );
 
   return (
     <PageContainer
       title="Finance"
       subtitle="Track invoices, receivables, payment collection and financial operations."
     >
-      {/* FINANCE KPI */}
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="mb-8 grid gap-6 md:grid-cols-4">
         <div className="rounded-3xl border border-white/10 bg-[#111827] p-6">
           <p className="text-slate-400">
             Revenue
           </p>
 
           <h2 className="mt-4 text-5xl font-black text-green-400">
-            ₹{totalRevenue.toLocaleString()}
+            ₹
+            {totalRevenue.toLocaleString()}
+          </h2>
+        </div>
+
+        <div className="rounded-3xl border border-white/10 bg-[#111827] p-6">
+          <p className="text-slate-400">
+            Collected
+          </p>
+
+          <h2 className="mt-4 text-5xl font-black text-blue-400">
+            ₹
+            {totalPaid.toLocaleString()}
           </h2>
         </div>
 
@@ -95,22 +135,48 @@ export default function Finance() {
           </p>
 
           <h2 className="mt-4 text-5xl font-black text-red-400">
-            ₹{totalDue.toLocaleString()}
+            ₹
+            {totalDue.toLocaleString()}
           </h2>
         </div>
 
         <div className="rounded-3xl border border-white/10 bg-[#111827] p-6">
           <p className="text-slate-400">
-            Pending Payments
+            Paid Invoices
           </p>
 
-          <h2 className="mt-4 text-5xl font-black text-orange-400">
-            {pendingPayments.length}
+          <h2 className="mt-4 text-5xl font-black text-purple-400">
+            {
+              paidInvoices.length
+            }
           </h2>
         </div>
       </div>
 
-      {/* FINANCE TABLE */}
+      <div className="mb-8 grid gap-6 md:grid-cols-2">
+        <div className="rounded-2xl bg-white/5 p-6">
+          <p className="text-slate-400">
+            Pending Payments
+          </p>
+
+          <h3 className="mt-3 text-3xl font-bold text-orange-400">
+            {
+              pendingPayments.length
+            }
+          </h3>
+        </div>
+
+        <div className="rounded-2xl bg-white/5 p-6">
+          <p className="text-slate-400">
+            Total Invoices
+          </p>
+
+          <h3 className="mt-3 text-3xl font-bold text-white">
+            {invoices.length}
+          </h3>
+        </div>
+      </div>
+
       <DataTable
         columns={financeColumns}
         data={invoices}

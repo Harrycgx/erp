@@ -115,24 +115,33 @@ export default function Analytics() {
           Operations Overview
         </h3>
 
-        <div className="h-80">
-          <ResponsiveContainer
-            width="100%"
-            height="100%"
-          >
-            <BarChart
-              data={chartData}
-            >
-              <XAxis dataKey="name" />
+        <div
+  className="h-80 w-full"
+  style={{
+    minHeight: "320px",
+  }}
+>
+  <ResponsiveContainer
+    width="99%"
+    height={320}
+  >
+    <BarChart
+      data={chartData}
+    >
+      <XAxis
+        dataKey="name"
+      />
 
-              <YAxis />
+      <YAxis />
 
-              <Tooltip />
+      <Tooltip />
 
-              <Bar dataKey="value" />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+      <Bar
+        dataKey="value"
+      />
+    </BarChart>
+  </ResponsiveContainer>
+</div>
       </div>
     </PageContainer>
   );

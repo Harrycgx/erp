@@ -1,42 +1,117 @@
-import PageContainer from "../components/PageContainer";
+import { useEffect, useState } from "react";
 
-const employees = [
+import PageContainer from "../components/ui/PageContainer";
+import DataTable from "../components/tables/DataTable";
+
+import supabase from "../lib/supabase";
+
+const columns = [
   {
-    name: "Raj Sharma",
-    role: "Production Manager",
+    key: "full_name",
+    label: "Employee",
   },
   {
-    name: "Priya Singh",
-    role: "Procurement Officer",
+    key: "email",
+    label: "Email",
   },
   {
-    name: "Aman Verma",
-    role: "Inventory Lead",
+    key: "department",
+    label: "Department",
+  },
+  {
+    key: "designation",
+    label: "Designation",
+  },
+  {
+    key: "phone",
+    label: "Phone",
+  },
+  {
+    key: "status",
+    label: "Status",
   },
 ];
 
 export default function Employees() {
+  const [employees, setEmployees] =
+    useState([]);
+
+  useEffect(() => {
+    loadEmployees();
+  }, []);
+
+  async function loadEmployees() {
+    const { data, error } =
+      await supabase
+        .from("employees")
+        .select("*")
+        .order("created_at", {
+          ascending: false,
+        });
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    setEmployees(data || []);
+  }
+
+  const activeEmployees =
+    employees.filter(
+      (employee) =>
+        employee.status === "active"
+    );
+
+  const departments =
+    new Set(
+      employees.map(
+        (employee) =>
+          employee.department
+      )
+    );
+
   return (
     <PageContainer
       title="Employees"
-      description="Manage employee operations and workforce records."
+      subtitle="Employee directory and workforce management."
     >
-      <div className="space-y-4">
-        {employees.map((employee) => (
-          <div
-            key={employee.name}
-            className="rounded-2xl bg-black/30 p-5"
-          >
-            <h2 className="text-2xl font-semibold text-white">
-              {employee.name}
-            </h2>
+      <div className="mb-8 grid gap-6 md:grid-cols-3">
+        <div className="rounded-3xl border border-white/10 bg-[#111827] p-6">
+          <p className="text-slate-400">
+            Total Employees
+          </p>
 
-            <p className="mt-2 text-slate-400">
-              {employee.role}
-            </p>
-          </div>
-        ))}
+          <h2 className="mt-4 text-5xl font-black text-blue-400">
+            {employees.length}
+          </h2>
+        </div>
+
+        <div className="rounded-3xl border border-white/10 bg-[#111827] p-6">
+          <p className="text-slate-400">
+            Active Employees
+          </p>
+
+          <h2 className="mt-4 text-5xl font-black text-green-400">
+            {activeEmployees.length}
+          </h2>
+        </div>
+
+        <div className="rounded-3xl border border-white/10 bg-[#111827] p-6">
+          <p className="text-slate-400">
+            Departments
+          </p>
+
+          <h2 className="mt-4 text-5xl font-black text-orange-400">
+            {departments.size}
+          </h2>
+        </div>
       </div>
+
+      <DataTable
+        columns={columns}
+        data={employees}
+      />
     </PageContainer>
   );
 }

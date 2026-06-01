@@ -1,31 +1,64 @@
 import supabase from "../../lib/supabase";
 
 export async function generateForecast() {
-  const { data: quotations } =
-    await supabase
+  const [
+    quotationsResult,
+    ordersResult,
+    invoicesResult,
+    inventoryResult,
+    productionResult,
+  ] = await Promise.all([
+    supabase
       .from("quotations")
-      .select("*");
+      .select("*"),
 
-  const { data: inventory } =
-    await supabase
+    supabase
+      .from("orders")
+      .select("*"),
+
+    supabase
+      .from("invoices")
+      .select("*"),
+
+    supabase
       .from("inventory_ledger")
-      .select("*");
+      .select("*"),
+
+    supabase
+      .from("production_jobs")
+      .select("*"),
+  ]);
+
+  const quotations =
+    quotationsResult.data || [];
+
+  const orders =
+    ordersResult.data || [];
+
+  const invoices =
+    invoicesResult.data || [];
+
+  const inventory =
+    inventoryResult.data || [];
+
+  const production =
+    productionResult.data || [];
 
   const quotationVolume =
-    quotations?.length || 0;
+    quotations.length;
 
   const revenue =
-    quotations?.reduce(
-      (sum, quote) =>
+    invoices.reduce(
+      (sum, invoice) =>
         sum +
         Number(
-          quote.estimated_price || 0
+          invoice.invoice_amount || 0
         ),
       0
-    ) || 0;
+    );
 
   const inventoryUsage =
-    inventory?.reduce(
+    inventory.reduce(
       (sum, entry) =>
         sum +
         Math.abs(
@@ -34,7 +67,21 @@ export async function generateForecast() {
           )
         ),
       0
-    ) || 0;
+    );
+
+  const activeOrders =
+    orders.filter(
+      (order) =>
+        order.production_status !==
+        "completed"
+    ).length;
+
+  const completedProduction =
+    production.filter(
+      (job) =>
+        job.stage ===
+        "completed"
+    ).length;
 
   const recommendations =
     [];
@@ -43,7 +90,15 @@ export async function generateForecast() {
     quotationVolume > 20
   ) {
     recommendations.push(
-      "High quotation demand detected. Increase production planning."
+      "Quotation demand is increasing. Prepare additional production capacity."
+    );
+  }
+
+  if (
+    activeOrders > 10
+  ) {
+    recommendations.push(
+      "Production workload is rising. Review scheduling efficiency."
     );
   }
 
@@ -51,23 +106,41 @@ export async function generateForecast() {
     inventoryUsage > 500
   ) {
     recommendations.push(
-      "Inventory consumption is rising. Review procurement schedules."
+      "Inventory consumption is high. Review procurement planning."
     );
   }
 
-  if (revenue > 100000) {
+  if (
+    revenue > 100000
+  ) {
     recommendations.push(
-      "Revenue growth trend detected. Consider scaling operations."
+      "Revenue growth detected. Consider expanding production resources."
+    );
+  }
+
+  if (
+    completedProduction <
+    activeOrders
+  ) {
+    recommendations.push(
+      "Production backlog detected. Monitor dispatch and manufacturing timelines."
+    );
+  }
+
+  if (
+    recommendations.length === 0
+  ) {
+    recommendations.push(
+      "Operations appear stable. Continue monitoring KPIs."
     );
   }
 
   return {
     quotationVolume,
-
     revenue,
-
     inventoryUsage,
-
+    activeOrders,
+    completedProduction,
     recommendations,
   };
 }
