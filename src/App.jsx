@@ -84,6 +84,7 @@ const OrderDetails = lazy(() =>
 const FinanceLedger = lazy(() =>
   import("./pages/FinanceLedger")
 );
+const ProductMaster = lazy(() => import("./pages/ProductMaster"));
 
 const router =
   createBrowserRouter([
@@ -268,6 +269,7 @@ const router =
             </ProtectedRoute>
           ),
         },
+        { path: "products", element: (<ProtectedRoute><ProductMaster /></ProtectedRoute>) },
 
         {
           path: "imports",

@@ -5,6 +5,7 @@ import NotificationBell from "./components/ui/NotificationBell";
 const navItems = [
   { label: "Dashboard", path: "/dashboard" },
   { label: "Analytics", path: "/analytics" },
+  { label: "Products", path: "/products" },
   { label: "Employees", path: "/employees" },
   { label: "Inventory", path: "/inventory" },
   { label: "Production", path: "/production" },

@@ -10,13 +10,22 @@ export async function fetchQuotations() {
     console.error("Fetch Error:", error);
     return [];
   }
+
   return data;
 }
 
 export async function createQuotation(quotation) {
+  const payload = {
+    ...quotation,
+
+    customer_id: quotation.customer_id || null,
+    product_id: quotation.product_id || null,
+    artwork_id: quotation.artwork_id || null,
+  };
+
   const { data, error } = await supabase
     .from("quotations")
-    .insert([quotation])
+    .insert([payload])
     .select()
     .single();
 
@@ -24,13 +33,22 @@ export async function createQuotation(quotation) {
     console.error("Create Error:", error);
     return null;
   }
+
   return data;
 }
 
 export async function updateQuotation(id, updates) {
+  const payload = {
+    ...updates,
+
+    customer_id: updates.customer_id || null,
+    product_id: updates.product_id || null,
+    artwork_id: updates.artwork_id || null,
+  };
+
   const { data, error } = await supabase
     .from("quotations")
-    .update(updates)
+    .update(payload)
     .eq("id", id)
     .select()
     .single();
