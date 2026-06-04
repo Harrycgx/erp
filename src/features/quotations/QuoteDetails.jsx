@@ -10,7 +10,7 @@ import { useRef, useState } from "react";
 import {
   approveQuotation,
   convertToOrder,
-} from "../features/quotations/services/quotationService";
+} from "./services/quotationService";
 import { formatINR } from "./pricingEngine";
 import {
   submitQuotation,

@@ -335,60 +335,7 @@ const [errors, setErrors] = useState({});
           )}
         </div>
 
-        {/* ── Section 0: Customer / Product / Artwork ── */}
-        <div style={styles.section}>
-          <SectionHeader number="00" title="Customer & Product" icon="🔗" />
-          <FieldGroup columns={1}>
-            <Field label="Customer" required>
-              <select
-                style={styles.select}
-                value={form.customer_id}
-                onChange={e => handleCustomerChange(e.target.value)}
-              >
-                <option value="">— Select customer —</option>
-                {customers.map(c => (
-                  <option key={c.id} value={c.id}>{c.company_name}</option>
-                ))}
-              </select>
-            </Field>
-          </FieldGroup>
-          <FieldGroup columns={2}>
-            <Field label="Product" hint={!form.customer_id ? "Select a customer first" : ""}>
-              <select
-                style={styles.select}
-                value={form.product_id}
-                onChange={e => handleProductChange(e.target.value)}
-                disabled={!form.customer_id}
-              >
-                <option value="">— Select product —</option>
-                {products.map(p => (
-                  <option key={p.id} value={p.id}>{p.product_name}</option>
-                ))}
-              </select>
-            </Field>
-            <Field label="Artwork" hint={!form.product_id ? "Select a product first" : ""}>
-              <select
-                style={styles.select}
-                value={form.artwork_id}
-                onChange={e => setForm(prev => ({ ...prev, artwork_id: e.target.value }))}
-                disabled={!form.product_id}
-              >
-                <option value="">— Select artwork —</option>
-                {artworks.map(a => (
-                  <option key={a.id} value={a.id}>
-                    {a.file_name}{a.version ? ` v${a.version}` : ""} · {a.approval_status ?? "Pending"}
-                  </option>
-                ))}
-              </select>
-            </Field>
-          </FieldGroup>
-          {productLocked && (
-            <p style={{ margin: 0, fontSize: "0.75rem", color: "#4ade80" }}>
-              ✓ Box specifications auto-filled from product. Fields are read-only.
-            </p>
-          )}
-        </div>
-
+        
         {/* ── Section 1: Customer Details ── */}
         <div style={styles.section}>
           <SectionHeader number="01" title="Customer Details" icon="🏢" />
