@@ -61,12 +61,17 @@ export function calculatePricing(params) {
     margin_percent = DEFAULT_MARGIN_PERCENT, gst_percent = DEFAULT_GST_PERCENT,
   } = params;
 
-  if (!length || !width || !height || !quantity) {
-    return getZeroPricing(margin_percent, gst_percent);
-  }
-
   const { blankLengthMm, blankWidthMm } = calculateBlankSize(length, width, height, flute_type);
   const boardAreaSqm = (blankLengthMm / 1000) * (blankWidthMm / 1000);
+
+  if (!length || !width || !height || !quantity) {
+    return {
+      ...getZeroPricing(margin_percent, gst_percent),
+      blank_length_mm: round2(blankLengthMm),
+      blank_width_mm: round2(blankWidthMm),
+      board_area_sqm: round4(boardAreaSqm),
+    };
+  }
 
   const layers = PLY_LAYERS[ply_type] || 3;
   const takeup = FLUTE_TAKEUP[flute_type] || 1.32;
