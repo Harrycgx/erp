@@ -11,16 +11,17 @@ export default function AIInsights() {
     setForecast] =
     useState(null);
 
-  useEffect(() => {
-    loadForecast();
-  }, []);
-
   async function loadForecast() {
     const data =
       await generateForecast();
 
     setForecast(data);
   }
+
+  useEffect(() => {
+    loadForecast();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!forecast) {
     return (

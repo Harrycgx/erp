@@ -1,0 +1,2170 @@
+{
+  "emptyFiles": [
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\app\\constants.js",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\app\\providers.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\app\\router.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\layout\\AppLayout.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\layout\\PageShell.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\ai\\AIQuoteEngine.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\ai\\FactoryCopilot.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\ai\\ForecastPanel.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\ai\\ProductionPrediction.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\analytics\\ProductionAnalytics.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\analytics\\RevenueAnalytics.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\analytics\\WastageAnalytics.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\crm\\CustomerStats.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\crm\\CustomerTable.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\dashboard\\DashboardHero.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\employees\\AttendanceTracker.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\employees\\EmployeeTable.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\employees\\PayrollPanel.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\finance\\ExpenseTracker.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\finance\\InvoiceTable.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\finance\\ProfitabilityChart.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\InventoryTable.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\PaperRollList.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\StockAlerts.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\WarehouseStats.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\orders\\OrderStats.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\orders\\OrderTable.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\printing\\ArtworkManager.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\printing\\DieManager.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\printing\\PlateManager.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\procurement\\PurchaseOrders.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\procurement\\VendorTable.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\MachineStatus.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionFilters.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionKanban.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionStats.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionTable.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\hooks\\useQuotationCalculator.js",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuotationBuilder.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuotationPreview.jsx",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\hooks\\useInventory.js",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\hooks\\useProduction.js",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\hooks\\useQuotations.js",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\hooks\\useRealtime.js",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\lib\\formatters.js",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\lib\\utils.js",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\orchestration\\orderOrchestrator.js",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\workflows\\workflowService.js",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\store\\authStore.js",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\store\\notificationStore.js",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\store\\productionStore.js",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\store\\uiStore.js",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\styles\\globals.css",
+    "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\styles\\theme.js"
+  ],
+  "duplicateAnalysis": {
+    "AppLayout.jsx": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\AppLayout.jsx",
+        "lines": 67,
+        "size": 2146
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\layout\\AppLayout.jsx",
+        "lines": 1,
+        "size": 0
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\layouts\\AppLayout.jsx",
+        "lines": 153,
+        "size": 3721
+      }
+    ],
+    "ProtectedRoute.jsx": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\auth\\ProtectedRoute.jsx",
+        "lines": 22,
+        "size": 677
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\auth\\ProtectedRoute.jsx",
+        "lines": 44,
+        "size": 706
+      }
+    ],
+    "DispatchQueue.jsx": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\dashboard\\DispatchQueue.jsx",
+        "lines": 84,
+        "size": 3805
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\DispatchQueue.jsx",
+        "lines": 40,
+        "size": 2025
+      }
+    ],
+    "MachineStatus.jsx": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\dashboard\\MachineStatus.jsx",
+        "lines": 83,
+        "size": 3668
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\MachineStatus.jsx",
+        "lines": 1,
+        "size": 0
+      }
+    ],
+    "OrderCard.jsx": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\dashboard\\OrderCard.jsx",
+        "lines": 35,
+        "size": 1701
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\orders\\OrderCard.jsx",
+        "lines": 40,
+        "size": 1861
+      }
+    ],
+    "ProductionQueue.jsx": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\dashboard\\ProductionQueue.jsx",
+        "lines": 20,
+        "size": 641
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\ProductionQueue.jsx",
+        "lines": 49,
+        "size": 2538
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionQueue.jsx",
+        "lines": 54,
+        "size": 2566
+      }
+    ],
+    "StatusBadge.jsx": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\dashboard\\StatusBadge.jsx",
+        "lines": 11,
+        "size": 369
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\StatusBadge.jsx",
+        "lines": 27,
+        "size": 1044
+      }
+    ],
+    "ProductionTimeline.jsx": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\ProductionTimeline.jsx",
+        "lines": 49,
+        "size": 1893
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionTimeline.jsx",
+        "lines": 39,
+        "size": 2077
+      }
+    ],
+    "PageContainer.jsx": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\PageContainer.jsx",
+        "lines": 27,
+        "size": 608
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\PageContainer.jsx",
+        "lines": 7,
+        "size": 138
+      }
+    ],
+    "QuoteSummary.jsx": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\quote\\QuoteSummary.jsx",
+        "lines": 9,
+        "size": 330
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteSummary.jsx",
+        "lines": 43,
+        "size": 2325
+      }
+    ],
+    "DataTable.jsx": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\tables\\DataTable.jsx",
+        "lines": 98,
+        "size": 2533
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\DataTable.jsx",
+        "lines": 43,
+        "size": 1272
+      }
+    ],
+    "EmployeeTable.jsx": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\employees\\EmployeeTable.jsx",
+        "lines": 1,
+        "size": 0
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\hr\\EmployeeTable.jsx",
+        "lines": 42,
+        "size": 2548
+      }
+    ],
+    "HRDashboard.jsx": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\hr\\HRDashboard.jsx",
+        "lines": 61,
+        "size": 3472
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\HRDashboard.jsx",
+        "lines": 8,
+        "size": 150
+      }
+    ],
+    "CustomerDetails.jsx": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inquiries\\CustomerDetails.jsx",
+        "lines": 76,
+        "size": 3889
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\CustomerDetails.jsx",
+        "lines": 147,
+        "size": 4388
+      }
+    ],
+    "PurchaseOrderTable.jsx": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\PurchaseOrderTable.jsx",
+        "lines": 73,
+        "size": 3807
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\procurement\\PurchaseOrderTable.jsx",
+        "lines": 59,
+        "size": 3252
+      }
+    ],
+    "OrderDetails.jsx": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\orders\\OrderDetails.jsx",
+        "lines": 48,
+        "size": 2215
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\OrderDetails.jsx",
+        "lines": 375,
+        "size": 18464
+      }
+    ],
+    "PurchaseOrders.jsx": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\procurement\\PurchaseOrders.jsx",
+        "lines": 1,
+        "size": 0
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\PurchaseOrders.jsx",
+        "lines": 8,
+        "size": 156
+      }
+    ],
+    "quotationService.js": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\services\\quotationService.js",
+        "lines": 306,
+        "size": 9887
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\quotationService.js",
+        "lines": 62,
+        "size": 1288
+      }
+    ],
+    "Landing.jsx": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\Landing.jsx",
+        "lines": 124,
+        "size": 4494
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Landing.jsx",
+        "lines": 8,
+        "size": 142
+      }
+    ],
+    "formatters.js": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\lib\\formatters.js",
+        "lines": 1,
+        "size": 0
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\utils\\formatters.js",
+        "lines": 7,
+        "size": 169
+      }
+    ],
+    "orderHelpers.js": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\modules\\orders\\orderHelpers.js",
+        "lines": 81,
+        "size": 1878
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\utils\\orderHelpers.js",
+        "lines": 59,
+        "size": 2231
+      }
+    ],
+    "analyticsService.js": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\analytics\\analyticsService.js",
+        "lines": 109,
+        "size": 2033
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\analyticsService.js",
+        "lines": 24,
+        "size": 399
+      }
+    ],
+    "financeService.js": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\finance\\financeService.js",
+        "lines": 38,
+        "size": 635
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\financeService.js",
+        "lines": 94,
+        "size": 1363
+      }
+    ],
+    "inventoryService.js": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\inventory\\inventoryService.js",
+        "lines": 38,
+        "size": 646
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\inventoryService.js",
+        "lines": 222,
+        "size": 7877
+      }
+    ],
+    "notificationService.js": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\notifications\\notificationService.js",
+        "lines": 48,
+        "size": 756
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\notificationService.js",
+        "lines": 5,
+        "size": 83
+      }
+    ],
+    "orderService.js": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\orders\\orderService.js",
+        "lines": 361,
+        "size": 10515
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\orderService.js",
+        "lines": 106,
+        "size": 1595
+      }
+    ],
+    "pdfService.js": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\pdf\\pdfService.js",
+        "lines": 64,
+        "size": 880
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\pdfService.js",
+        "lines": 267,
+        "size": 11132
+      }
+    ],
+    "productionService.js": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\production\\productionService.js",
+        "lines": 64,
+        "size": 961
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\productionService.js",
+        "lines": 197,
+        "size": 6227
+      }
+    ],
+    "workflowService.js": [
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\workflow\\workflowService.js",
+        "lines": 5,
+        "size": 104
+      },
+      {
+        "path": "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\workflows\\workflowService.js",
+        "lines": 1,
+        "size": 0
+      }
+    ]
+  },
+  "depUsage": {
+    "@hookform/resolvers": [],
+    "@supabase/supabase-js": [
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\lib\\supabase.js"
+    ],
+    "@tanstack/react-query": [],
+    "@tanstack/react-table": [],
+    "dotenv": [],
+    "express": [],
+    "framer-motion": [],
+    "jspdf": [
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\pdf\\pdfService.js"
+    ],
+    "lucide-react": [
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\AppLayout.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\dashboard\\ActivityFeed.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteConversionModal.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteSearchBar.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteTable.jsx"
+    ],
+    "papaparse": [
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\ImportCenter.jsx"
+    ],
+    "pdf-lib": [
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\pdfService.js"
+    ],
+    "pg": [],
+    "react": [
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\BoxIQ.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ErrorBoundary.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\LiveQuoteSection.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\shared\\Navbar.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\ActionDrawer.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\BOMConsumptionTab.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\EditCustomerDrawer.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\ERPTable.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\NotificationBell.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\ProductionJobDetail.js",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\context\\AuthContext.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\ai\\AiQuotationAssistant.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\finance\\RecordPaymentForm.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\hr\\EmployeeForm.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inquiries\\CustomerForm.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inquiries\\InquiryForm.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\InventoryDetails.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\MaterialForm.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\ProductionPlanner.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\PurchaseOrderForm.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\SupplierForm.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\orders\\QuoteToOrderModal.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\procurement\\VendorForm.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\MaterialPlanningTab.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionDetails.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\QCChecklist.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\StaffAssignment.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\products\\ProductForm.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\PricingEditor.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteDetails.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteForm.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\quotepdf.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteTable.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\hooks\\useMediaQuery.js",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\hooks\\useQuotationBuilder.js",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\main.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\AI.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\AIInsights.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Analytics.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\ArtworkMaster.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\AuditLogs.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\auth\\ForgotPassword.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\auth\\Login.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\auth\\Register.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\CreateOrder.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\CustomerDetails.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Customers.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Dashboard.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Dispatch.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\DispatchWorkspace.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Employees.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Finance.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\FinanceLedger.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\FinanceWorkspace.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\ImportCenter.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Inventory.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\InventoryLedger.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\InventoryTransactions.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\InventoryWorkspace.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\OrderDetails.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Orders.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\PricingManagement.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Procurement.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Production.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\ProductionWorkspace.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\ProductMaster.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Quotations.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\QuoteDetail.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\store\\useQuoteStore.js"
+    ],
+    "react-countup": [],
+    "react-dom": [
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\main.jsx"
+    ],
+    "react-hook-form": [],
+    "react-hot-toast": [],
+    "react-router-dom": [
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\AppLayout.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\auth\\ProtectedRoute.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\auth\\RoleGuard.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\auth\\RoleProtectedRoute.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\layout\\Sidebar.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\layout\\WorkspaceShell.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\shared\\MobileMenu.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\shared\\Navbar.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\ProductionJobDetail.js",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\finance\\FinanceInvoiceTable.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\DispatchReadyBoard.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\sales\\SalesOrderTable.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\layouts\\AppLayout.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\auth\\ForgotPassword.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\auth\\Login.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\auth\\Register.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\CreateOrder.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\CustomerDetails.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Customers.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\OrderDetails.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Orders.jsx",
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+    ],
+    "recharts": [],
+    "zod": [],
+    "zustand": [],
+    "@eslint/js": [
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\eslint.config.js"
+    ],
+    "@types/express": [],
+    "@types/node": [],
+    "@types/react": [],
+    "@types/react-dom": [],
+    "@vitejs/plugin-react": [
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\vite.config.js"
+    ],
+    "autoprefixer": [],
+    "eslint": [
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\eslint.config.js"
+    ],
+    "eslint-plugin-react-hooks": [
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\eslint.config.js"
+    ],
+    "eslint-plugin-react-refresh": [
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\eslint.config.js"
+    ],
+    "globals": [
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\eslint.config.js"
+    ],
+    "knip": [],
+    "postcss": [],
+    "tailwindcss": [
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\tailwind.config.js"
+    ],
+    "ts-node": [],
+    "typescript": [],
+    "vite": [
+      "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\vite.config.js"
+    ]
+  },
+  "allImports": [
+    [
+      "react",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\BoxIQ.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ErrorBoundary.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\LiveQuoteSection.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\shared\\Navbar.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\ActionDrawer.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\BOMConsumptionTab.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\EditCustomerDrawer.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\ERPTable.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\NotificationBell.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\ProductionJobDetail.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\context\\AuthContext.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\ai\\AiQuotationAssistant.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\finance\\RecordPaymentForm.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\hr\\EmployeeForm.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inquiries\\CustomerForm.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inquiries\\InquiryForm.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\InventoryDetails.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\MaterialForm.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\ProductionPlanner.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\PurchaseOrderForm.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\SupplierForm.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\orders\\QuoteToOrderModal.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\procurement\\VendorForm.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\MaterialPlanningTab.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionDetails.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\QCChecklist.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\StaffAssignment.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\products\\ProductForm.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\PricingEditor.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteDetails.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteForm.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\quotepdf.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteTable.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\hooks\\useMediaQuery.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\hooks\\useQuotationBuilder.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\main.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\AI.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\AIInsights.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Analytics.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\ArtworkMaster.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\AuditLogs.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\auth\\ForgotPassword.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\auth\\Login.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\auth\\Register.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\CreateOrder.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\CustomerDetails.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Customers.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Dashboard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Dispatch.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\DispatchWorkspace.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Employees.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Finance.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\FinanceLedger.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\FinanceWorkspace.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\ImportCenter.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Inventory.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\InventoryLedger.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\InventoryTransactions.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\InventoryWorkspace.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\OrderDetails.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Orders.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\PricingManagement.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Procurement.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Production.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\ProductionWorkspace.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\ProductMaster.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Quotations.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\QuoteDetail.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\store\\useQuoteStore.js"
+      ]
+    ],
+    [
+      "react-router-dom",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\AppLayout.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\auth\\ProtectedRoute.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\auth\\RoleGuard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\auth\\RoleProtectedRoute.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\layout\\Sidebar.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\layout\\WorkspaceShell.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\shared\\MobileMenu.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\shared\\Navbar.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\ProductionJobDetail.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\finance\\FinanceInvoiceTable.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\DispatchReadyBoard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\sales\\SalesOrderTable.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\layouts\\AppLayout.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\auth\\ForgotPassword.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\auth\\Login.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\auth\\Register.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\CreateOrder.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\CustomerDetails.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Customers.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\OrderDetails.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Orders.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "./components/layout/WorkspaceShell",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./features/auth/ProtectedRoute",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/Dashboard",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/AI",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/AuditLogs",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/PricingManagement",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/Dispatch",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/Quotations",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/Production",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/Analytics",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/AIInsights",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/Employees",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/Inventory",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/Orders",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/CreateOrder",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/Finance",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/Procurement",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/Customers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/CustomerDetails",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/ImportCenter",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/InventoryLedger",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/OrderDetails",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/FinanceLedger",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/ProductMaster",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/ArtworkMaster",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "./pages/Settings",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\App.jsx"
+      ]
+    ],
+    [
+      "lucide-react",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\AppLayout.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\dashboard\\ActivityFeed.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteConversionModal.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteSearchBar.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteTable.jsx"
+      ]
+    ],
+    [
+      "./components/ui/NotificationBell",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\AppLayout.jsx"
+      ]
+    ],
+    [
+      "../../context/AuthContext",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\auth\\ProtectedRoute.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\auth\\RoleGuard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\auth\\RoleProtectedRoute.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\shared\\Navbar.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\auth\\ForgotPassword.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\auth\\Login.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\auth\\Register.jsx"
+      ]
+    ],
+    [
+      "../../config/permissions",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\auth\\RoleGuard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\shared\\Navbar.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\auth\\Register.jsx"
+      ]
+    ],
+    [
+      "../ui/StatCard",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\dashboard\\FactoryOverview.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\dashboard\\ProductionMetrics.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\FactorySection.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\Hero.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\LiveQuoteSection.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\ManufacturingStats.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\TrustBar.jsx"
+      ]
+    ],
+    [
+      "./StatusBadge",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\dashboard\\OrderCard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\dashboard\\OrdersTable.jsx"
+      ]
+    ],
+    [
+      "../../modules/orders/orderHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\dashboard\\OrderCard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\dashboard\\OrdersTable.jsx"
+      ]
+    ],
+    [
+      "./OrderCard",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\dashboard\\ProductionQueue.jsx"
+      ]
+    ],
+    [
+      "../../modules/orders/orderStatus",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\dashboard\\StatusBadge.jsx"
+      ]
+    ],
+    [
+      "../ui/Container",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\ClientLogos.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\CTASection.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\FactorySection.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\Hero.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\LiveQuoteSection.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\ManufacturingStats.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\PackagingCategories.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\ProductionTimeline.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\Testimonials.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\TrustBar.jsx"
+      ]
+    ],
+    [
+      "../ui/SectionHeading",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\ClientLogos.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\CTASection.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\FactorySection.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\LiveQuoteSection.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\ManufacturingStats.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\PackagingCategories.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\ProductionTimeline.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\Testimonials.jsx"
+      ]
+    ],
+    [
+      "../ui/PrimaryButton",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\CTASection.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\Hero.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\LiveQuoteSection.jsx"
+      ]
+    ],
+    [
+      "../ui/SecondaryButton",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\CTASection.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\landing\\Hero.jsx"
+      ]
+    ],
+    [
+      "./Sidebar",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\layout\\WorkspaceShell.jsx"
+      ]
+    ],
+    [
+      "./TopBar",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\layout\\WorkspaceShell.jsx"
+      ]
+    ],
+    [
+      "../ui/Modal",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\modals\\CrudModal.jsx"
+      ]
+    ],
+    [
+      "../ui/Button",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\modals\\CrudModal.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\tables\\Pagination.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\tables\\TableToolbar.jsx"
+      ]
+    ],
+    [
+      "./MobileMenu",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\shared\\Navbar.jsx"
+      ]
+    ],
+    [
+      "../ui/EmptyState",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\tables\\DataTable.jsx"
+      ]
+    ],
+    [
+      "../ui/StatusBadge",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\tables\\DataTable.jsx"
+      ]
+    ],
+    [
+      "../ui/Input",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\tables\\TableToolbar.jsx"
+      ]
+    ],
+    [
+      "../../lib/supabase",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\EditCustomerDrawer.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\NotificationBell.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\auth\\AuthProvider.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\MaterialPlanningTab.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteForm.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\ai\\forecastService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\analytics\\analyticsService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\audit\\auditService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\finance\\financeService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\import\\importService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\inventory\\inventoryService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\notifications\\notificationService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\production\\productionService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\workflow\\workflowService.js"
+      ]
+    ],
+    [
+      "./ActionDrawer",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\EditCustomerDrawer.jsx"
+      ]
+    ],
+    [
+      "../../features/auth/useAuth",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\NotificationBell.jsx"
+      ]
+    ],
+    [
+      "../lib/supabase",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\ProductionJobDetail.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\context\\AuthContext.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\modules\\inventory\\services\\inventoryLedgerService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\CreateOrder.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\CustomerDetails.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Dashboard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Dispatch.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\DispatchWorkspace.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Employees.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\FinanceWorkspace.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\InventoryTransactions.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\InventoryWorkspace.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\OrderDetails.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\PricingManagement.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Production.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\ProductionWorkspace.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Quotations.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\activityService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\aiService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\analyticsService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\artworkService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\attendanceService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\auditLogService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\authService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\bomService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\customerPortalService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\customerService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\dashboardService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\dispatchService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\employeeService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\financeService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\inquiryService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\inventoryMovementService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\inventoryReservationService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\inventoryService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\invoiceService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\leaveService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\ledgerService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\orderService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\paymentService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\payrollService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\pdfService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\pricingService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\procurementService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\productionConsumptionService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\productionPlanningService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\productionService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\purchaseOrderService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\quotationPersistence.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\salesOrderService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\supplierService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\vendorService.js"
+      ]
+    ],
+    [
+      "../components/ui/PageContainer",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\ProductionJobDetail.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\AI.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\AIInsights.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Analytics.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\ArtworkMaster.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\AuditLogs.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\CreateOrder.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\CustomerDetails.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Customers.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Dashboard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Dispatch.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Employees.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Finance.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\FinanceLedger.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\ImportCenter.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Inventory.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\InventoryLedger.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\InventoryTransactions.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\OrderDetails.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Orders.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\PricingManagement.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Procurement.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Production.jsx"
+      ]
+    ],
+    [
+      "../components/ui/BOMConsumptionTab",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\components\\ui\\ProductionJobDetail.js"
+      ]
+    ],
+    [
+      "./useAuth",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\auth\\ProtectedRoute.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\auth\\usePermissions.js"
+      ]
+    ],
+    [
+      "./AuthProvider",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\auth\\useAuth.js"
+      ]
+    ],
+    [
+      "../../components/ui/StatCard",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\dashboard\\KpiGrid.jsx"
+      ]
+    ],
+    [
+      "../../components/tables/DataTable",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\dashboard\\LiveProductionFeed.jsx"
+      ]
+    ],
+    [
+      "../../utils/formatters",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\finance\\FinanceInvoiceTable.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\finance\\RecordPaymentForm.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuotationItemEditor.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuotationTotalsPanel.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteTotals.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\sales\\SalesOrderTable.jsx"
+      ]
+    ],
+    [
+      "../../utils/financeHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\finance\\FinanceInvoiceTable.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\finance\\InvoiceStatusBadge.jsx"
+      ]
+    ],
+    [
+      "./InvoiceStatusBadge",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\finance\\FinanceInvoiceTable.jsx"
+      ]
+    ],
+    [
+      "../../utils/attendanceHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\hr\\AttendanceCalendar.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\hr\\AttendanceTable.jsx"
+      ]
+    ],
+    [
+      "../../utils/shiftHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\hr\\EmployeeForm.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\hr\\ShiftPlanner.jsx"
+      ]
+    ],
+    [
+      "./DepartmentCard",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\hr\\HRDashboard.jsx"
+      ]
+    ],
+    [
+      "./OvertimeTracker",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\hr\\HRDashboard.jsx"
+      ]
+    ],
+    [
+      "./StaffPerformanceCard",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\hr\\HRDashboard.jsx"
+      ]
+    ],
+    [
+      "../../utils/leaveHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\hr\\LeaveRequestTable.jsx"
+      ]
+    ],
+    [
+      "../../utils/payrollCalculations",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\hr\\SalarySlipPreview.jsx"
+      ]
+    ],
+    [
+      "./InquiryStatusBadge",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inquiries\\CustomerDetails.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inquiries\\InquiryCard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inquiries\\InquiryTable.jsx"
+      ]
+    ],
+    [
+      "../../utils/inquiryHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inquiries\\CustomerDetails.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inquiries\\InquiryCard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inquiries\\InquiryFilters.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inquiries\\InquiryForm.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inquiries\\InquiryStatusBadge.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inquiries\\InquiryTable.jsx"
+      ]
+    ],
+    [
+      "../../utils/inventoryHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\InventoryCard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\InventoryDetails.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\InventoryFlow.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\LowStockAlerts.jsx"
+      ]
+    ],
+    [
+      "../../utils/stockCalculations",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\InventoryCard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\InventoryDetails.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\StockMovementTable.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\WastageTracker.jsx"
+      ]
+    ],
+    [
+      "./StockMovementTable",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\InventoryDetails.jsx"
+      ]
+    ],
+    [
+      "../../services/inventoryService",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\InventoryDetails.jsx"
+      ]
+    ],
+    [
+      "./InventoryCard",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\InventoryFlow.jsx"
+      ]
+    ],
+    [
+      "./LowStockAlerts",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\InventoryFlow.jsx"
+      ]
+    ],
+    [
+      "./MaterialUsagePanel",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\InventoryFlow.jsx"
+      ]
+    ],
+    [
+      "./InventoryMovementTable",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\InventoryFlow.jsx"
+      ]
+    ],
+    [
+      "../../utils/productionEstimations",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\MaterialConsumption.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\ProductionPlanner.jsx"
+      ]
+    ],
+    [
+      "./StockStatusBadge",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\ProductionPlanner.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\ProductionQueue.jsx"
+      ]
+    ],
+    [
+      "../../utils/procurementHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\PurchaseOrderForm.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\inventory\\PurchaseOrderTable.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\procurement\\PurchaseOrderStatusBadge.jsx"
+      ]
+    ],
+    [
+      "../../utils/orderHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\orders\\DispatchTimeline.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\orders\\OrderStatusBadge.jsx"
+      ]
+    ],
+    [
+      "./OrderStatusBadge",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\orders\\OrderCard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\orders\\OrderDetails.jsx"
+      ]
+    ],
+    [
+      "../../utils/pdfHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\orders\\OrderCard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\orders\\OrderDetails.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\orders\\ProductionEstimate.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\pdf\\QuoteTemplate.jsx"
+      ]
+    ],
+    [
+      "./DispatchTimeline",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\orders\\OrderDetails.jsx"
+      ]
+    ],
+    [
+      "./ProductionEstimate",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\orders\\OrderDetails.jsx"
+      ]
+    ],
+    [
+      "./QuoteTemplate",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\pdf\\PDFPreview.jsx"
+      ]
+    ],
+    [
+      "./DownloadQuoteButton",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\pdf\\PDFQuoteGenerator.jsx"
+      ]
+    ],
+    [
+      "./PurchaseOrderStatusBadge",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\procurement\\PurchaseOrderTable.jsx"
+      ]
+    ],
+    [
+      "../../utils/productionHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\DispatchQueue.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\DispatchReadyBoard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionAlerts.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionDetails.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionQueue.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionStageBadge.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionTimeline.jsx"
+      ]
+    ],
+    [
+      "./ProductionStageBadge",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\DispatchReadyBoard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionBoard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionCard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionQueue.jsx"
+      ]
+    ],
+    [
+      "./ProductionCard",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionBoard.jsx"
+      ]
+    ],
+    [
+      "./ProductionAlerts",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionBoard.jsx"
+      ]
+    ],
+    [
+      "./ProductionQueue",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionBoard.jsx"
+      ]
+    ],
+    [
+      "./DispatchReadyBoard",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionBoard.jsx"
+      ]
+    ],
+    [
+      "./ProductionTimeline",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionBoard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionDetails.jsx"
+      ]
+    ],
+    [
+      "./StaffAssignment",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionDetails.jsx"
+      ]
+    ],
+    [
+      "./QCChecklist",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\production\\ProductionDetails.jsx"
+      ]
+    ],
+    [
+      "../../../lib/supabase",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\products\\services\\productService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\services\\quotationService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\orders\\orderService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\quotationService.js"
+      ]
+    ],
+    [
+      "./utils/pricingEngine",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\PricingCalculator.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteForm.jsx"
+      ]
+    ],
+    [
+      "../../utils/quotationHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuotationHeaderForm.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteFilters.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteStatusBadge.jsx"
+      ]
+    ],
+    [
+      "../../services/quotationService",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuotationHeaderForm.jsx"
+      ]
+    ],
+    [
+      "./QuoteStatusBadge",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteCard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteHistory.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuotePreviewCard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteSummary.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteTable.jsx"
+      ]
+    ],
+    [
+      "./QuoteSearchBar",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteDashboard.jsx"
+      ]
+    ],
+    [
+      "./QuoteFilters",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteDashboard.jsx"
+      ]
+    ],
+    [
+      "./pricingEngine",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteDetails.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\quotepdf.jsx"
+      ]
+    ],
+    [
+      "./QuoteCard",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\quotations\\QuoteTable.jsx"
+      ]
+    ],
+    [
+      "../../utils/salesOrderHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\sales\\SalesOrderStatusBadge.jsx"
+      ]
+    ],
+    [
+      "./SalesOrderStatusBadge",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\features\\sales\\SalesOrderTable.jsx"
+      ]
+    ],
+    [
+      "../services/quotationCalculationService",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\hooks\\useQuotationBuilder.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\utils\\quotationState.js"
+      ]
+    ],
+    [
+      "../components/shared/Navbar",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\layouts\\AppLayout.jsx"
+      ]
+    ],
+    [
+      "@supabase/supabase-js",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\lib\\supabase.js"
+      ]
+    ],
+    [
+      "react-dom/client",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\main.jsx"
+      ]
+    ],
+    [
+      "./App.jsx",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\main.jsx"
+      ]
+    ],
+    [
+      "./features/auth/AuthProvider",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\main.jsx"
+      ]
+    ],
+    [
+      "./components/ErrorBoundary",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\main.jsx"
+      ]
+    ],
+    [
+      "./orderStatus",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\modules\\orders\\orderHelpers.js"
+      ]
+    ],
+    [
+      "./calculatePricing",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\modules\\pricing\\quoteEngine.js"
+      ]
+    ],
+    [
+      "./boardCalculations",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\modules\\pricing\\quoteEngine.js"
+      ]
+    ],
+    [
+      "../components/tables/DataTable",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\AI.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\AuditLogs.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Customers.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Dispatch.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Employees.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Finance.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Orders.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Procurement.jsx"
+      ]
+    ],
+    [
+      "../features/ai/AiQuotationAssistant",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\AI.jsx"
+      ]
+    ],
+    [
+      "../services/aiService",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\AI.jsx"
+      ]
+    ],
+    [
+      "../components/ui/EditCustomerDrawer",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\CustomerDetails.jsx"
+      ]
+    ],
+    [
+      "../services/customerService",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Customers.jsx"
+      ]
+    ],
+    [
+      "../services/productionService",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Dashboard.jsx"
+      ]
+    ],
+    [
+      "../components/ui/KPIStrip",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Dashboard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\DispatchWorkspace.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\FinanceWorkspace.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\InventoryWorkspace.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\ProductionWorkspace.jsx"
+      ]
+    ],
+    [
+      "../components/ui/ERPTable",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Dashboard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\DispatchWorkspace.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\FinanceWorkspace.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\InventoryWorkspace.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\ProductionWorkspace.jsx"
+      ]
+    ],
+    [
+      "../components/ui/SearchBar",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Dashboard.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\DispatchWorkspace.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\FinanceWorkspace.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\InventoryWorkspace.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\ProductionWorkspace.jsx"
+      ]
+    ],
+    [
+      "../components/ui/ActionDrawer",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\DispatchWorkspace.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\InventoryWorkspace.jsx",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\ProductionWorkspace.jsx"
+      ]
+    ],
+    [
+      "../services/financeService",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Finance.jsx"
+      ]
+    ],
+    [
+      "papaparse",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\ImportCenter.jsx"
+      ]
+    ],
+    [
+      "../features/production/MaterialPlanningTab",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\OrderDetails.jsx"
+      ]
+    ],
+    [
+      "../services/orderService",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Orders.jsx"
+      ]
+    ],
+    [
+      "../features/products/ProductForm",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\ProductMaster.jsx"
+      ]
+    ],
+    [
+      "../features/quotations/QuoteForm",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Quotations.jsx"
+      ]
+    ],
+    [
+      "./QuoteDetail",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\Quotations.jsx"
+      ]
+    ],
+    [
+      "../features/quotations/utils/pricingEngine",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\pages\\QuoteDetail.jsx"
+      ]
+    ],
+    [
+      "../layouts/AppLayout",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../components/auth/ProtectedRoute",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../components/auth/RoleProtectedRoute",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/auth/Login",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/auth/Register",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/auth/ForgotPassword",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/Analytics",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/Employees",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/Attendance",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/Payroll",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/HRDashboard",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/Inventory",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/Procurement",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/PurchaseOrders",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/ProductionPlanning",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/Suppliers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/Vendors",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/Finance",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/Invoices",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/InvoiceDetails",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/Payments",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/CustomerLedger",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/Orders",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/SalesOrders",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/SalesOrderDetails",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/QuoteBuilder",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/Customers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/CustomerPortal",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/CustomerQuotations",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/CustomerQuotationDetails",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/Inquiries",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/Quotations",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/QuotationDetails",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/Production",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/ProductionJobDetails",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/AdminDashboard",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/StaffDashboard",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/CustomerDashboard",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/VendorDashboard",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/Unauthorized",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../pages/NotFound",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\routes\\AppRoutes.jsx"
+      ]
+    ],
+    [
+      "../utils/anomalyHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\anomalyDetectionService.js"
+      ]
+    ],
+    [
+      "../config/permissions",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\authService.js"
+      ]
+    ],
+    [
+      "../utils/automationHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\automationService.js"
+      ]
+    ],
+    [
+      "./quotationApprovalService",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\customerPortalService.js"
+      ]
+    ],
+    [
+      "../utils/workflowIntegrity",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\customerPortalService.js"
+      ]
+    ],
+    [
+      "../utils/forecastingHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\forecastingService.js"
+      ]
+    ],
+    [
+      "./procurementService",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\inventoryReservationService.js"
+      ]
+    ],
+    [
+      "./inventoryService",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\inventoryReservationService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\productionConsumptionService.js"
+      ]
+    ],
+    [
+      "./ledgerService",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\invoiceService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\paymentService.js"
+      ]
+    ],
+    [
+      "./salesOrderService",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\invoiceService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\invoiceService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\productionService.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\salesOrderProductionService.js"
+      ]
+    ],
+    [
+      "./invoiceCalculationService",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\ledgerService.js"
+      ]
+    ],
+    [
+      "./invoiceService",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\paymentService.js"
+      ]
+    ],
+    [
+      "jspdf",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\pdf\\pdfService.js"
+      ]
+    ],
+    [
+      "pdf-lib",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\pdfService.js"
+      ]
+    ],
+    [
+      "../utils/pdfHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\pdfService.js"
+      ]
+    ],
+    [
+      "../utils/predictionHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\predictionService.js"
+      ]
+    ],
+    [
+      "./quotationConversionService",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\quotationApprovalService.js"
+      ]
+    ],
+    [
+      "../utils/pricingCalculations",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\quotationCalculationService.js"
+      ]
+    ],
+    [
+      "./quotationCalculationService",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\quotationPersistence.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\salesOrderService.js"
+      ]
+    ],
+    [
+      "./analyticsService",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\reportingService.js"
+      ]
+    ],
+    [
+      "../utils/reportingHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\reportingService.js"
+      ]
+    ],
+    [
+      "./productionService",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\salesOrderProductionService.js"
+      ]
+    ],
+    [
+      "../utils/salesOrderHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\services\\salesOrderProductionService.js"
+      ]
+    ],
+    [
+      "./predictionHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\utils\\aiHelpers.js"
+      ]
+    ],
+    [
+      "./forecastingHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\utils\\predictionHelpers.js"
+      ]
+    ],
+    [
+      "./pdfHelpers",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\utils\\quotationFormatter.js"
+      ]
+    ],
+    [
+      "../services/quotationService",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\utils\\validationHelpers.js",
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\src\\utils\\workflowIntegrity.js"
+      ]
+    ],
+    [
+      "vite",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\vite.config.js"
+      ]
+    ],
+    [
+      "@vitejs/plugin-react",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\vite.config.js"
+      ]
+    ],
+    [
+      "tailwindcss",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\tailwind.config.js"
+      ]
+    ],
+    [
+      "@eslint/js",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\eslint.config.js"
+      ]
+    ],
+    [
+      "globals",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\eslint.config.js"
+      ]
+    ],
+    [
+      "eslint-plugin-react-hooks",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\eslint.config.js"
+      ]
+    ],
+    [
+      "eslint-plugin-react-refresh",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\eslint.config.js"
+      ]
+    ],
+    [
+      "eslint/config",
+      [
+        "C:\\Users\\DELL\\OneDrive\\Desktop\\boxiq-project\\eslint.config.js"
+      ]
+    ]
+  ]
+}

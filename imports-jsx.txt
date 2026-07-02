@@ -1,0 +1,457 @@
+﻿
+Filename                 LineNumber Line                                                             
+--------                 ---------- ----                                                             
+App.jsx                           1 import React, { lazy, Suspense } from "react";                   
+App.jsx                           2 import { createBrowserRouter, RouterProvider } from "react-rou...
+App.jsx                           5 import WorkspaceShell from "./components/layout/WorkspaceShell"; 
+App.jsx                           6 import ProtectedRoute from "./features/auth/ProtectedRoute";     
+App.jsx                           7 import Dashboard from "./pages/Dashboard";                       
+App.jsx                           8 import AI from "./pages/AI";                                     
+App.jsx                          11 const AuditLogs = lazy(() => import("./pages/AuditLogs"));       
+App.jsx                          12 const PricingManagement = lazy(() => import("./pages/PricingMa...
+App.jsx                          13 const Dispatch = lazy(() => import("./pages/Dispatch"));         
+App.jsx                          14 const Quotations = lazy(() => import("./pages/Quotations"));     
+App.jsx                          15 const Production = lazy(() => import("./pages/Production"));     
+App.jsx                          16 const Analytics = lazy(() => import("./pages/Analytics"));       
+App.jsx                          17 const AIInsights = lazy(() => import("./pages/AIInsights"));     
+App.jsx                          18 const Employees = lazy(() => import("./pages/Employees"));       
+App.jsx                          19 const Inventory = lazy(() => import("./pages/Inventory"));       
+App.jsx                          20 const Orders = lazy(() => import("./pages/Orders"));             
+App.jsx                          21 const CreateOrder = lazy(() => import("./pages/CreateOrder"));...
+App.jsx                          22 const Finance = lazy(() => import("./pages/Finance"));           
+App.jsx                          23 const Procurement = lazy(() => import("./pages/Procurement"));   
+App.jsx                          24 const Customers = lazy(() => import("./pages/Customers"));       
+App.jsx                          25 const CustomerDetails = lazy(() => import("./pages/CustomerDet...
+App.jsx                          26 const ImportCenter = lazy(() => import("./pages/ImportCenter")); 
+App.jsx                          27 const InventoryLedger = lazy(() => import("./pages/InventoryLe...
+App.jsx                          28 const OrderDetails = lazy(() => import("./pages/OrderDetails")); 
+App.jsx                          29 const FinanceLedger = lazy(() => import("./pages/FinanceLedger...
+App.jsx                          30 const ProductMaster = lazy(() => import("./pages/ProductMaster...
+App.jsx                          31 const ArtworkMaster = lazy(() => import("./pages/ArtworkMaster...
+App.jsx                          32 const Settings = lazy(() => import("./pages/Settings"));         
+App.jsx                          70       { path: "imports", element: <ProtectedRoute><ImportCente...
+AppLayout.jsx                     1 import { Outlet, NavLink } from "react-router-dom";              
+AppLayout.jsx                     2 import { Brain } from "lucide-react";                            
+AppLayout.jsx                     3 import NotificationBell from "./components/ui/NotificationBell"; 
+BoxIQ.jsx                         1 import React from "react";                                       
+Landing.jsx                       1 import {                                                         
+main.jsx                          1 import { StrictMode } from "react";                              
+main.jsx                          3 import { createRoot } from "react-dom/client";                   
+main.jsx                          5 import "./index.css";                                            
+main.jsx                          7 import App from "./App.jsx";                                     
+main.jsx                          9 import { AuthProvider } from "./features/auth/AuthProvider";     
+main.jsx                         11 import ErrorBoundary from "./components/ErrorBoundary";          
+ErrorBoundary.jsx                 1 import React from "react";                                       
+ProtectedRoute.jsx                1 import { useAuth } from '../../context/AuthContext';             
+ProtectedRoute.jsx                2 import { Navigate, useLocation } from 'react-router-dom';        
+RoleGuard.jsx                     1 import { useAuth } from '../../context/AuthContext';             
+RoleGuard.jsx                     2 import { useNavigate } from 'react-router-dom';                  
+RoleGuard.jsx                     3 import { hasRole } from '../../config/permissions';              
+RoleProtectedRoute.jsx            1 import { Navigate } from "react-router-dom";                     
+RoleProtectedRoute.jsx            2 import { useAuth } from "../../context/AuthContext";             
+FactoryOverview.jsx               1 import StatCard from '../ui/StatCard';                           
+OrderCard.jsx                     1 import StatusBadge from './StatusBadge';                         
+OrderCard.jsx                     2 import { getOrderProgress, getDispatchEstimate } from '../../m...
+OrdersTable.jsx                   1 import StatusBadge from './StatusBadge';                         
+OrdersTable.jsx                   2 import { getOrderProgress } from '../../modules/orders/orderHe...
+ProductionMetrics.jsx             1 import StatCard from '../ui/StatCard';                           
+ProductionQueue.jsx               1 import OrderCard from './OrderCard';                             
+StatusBadge.jsx                   1 import { statusClasses } from '../../modules/orders/orderStatus';
+ClientLogos.jsx                   1 import Container from '../ui/Container';                         
+ClientLogos.jsx                   2 import SectionHeading from '../ui/SectionHeading';               
+CTASection.jsx                    1 import Container from '../ui/Container';                         
+CTASection.jsx                    2 import PrimaryButton from '../ui/PrimaryButton';                 
+CTASection.jsx                    3 import SecondaryButton from '../ui/SecondaryButton';             
+CTASection.jsx                    4 import SectionHeading from '../ui/SectionHeading';               
+FactorySection.jsx                1 import Container from '../ui/Container';                         
+FactorySection.jsx                2 import SectionHeading from '../ui/SectionHeading';               
+FactorySection.jsx                3 import StatCard from '../ui/StatCard';                           
+Hero.jsx                          1 import Container from '../ui/Container';                         
+Hero.jsx                          2 import PrimaryButton from '../ui/PrimaryButton';                 
+Hero.jsx                          3 import SecondaryButton from '../ui/SecondaryButton';             
+Hero.jsx                          4 import StatCard from '../ui/StatCard';                           
+LiveQuoteSection.jsx              1 import { useState } from 'react';                                
+LiveQuoteSection.jsx              2 import Container from '../ui/Container';                         
+LiveQuoteSection.jsx              3 import SectionHeading from '../ui/SectionHeading';               
+LiveQuoteSection.jsx              4 import PrimaryButton from '../ui/PrimaryButton';                 
+LiveQuoteSection.jsx              5 import StatCard from '../ui/StatCard';                           
+ManufacturingStats.jsx            1 import Container from '../ui/Container';                         
+ManufacturingStats.jsx            2 import SectionHeading from '../ui/SectionHeading';               
+ManufacturingStats.jsx            3 import StatCard from '../ui/StatCard';                           
+PackagingCategories.jsx           1 import Container from '../ui/Container';                         
+PackagingCategories.jsx           2 import SectionHeading from '../ui/SectionHeading';               
+ProductionTimeline.jsx            1 import Container from '../ui/Container';                         
+ProductionTimeline.jsx            2 import SectionHeading from '../ui/SectionHeading';               
+Testimonials.jsx                  1 import Container from '../ui/Container';                         
+Testimonials.jsx                  2 import SectionHeading from '../ui/SectionHeading';               
+TrustBar.jsx                      1 import Container from '../ui/Container';                         
+TrustBar.jsx                      2 import StatCard from '../ui/StatCard';                           
+Sidebar.jsx                       1 import { NavLink } from 'react-router-dom';                      
+Sidebar.jsx                       2 import {                                                         
+WorkspaceShell.jsx                1 import { Outlet } from 'react-router-dom';                       
+WorkspaceShell.jsx                2 import Sidebar from './Sidebar';                                 
+WorkspaceShell.jsx                3 import TopBar from './TopBar';                                   
+CrudModal.jsx                     1 import Modal from "../ui/Modal";                                 
+CrudModal.jsx                     2 import Button from "../ui/Button";                               
+MobileMenu.jsx                    1 import { Link } from 'react-router-dom';                         
+Navbar.jsx                        1 import { NavLink, Link, useNavigate } from 'react-router-dom';   
+Navbar.jsx                        2 import { useAuth } from '../../context/AuthContext';             
+Navbar.jsx                        3 import { canAccessModule } from '../../config/permissions';      
+Navbar.jsx                        4 import MobileMenu from './MobileMenu';                           
+Navbar.jsx                        5 import { useState } from 'react';                                
+DataTable.jsx                     1 import EmptyState from "../ui/EmptyState";                       
+DataTable.jsx                     2 import StatusBadge from "../ui/StatusBadge";                     
+Pagination.jsx                    1 import Button from "../ui/Button";                               
+TableToolbar.jsx                  1 import Input from "../ui/Input";                                 
+TableToolbar.jsx                  2 import Button from "../ui/Button";                               
+ActionDrawer.jsx                  1 import React, { useEffect } from "react";                        
+BOMConsumptionTab.jsx             1 import React from "react";                                       
+EditCustomerDrawer.jsx            1 import React, { useState, useEffect } from "react";              
+EditCustomerDrawer.jsx            2 import supabase from "../lib/supabase";                          
+EditCustomerDrawer.jsx            3 import ActionDrawer, { DrawerSection } from "./ActionDrawer";    
+ERPTable.jsx                      1 import React from "react";                                       
+NotificationBell.jsx              1 import { useEffect, useState } from "react";                     
+NotificationBell.jsx              3 import useAuth from "../../features/auth/useAuth";               
+NotificationBell.jsx              5 import supabase from "../../lib/supabase";                       
+NotificationBell.jsx              7 import {                                                         
+AuthContext.jsx                   3 import { createContext, useContext, useEffect, useRef, useStat...
+AuthContext.jsx                   4 import supabase from "../lib/supabase";                          
+AiQuotationAssistant.jsx          1 import { useState } from "react";                                
+AuthProvider.jsx                  1 import {                                                         
+AuthProvider.jsx                  8 import supabase from "../../lib/supabase";                       
+ProtectedRoute.jsx                1 import useAuth from "./useAuth";                                 
+ActivityFeed.jsx                  1 import { Activity } from "lucide-react";                         
+KpiGrid.jsx                       1 import {                                                         
+KpiGrid.jsx                       8 import StatCard from "../../components/ui/StatCard";             
+LiveProductionFeed.jsx            1 import DataTable from "../../components/tables/DataTable";       
+FinanceInvoiceTable.jsx           1 import { Link } from 'react-router-dom';                         
+FinanceInvoiceTable.jsx           2 import { formatCurrency } from '../../utils/formatters';         
+FinanceInvoiceTable.jsx           3 import { formatDate } from '../../utils/financeHelpers';         
+FinanceInvoiceTable.jsx           4 import InvoiceStatusBadge from './InvoiceStatusBadge';           
+InvoiceStatusBadge.jsx            1 import { getInvoiceStatus, getStatusClass } from '../../utils/...
+RecordPaymentForm.jsx             1 import { useState } from 'react';                                
+RecordPaymentForm.jsx             2 import { formatCurrency } from '../../utils/formatters';         
+AttendanceCalendar.jsx            1 import { getAttendanceStatusClass } from '../../utils/attendan...
+AttendanceTable.jsx               1 import { formatAttendanceTime, getAttendanceStatusClass } from...
+EmployeeForm.jsx                  1 import { useEffect, useState } from 'react';                     
+EmployeeForm.jsx                  2 import { SHIFT_OPTIONS } from '../../utils/shiftHelpers';        
+HRDashboard.jsx                   1 import DepartmentCard from './DepartmentCard';                   
+HRDashboard.jsx                   2 import OvertimeTracker from './OvertimeTracker';                 
+HRDashboard.jsx                   3 import StaffPerformanceCard from './StaffPerformanceCard';       
+LeaveRequestTable.jsx             1 import { getLeaveStatusClass } from '../../utils/leaveHelpers';  
+SalarySlipPreview.jsx             1 import { calculateNetSalary, calculateOvertimeAmount } from '....
+ShiftPlanner.jsx                  1 import { getShiftBadgeClass, SHIFT_DETAILS } from '../../utils...
+CustomerDetails.jsx               1 import InquiryStatusBadge from './InquiryStatusBadge';           
+CustomerDetails.jsx               2 import { formatTimestamp } from '../../utils/inquiryHelpers';    
+CustomerForm.jsx                  1 import { useEffect, useState } from 'react';                     
+InquiryCard.jsx                   1 import InquiryStatusBadge from './InquiryStatusBadge';           
+InquiryCard.jsx                   2 import { formatTimestamp } from '../../utils/inquiryHelpers';    
+InquiryFilters.jsx                1 import { INQUIRY_STATUSES, PRIORITY_LEVELS } from '../../utils...
+InquiryForm.jsx                   1 import { useEffect, useState } from 'react';                     
+InquiryForm.jsx                   2 import { INQUIRY_STATUSES, PRIORITY_LEVELS } from '../../utils...
+InquiryStatusBadge.jsx            1 import { statusClasses } from '../../utils/inquiryHelpers';      
+InquiryTable.jsx                  1 import InquiryStatusBadge from './InquiryStatusBadge';           
+InquiryTable.jsx                  2 import { formatTimestamp } from '../../utils/inquiryHelpers';    
+InventoryCard.jsx                 1 import { getStockStatus, buildMaterialLabel, formatUnit } from...
+InventoryCard.jsx                 2 import { calculateWastageValue } from '../../utils/stockCalcul...
+InventoryDetails.jsx              1 import { useEffect, useState } from 'react';                     
+InventoryDetails.jsx              2 import StockMovementTable from './StockMovementTable';           
+InventoryDetails.jsx              3 import { getStockStatus, formatUnit } from '../../utils/invent...
+InventoryDetails.jsx              4 import { calculateWastageValue, getInventoryHealth } from '../...
+InventoryDetails.jsx              5 import { fetchStockMovements, insertStockMovement, updateInven...
+InventoryFlow.jsx                 1 import InventoryCard from './InventoryCard';                     
+InventoryFlow.jsx                 2 import LowStockAlerts from './LowStockAlerts';                   
+InventoryFlow.jsx                 3 import MaterialUsagePanel from './MaterialUsagePanel';           
+InventoryFlow.jsx                 4 import InventoryMovementTable from './InventoryMovementTable';   
+InventoryFlow.jsx                 5 import { isLowStock } from '../../utils/inventoryHelpers';       
+LowStockAlerts.jsx                1 import { isLowStock } from '../../utils/inventoryHelpers';       
+MaterialConsumption.jsx           1 import { estimateMaterialUsage } from '../../utils/productionE...
+MaterialForm.jsx                  1 import { useEffect, useState } from 'react';                     
+ProductionPlanner.jsx             1 import { useEffect, useMemo, useState } from 'react';            
+ProductionPlanner.jsx             2 import { estimateMaterialUsage } from '../../utils/productionE...
+ProductionPlanner.jsx             3 import StockStatusBadge from './StockStatusBadge';               
+ProductionQueue.jsx               1 import StockStatusBadge from './StockStatusBadge';               
+PurchaseOrderForm.jsx             1 import { useState } from 'react';                                
+PurchaseOrderForm.jsx             2 import { buildPoNumber } from '../../utils/procurementHelpers';  
+PurchaseOrderTable.jsx            1 import { getPoBadgeClasses } from '../../utils/procurementHelp...
+StockMovementTable.jsx            1 import { formatStockMovement } from '../../utils/stockCalculat...
+SupplierForm.jsx                  1 import { useEffect, useState } from 'react';                     
+WastageTracker.jsx                1 import { calculateWastageValue } from '../../utils/stockCalcul...
+DispatchTimeline.jsx              1 import { PRODUCTION_STAGES } from '../../utils/orderHelpers';    
+OrderCard.jsx                     1 import OrderStatusBadge from './OrderStatusBadge';               
+OrderCard.jsx                     2 import { formatCurrency } from '../../utils/pdfHelpers';         
+OrderDetails.jsx                  1 import OrderStatusBadge from './OrderStatusBadge';               
+OrderDetails.jsx                  2 import DispatchTimeline from './DispatchTimeline';               
+OrderDetails.jsx                  3 import ProductionEstimate from './ProductionEstimate';           
+OrderDetails.jsx                  4 import { formatDate } from '../../utils/pdfHelpers';             
+OrderStatusBadge.jsx              1 import { orderStatusClasses } from '../../utils/orderHelpers';   
+ProductionEstimate.jsx            1 import { formatDate } from '../../utils/pdfHelpers';             
+QuoteToOrderModal.jsx             1 import { useState } from 'react';                                
+PDFPreview.jsx                    1 import QuoteTemplate from './QuoteTemplate';                     
+PDFQuoteGenerator.jsx             1 import DownloadQuoteButton from './DownloadQuoteButton';         
+QuoteTemplate.jsx                 1 import { formatCurrency, formatDate, getValidityDate } from '....
+PurchaseOrderStatusBa...          1 import { getPoBadgeClasses } from '../../utils/procurementHelp...
+PurchaseOrderTable.jsx            1 import PurchaseOrderStatusBadge from './PurchaseOrderStatusBad...
+VendorForm.jsx                    1 import { useEffect, useState } from 'react';                     
+DispatchQueue.jsx                 1 import { formatDate, normalizeStage } from '../../utils/produc...
+DispatchReadyBoard.jsx            1 import { Link } from 'react-router-dom';                         
+DispatchReadyBoard.jsx            2 import ProductionStageBadge from './ProductionStageBadge';       
+DispatchReadyBoard.jsx            3 import { formatDate } from '../../utils/productionHelpers';      
+MaterialPlanningTab.jsx           1 import React, { useState, useEffect } from 'react';              
+MaterialPlanningTab.jsx           2 import supabase from "../../lib/supabase";                       
+ProductionAlerts.jsx              1 import { isOverdue } from '../../utils/productionHelpers';       
+ProductionBoard.jsx               1 import ProductionCard from './ProductionCard';                   
+ProductionBoard.jsx               2 import ProductionAlerts from './ProductionAlerts';               
+ProductionBoard.jsx               3 import ProductionQueue from './ProductionQueue';                 
+ProductionBoard.jsx               4 import DispatchReadyBoard from './DispatchReadyBoard';           
+ProductionBoard.jsx               5 import ProductionStageBadge from './ProductionStageBadge';       
+ProductionBoard.jsx               6 import ProductionTimeline from './ProductionTimeline';           
+ProductionBoard.jsx               7 import {                                                         
+ProductionCard.jsx                1 import ProductionStageBadge from './ProductionStageBadge';       
+ProductionCard.jsx                2 import {                                                         
+ProductionDetails.jsx             1 import { useEffect, useMemo, useState } from 'react';            
+ProductionDetails.jsx             2 import ProductionTimeline from './ProductionTimeline';           
+ProductionDetails.jsx             3 import StaffAssignment from './StaffAssignment';                 
+ProductionDetails.jsx             4 import QCChecklist from './QCChecklist';                         
+ProductionDetails.jsx             5 import { formatDateTime } from '../../utils/productionHelpers';  
+ProductionQueue.jsx               1 import ProductionStageBadge from './ProductionStageBadge';       
+ProductionQueue.jsx               2 import { formatDate, isOverdue } from '../../utils/productionH...
+ProductionStageBadge.jsx          1 import { getProductionBadgeClasses } from '../../utils/product...
+ProductionTimeline.jsx            1 import { PRODUCTION_STAGES, formatStageLabel, formatDateTime, ...
+QCChecklist.jsx                   1 import { useState } from 'react';                                
+StaffAssignment.jsx               1 import { useState } from 'react';                                
+ProductForm.jsx                   8 import { useState, useEffect } from "react";                     
+ProductForm.jsx                   9 import {                                                         
+PricingCalculator.jsx             1 import { calcPricing } from "./utils/pricingEngine";             
+PricingEditor.jsx                 1 import { useEffect, useState } from 'react';                     
+QuotationHeaderForm.jsx           1 import { BOX_TYPES, URGENCY_OPTIONS } from '../../utils/quotat...
+QuotationHeaderForm.jsx           2 import { QUOTATION_STATUSES } from '../../services/quotationSe...
+QuotationItemEditor.jsx           1 import { formatCurrency } from '../../utils/formatters';         
+QuotationTotalsPanel.jsx          1 import { formatCurrency } from '../../utils/formatters';         
+QuoteCard.jsx                     1 import QuoteStatusBadge from './QuoteStatusBadge';               
+QuoteConversionModal.jsx          1 import { X, CheckCircle2 } from 'lucide-react';                  
+QuoteDashboard.jsx                1 import QuoteSearchBar from './QuoteSearchBar';                   
+QuoteDashboard.jsx                2 import QuoteFilters from './QuoteFilters';                       
+QuoteDetails.jsx                  9 import { useRef, useState } from "react";                        
+QuoteDetails.jsx                 10 import {                                                         
+QuoteDetails.jsx                 14 import { formatINR } from "./pricingEngine";                     
+QuoteDetails.jsx                 15 import {                                                         
+QuoteFilters.jsx                  1 import { QUOTE_STATUSES } from '../../utils/quotationHelpers';   
+QuoteForm.jsx                     5 import { useState, useEffect, useCallback } from "react";        
+QuoteForm.jsx                     6 import { calculatePricing, formatINR, GSM_OPTIONS, BOX_TYPES, ...
+QuoteForm.jsx                     7 import supabase from "../../lib/supabase";                       
+QuoteHistory.jsx                  1 import QuoteStatusBadge from './QuoteStatusBadge';               
+quotepdf.jsx                      5 // Import and render inside a modal, then call handlePrint()     
+quotepdf.jsx                      8 import { forwardRef } from "react";                              
+quotepdf.jsx                      9 import { formatINR } from "./pricingEngine";                     
+QuotePreviewCard.jsx              1 import QuoteStatusBadge from './QuoteStatusBadge';               
+QuoteSearchBar.jsx                1 import { Search } from 'lucide-react';                           
+QuoteStatusBadge.jsx              1 import { quoteStatusClasses } from '../../utils/quotationHelpe...
+QuoteSummary.jsx                  1 import QuoteStatusBadge from './QuoteStatusBadge';               
+QuoteTable.jsx                    1 import { useMemo, useState } from 'react';                       
+QuoteTable.jsx                    2 import { ChevronDown, ChevronUp } from 'lucide-react';           
+QuoteTable.jsx                    3 import QuoteStatusBadge from './QuoteStatusBadge';               
+QuoteTable.jsx                    4 import QuoteCard from './QuoteCard';                             
+QuoteTotals.jsx                   1 import { formatCurrency } from '../../utils/formatters';         
+SalesOrderStatusBadge...          1 import { formatSalesOrderStatusLabel, salesOrderStatusClasses ...
+SalesOrderTable.jsx               1 import { Link } from 'react-router-dom';                         
+SalesOrderTable.jsx               2 import { formatCurrency } from '../../utils/formatters';         
+SalesOrderTable.jsx               3 import SalesOrderStatusBadge from './SalesOrderStatusBadge';     
+AppLayout.jsx                     1 import { Outlet, NavLink } from 'react-router-dom';              
+AppLayout.jsx                     3 import Navbar from '../components/shared/Navbar';                
+AppLayout.jsx                     5 import {                                                         
+AI.jsx                            1 import { useEffect, useState } from "react";                     
+AI.jsx                            3 import PageContainer from "../components/ui/PageContainer";      
+AI.jsx                            4 import DataTable from "../components/tables/DataTable";          
+AI.jsx                            5 import AiQuotationAssistant from "../features/ai/AiQuotationAs...
+AI.jsx                            7 import { fetchAiPredictions } from "../services/aiService";      
+AIInsights.jsx                    1 import { useEffect, useState } from "react";                     
+AIInsights.jsx                    3 import PageContainer from "../components/ui/PageContainer";      
+AIInsights.jsx                    5 import {                                                         
+Analytics.jsx                     1 import { useEffect, useState } from "react";                     
+Analytics.jsx                     3 import {                                                         
+Analytics.jsx                    12 import PageContainer from "../components/ui/PageContainer";      
+Analytics.jsx                    14 import {                                                         
+ArtworkMaster.jsx                 7 import { useState, useEffect, useRef } from "react";             
+ArtworkMaster.jsx                 8 import PageContainer from "../components/ui/PageContainer";      
+ArtworkMaster.jsx                 9 import {                                                         
+AuditLogs.jsx                     1 import { useEffect, useState } from "react";                     
+AuditLogs.jsx                     3 import PageContainer from "../components/ui/PageContainer";      
+AuditLogs.jsx                     4 import DataTable from "../components/tables/DataTable";          
+AuditLogs.jsx                     6 import {                                                         
+CreateOrder.jsx                   1 import { useState } from "react";                                
+CreateOrder.jsx                   2 import { useNavigate } from "react-router-dom";                  
+CreateOrder.jsx                   3 import PageContainer from "../components/ui/PageContainer";      
+CreateOrder.jsx                   4 import supabase from "../lib/supabase";                          
+CustomerDetails.jsx               1 import { useEffect, useState } from "react";                     
+CustomerDetails.jsx               2 import { useParams } from "react-router-dom";                    
+CustomerDetails.jsx               3 import PageContainer from "../components/ui/PageContainer";      
+CustomerDetails.jsx               4 import EditCustomerDrawer from "../components/ui/EditCustomerD...
+CustomerDetails.jsx               5 import supabase from "../lib/supabase";                          
+Customers.jsx                     1 import { useEffect, useState } from "react";                     
+Customers.jsx                     2 import PageContainer from "../components/ui/PageContainer";      
+Customers.jsx                     3 import DataTable from "../components/tables/DataTable";          
+Customers.jsx                     4 import { useNavigate } from "react-router-dom";                  
+Customers.jsx                     5 import { fetchCustomers, createCustomer } from "../services/cu...
+Dashboard.jsx                     1 import { useEffect, useState } from "react";                     
+Dashboard.jsx                     2 import supabase from "../lib/supabase";                          
+Dashboard.jsx                     3 import { fetchProductionJobs } from "../services/productionSer...
+Dashboard.jsx                     5 import PageContainer from "../components/ui/PageContainer";      
+Dashboard.jsx                     6 import KPIStrip from "../components/ui/KPIStrip";                
+Dashboard.jsx                     7 import ERPTable from "../components/ui/ERPTable";                
+Dashboard.jsx                     8 import SearchBar from "../components/ui/SearchBar";              
+Dispatch.jsx                      1 import { useEffect, useState } from "react";                     
+Dispatch.jsx                      2 import PageContainer from "../components/ui/PageContainer";      
+Dispatch.jsx                      3 import DataTable from "../components/tables/DataTable";          
+Dispatch.jsx                      4 import supabase from "../lib/supabase";                          
+DispatchWorkspace.jsx             1 import { useEffect, useMemo, useState } from "react";            
+DispatchWorkspace.jsx             2 import supabase from "../lib/supabase";                          
+DispatchWorkspace.jsx             3 import ERPTable from "../components/ui/ERPTable";                
+DispatchWorkspace.jsx             4 import SearchBar from "../components/ui/SearchBar";              
+DispatchWorkspace.jsx             5 import KPIStrip from "../components/ui/KPIStrip";                
+DispatchWorkspace.jsx             6 import ActionDrawer, { DrawerSection } from "../components/ui/...
+Employees.jsx                     1 import { useEffect, useState } from "react";                     
+Employees.jsx                     3 import PageContainer from "../components/ui/PageContainer";      
+Employees.jsx                     4 import DataTable from "../components/tables/DataTable";          
+Employees.jsx                     6 import supabase from "../lib/supabase";                          
+Finance.jsx                       1 import { useEffect, useState } from "react";                     
+Finance.jsx                       3 import PageContainer from "../components/ui/PageContainer";      
+Finance.jsx                       4 import DataTable from "../components/tables/DataTable";          
+Finance.jsx                       6 import { fetchInvoices } from "../services/financeService";      
+FinanceLedger.jsx                 1 import { useEffect, useState } from "react";                     
+FinanceLedger.jsx                 3 import PageContainer from "../components/ui/PageContainer";      
+FinanceLedger.jsx                 5 import {                                                         
+FinanceWorkspace.jsx              1 import { useEffect, useMemo, useState } from "react";            
+FinanceWorkspace.jsx              2 import supabase from "../lib/supabase";                          
+FinanceWorkspace.jsx              3 import ERPTable from "../components/ui/ERPTable";                
+FinanceWorkspace.jsx              4 import SearchBar from "../components/ui/SearchBar";              
+FinanceWorkspace.jsx              5 import KPIStrip from "../components/ui/KPIStrip";                
+ImportCenter.jsx                  1 import { useState } from "react";                                
+ImportCenter.jsx                  3 import Papa from "papaparse";                                    
+ImportCenter.jsx                  5 import PageContainer from "../components/ui/PageContainer";      
+ImportCenter.jsx                  7 import {                                                         
+ImportCenter.jsx                  8   uploadQuotationImport,                                         
+ImportCenter.jsx                  9 } from "../services/import/importService";                       
+ImportCenter.jsx                 11 export default function ImportCenter() {                         
+ImportCenter.jsx                 15   const [importStats,                                            
+ImportCenter.jsx                 16     setImportStats] =                                            
+ImportCenter.jsx                 56           await uploadQuotationImport(                           
+ImportCenter.jsx                 61           setImportStats({                                       
+ImportCenter.jsx                 68             "Import uploaded successfully"                       
+ImportCenter.jsx                 78             "Import failed"                                      
+ImportCenter.jsx                 89       title="Import Center"                                      
+ImportCenter.jsx                 90       subtitle="Secure staging imports for ERP data."            
+ImportCenter.jsx                112             Processing import...                                 
+ImportCenter.jsx                116         {importStats && (                                        
+ImportCenter.jsx                119               Import Complete                                    
+ImportCenter.jsx                126                 importStats.batchId                              
+ImportCenter.jsx                134                 importStats.rows                                 
+Inventory.jsx                     6 import { useState, useEffect, useCallback } from 'react';        
+Inventory.jsx                     7 import PageContainer from '../components/ui/PageContainer';      
+Inventory.jsx                     8 import {                                                         
+InventoryLedger.jsx               1 import { useEffect, useState } from "react";                     
+InventoryLedger.jsx               3 import PageContainer from "../components/ui/PageContainer";      
+InventoryLedger.jsx               5 import {                                                         
+InventoryTransactions...          1 import { useEffect, useState } from "react";                     
+InventoryTransactions...          3 import PageContainer from "../components/ui/PageContainer";      
+InventoryTransactions...          5 import supabase from "../lib/supabase";                          
+InventoryTransactions...          7 import {                                                         
+InventoryWorkspace.jsx            1 import { useEffect, useMemo, useState } from "react";            
+InventoryWorkspace.jsx            2 import supabase from "../lib/supabase";                          
+InventoryWorkspace.jsx            3 import ERPTable from "../components/ui/ERPTable";                
+InventoryWorkspace.jsx            4 import SearchBar from "../components/ui/SearchBar";              
+InventoryWorkspace.jsx            5 import KPIStrip from "../components/ui/KPIStrip";                
+InventoryWorkspace.jsx            6 import ActionDrawer, { DrawerSection } from "../components/ui/...
+OrderDetails.jsx                  1 import { useEffect, useState } from "react";                     
+OrderDetails.jsx                  2 import { useParams, Link } from "react-router-dom";              
+OrderDetails.jsx                  3 import PageContainer from "../components/ui/PageContainer";      
+OrderDetails.jsx                  4 import MaterialPlanningTab from "../features/production/Materi...
+OrderDetails.jsx                  5 import supabase from "../lib/supabase";                          
+Orders.jsx                        1 import { useEffect, useState } from "react";                     
+Orders.jsx                        2 import { useNavigate } from "react-router-dom";                  
+Orders.jsx                        3 import PageContainer from "../components/ui/PageContainer";      
+Orders.jsx                        4 import DataTable from "../components/tables/DataTable";          
+Orders.jsx                        5 import { fetchOrders } from "../services/orderService";          
+PricingManagement.jsx             7 import { useState, useEffect, useCallback } from "react";        
+PricingManagement.jsx             8 import PageContainer from "../components/ui/PageContainer";      
+PricingManagement.jsx             9 import {                                                         
+PricingManagement.jsx            18 import supabase from "../lib/supabase";                          
+Procurement.jsx                   1 import { useEffect, useState } from "react";                     
+Procurement.jsx                   3 import PageContainer from "../components/ui/PageContainer";      
+Procurement.jsx                   4 import DataTable from "../components/tables/DataTable";          
+Procurement.jsx                   6 import {                                                         
+Production.jsx                    1 import React, { useState, useEffect } from "react";              
+Production.jsx                    2 import supabase from "../lib/supabase";                          
+Production.jsx                    3 import PageContainer from "../components/ui/PageContainer";      
+ProductionWorkspace.jsx           1 import { useEffect, useMemo, useState } from "react";            
+ProductionWorkspace.jsx           2 import supabase from "../lib/supabase";                          
+ProductionWorkspace.jsx           3 import ERPTable from "../components/ui/ERPTable";                
+ProductionWorkspace.jsx           4 import SearchBar from "../components/ui/SearchBar";              
+ProductionWorkspace.jsx           5 import KPIStrip from "../components/ui/KPIStrip";                
+ProductionWorkspace.jsx           6 import ActionDrawer from "../components/ui/ActionDrawer";        
+ProductMaster.jsx                 7 import { useState, useEffect, useCallback } from "react";        
+ProductMaster.jsx                 8 import {                                                         
+ProductMaster.jsx                16 import ProductForm from "../features/products/ProductForm";      
+Quotations.jsx                    8 import { useState, useEffect, useCallback } from "react";        
+Quotations.jsx                    9 import {                                                         
+Quotations.jsx                   15 import {                                                         
+Quotations.jsx                   19 import QuoteForm from "../features/quotations/QuoteForm";        
+Quotations.jsx                   20 import QuoteDetail from "./QuoteDetail";                         
+Quotations.jsx                   21 import supabase from "../lib/supabase";                          
+QuoteDetail.jsx                   7 import { useState } from "react";                                
+QuoteDetail.jsx                   8 import {                                                         
+QuoteDetail.jsx                  15 import { formatINR } from "../features/quotations/utils/pricin...
+ForgotPassword.jsx                1 import { useState } from 'react';                                
+ForgotPassword.jsx                2 import { useNavigate } from 'react-router-dom';                  
+ForgotPassword.jsx                3 import { useAuth } from '../../context/AuthContext';             
+Login.jsx                         1 import { useState } from 'react';                                
+Login.jsx                         2 import { useNavigate } from 'react-router-dom';                  
+Login.jsx                         3 import { useAuth } from '../../context/AuthContext';             
+Register.jsx                      1 import { useState } from 'react';                                
+Register.jsx                      2 import { useNavigate } from 'react-router-dom';                  
+Register.jsx                      3 import { useAuth } from '../../context/AuthContext';             
+Register.jsx                      4 import { ROLES } from '../../config/permissions';                
+AppRoutes.jsx                     1 import { Routes, Route } from 'react-router-dom';                
+AppRoutes.jsx                     2 import AppLayout from '../layouts/AppLayout';                    
+AppRoutes.jsx                     3 import ProtectedRoute from '../components/auth/ProtectedRoute';  
+AppRoutes.jsx                     4 import RoleProtectedRoute from '../components/auth/RoleProtect...
+AppRoutes.jsx                     5 import Login from '../pages/auth/Login';                         
+AppRoutes.jsx                     6 import Register from '../pages/auth/Register';                   
+AppRoutes.jsx                     7 import ForgotPassword from '../pages/auth/ForgotPassword';       
+AppRoutes.jsx                     8 import Analytics from '../pages/Analytics';                      
+AppRoutes.jsx                     9 import Employees from '../pages/Employees';                      
+AppRoutes.jsx                    10 import Attendance from '../pages/Attendance';                    
+AppRoutes.jsx                    11 import Payroll from '../pages/Payroll';                          
+AppRoutes.jsx                    12 import HRDashboard from '../pages/HRDashboard';                  
+AppRoutes.jsx                    13 import Inventory from '../pages/Inventory';                      
+AppRoutes.jsx                    14 import Procurement from '../pages/Procurement';                  
+AppRoutes.jsx                    15 import PurchaseOrders from '../pages/PurchaseOrders';            
+AppRoutes.jsx                    16 import ProductionPlanning from '../pages/ProductionPlanning';    
+AppRoutes.jsx                    17 import Suppliers from '../pages/Suppliers';                      
+AppRoutes.jsx                    18 import Vendors from '../pages/Vendors';                          
+AppRoutes.jsx                    19 import Finance from '../pages/Finance';                          
+AppRoutes.jsx                    20 import Invoices from '../pages/Invoices';                        
+AppRoutes.jsx                    21 import InvoiceDetails from '../pages/InvoiceDetails';            
+AppRoutes.jsx                    22 import Payments from '../pages/Payments';                        
+AppRoutes.jsx                    23 import CustomerLedger from '../pages/CustomerLedger';            
+AppRoutes.jsx                    24 import Orders from '../pages/Orders';                            
+AppRoutes.jsx                    25 import SalesOrders from '../pages/SalesOrders';                  
+AppRoutes.jsx                    26 import SalesOrderDetails from '../pages/SalesOrderDetails';      
+AppRoutes.jsx                    27 import QuoteBuilder from '../pages/QuoteBuilder';                
+AppRoutes.jsx                    28 import Customers from '../pages/Customers';                      
+AppRoutes.jsx                    29 import CustomerPortal from '../pages/CustomerPortal';            
+AppRoutes.jsx                    30 import CustomerQuotations from '../pages/CustomerQuotations';    
+AppRoutes.jsx                    31 import CustomerQuotationDetails from '../pages/CustomerQuotati...
+AppRoutes.jsx                    32 import Inquiries from '../pages/Inquiries';                      
+AppRoutes.jsx                    33 import Quotations from '../pages/Quotations';                    
+AppRoutes.jsx                    34 import QuotationDetails from '../pages/QuotationDetails';        
+AppRoutes.jsx                    35 import Production from '../pages/Production';                    
+AppRoutes.jsx                    36 import ProductionJobDetails from '../pages/ProductionJobDetails';
+AppRoutes.jsx                    37 import AdminDashboard from '../pages/AdminDashboard';            
+AppRoutes.jsx                    38 import StaffDashboard from '../pages/StaffDashboard';            
+AppRoutes.jsx                    39 import CustomerDashboard from '../pages/CustomerDashboard';      
+AppRoutes.jsx                    40 import VendorDashboard from '../pages/VendorDashboard';          
+AppRoutes.jsx                    41 import Unauthorized from '../pages/Unauthorized';                
+AppRoutes.jsx                    42 import NotFound from '../pages/NotFound';                        
+
+

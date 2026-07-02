@@ -1,88 +1,83 @@
-import supabase from "../../../lib/supabase";
+// ============================================================
+// inventoryLedgerService.js
+// Location: src/services/inventoryLedgerService.js
+// ============================================================
 
-export async function createInventoryItem(item) {
-  const { data, error } =
-    await supabase
-      .from("inventory_items")
-      .insert([item])
-      .select()
-      .single();
+import supabase from '../lib/supabase';
 
-  if (error) {
-    console.error(error);
-    return null;
-  }
+export const MOVEMENT_TYPES = ['Stock In', 'Stock Out', 'Adjustment'];
 
-  return data;
+// ─── FETCH ledger entries ─────────────────────────────────────
+
+export async function fetchLedgerEntries() {
+  const { data, error } = await supabase
+    .from('inventory_ledger')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) throw new Error(error.message);
+  return data || [];
 }
 
-export async function addInventoryMovement(
-  movement
-) {
-  const { data, error } =
-    await supabase
-      .from("inventory_ledger")
-      .insert([movement])
-      .select()
-      .single();
+// ─── FETCH materials for dropdown ────────────────────────────
 
-  if (error) {
-    console.error(error);
-    return null;
-  }
+export async function fetchMaterialsForSelect() {
+  const { data, error } = await supabase
+    .from('inventory_items')
+    .select('id, material_name, material_code, current_stock, unit')
+    .order('material_name');
 
-  return data;
+  if (error) throw new Error(error.message);
+  return data || [];
 }
 
-export async function getInventoryBalance(
-  materialName
-) {
-  const { data, error } =
-    await supabase
-      .from("inventory_ledger")
-      .select("quantity")
-      .eq(
-        "material_name",
-        materialName
-      );
+// ─── POST transaction (ledger row + stock update, atomic) ─────
 
-  if (error) {
-    console.error(error);
-    return 0;
-  }
+export async function postTransaction({ materialId, materialName, movementType, quantity, referenceNumber, notes, createdBy }) {
+  const qty = Number(quantity);
+  if (!qty || qty === 0) throw new Error('Quantity must be non-zero.');
 
-  return (
-    data?.reduce(
-      (sum, row) =>
-        sum +
-        Number(row.quantity || 0),
-      0
-    ) || 0
-  );
-}
+  // 1. Fetch current stock
+  const { data: item, error: fetchErr } = await supabase
+    .from('inventory_items')
+    .select('id, current_stock, material_name')
+    .eq('id', materialId)
+    .single();
 
-export async function fetchInventoryHistory(
-  materialName
-) {
-  const { data, error } =
-    await supabase
-      .from("inventory_ledger")
-      .select("*")
-      .eq(
-        "material_name",
-        materialName
-      )
-      .order(
-        "created_at",
-        {
-          ascending: false,
-        }
-      );
+  if (fetchErr) throw new Error(fetchErr.message);
 
-  if (error) {
-    console.error(error);
-    return [];
-  }
+  const currentStock = Number(item.current_stock ?? 0);
 
-  return data;
+  // 2. Calculate new stock
+  let delta = 0;
+  if (movementType === 'Stock In')    delta = qty;
+  if (movementType === 'Stock Out')   delta = -Math.abs(qty);
+  if (movementType === 'Adjustment')  delta = qty; // signed by caller
+
+  const newStock = currentStock + delta;
+  if (newStock < 0) throw new Error(`Insufficient stock. Available: ${currentStock}. Cannot go below zero.`);
+
+  // 3. Insert ledger row
+  const { error: ledgerErr } = await supabase
+    .from('inventory_ledger')
+    .insert([{
+      material_name:    materialName || item.material_name,
+      movement_type:    movementType,
+      quantity:         qty,
+      reference_number: referenceNumber?.trim() || null,
+      notes:            notes?.trim()           || null,
+      created_by:       createdBy               || null,
+    }]);
+
+  if (ledgerErr) throw new Error(ledgerErr.message);
+
+  // 4. Update inventory stock
+  const { error: stockErr } = await supabase
+    .from('inventory_items')
+    .update({ current_stock: newStock })
+    .eq('id', materialId);
+
+  if (stockErr) throw new Error(stockErr.message);
+
+  return { newStock, delta };
 }

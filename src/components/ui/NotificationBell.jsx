@@ -18,6 +18,15 @@ export default function NotificationBell() {
   const [open, setOpen] =
     useState(false);
 
+  async function loadNotifications() {
+    const data =
+      await fetchNotifications(
+        user.id
+      );
+
+    setNotifications(data);
+  }
+
   useEffect(() => {
     if (!user) {
       return;
@@ -64,16 +73,8 @@ export default function NotificationBell() {
         channel
       );
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
-
-  async function loadNotifications() {
-    const data =
-      await fetchNotifications(
-        user.id
-      );
-
-    setNotifications(data);
-  }
 
   const unreadCount =
     notifications.filter(

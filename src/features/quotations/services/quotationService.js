@@ -8,6 +8,8 @@ import supabase from "../../../lib/supabase";
 // ─── Fields that exist in the quotations table ───────────────
 // Strips computed/display-only fields from pricingEngine before insert/update
 const ALLOWED_FIELDS = [
+  // FK relationships
+  "customer_id", "product_id", "artwork_id",
   "customer_name", "contact_person", "phone", "email", "gst_number",
   "box_type", "length", "width", "height", "ply_type", "flute_type",
   "paper_gsm", "printing_type", "printing_colors", "quantity", "remarks",
@@ -222,6 +224,7 @@ export async function cancelQuotation(id) {
 
 export async function convertToOrder(quotationId) {
   const quotation = await fetchQuotationById(quotationId);
+
   if (!quotation) throw new Error("Quotation not found.");
   if (quotation.status !== "Approved") {
     throw new Error("Only Approved quotations can be converted to orders.");
@@ -232,15 +235,19 @@ export async function convertToOrder(quotationId) {
 
   const orderNumber = await generateOrderNumber();
 
+  const orderPayload = {
+    order_number:  orderNumber,
+    quotation_id:  quotationId,
+    customer_name: quotation.customer_name,
+    status:        "Confirmed",
+    total_amount:  quotation.final_price,
+    box_type:      quotation.box_type,
+    quantity:      quotation.quantity,
+  };
+
   const { data: order, error: orderError } = await supabase
     .from("orders")
-    .insert([{
-      order_number: orderNumber,
-      quotation_id: quotationId,
-      customer_name: quotation.customer_name,
-      status: "Confirmed",
-      total_amount: quotation.final_price,
-    }])
+    .insert([orderPayload])
     .select()
     .single();
 

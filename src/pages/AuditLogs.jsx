@@ -30,10 +30,6 @@ export default function AuditLogs() {
   const [logs, setLogs] =
     useState([]);
 
-  useEffect(() => {
-    loadLogs();
-  }, []);
-
   async function loadLogs() {
     const result =
       await fetchAuditLogs();
@@ -42,6 +38,11 @@ export default function AuditLogs() {
       setLogs(result.data);
     }
   }
+
+  useEffect(() => {
+    loadLogs();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <PageContainer

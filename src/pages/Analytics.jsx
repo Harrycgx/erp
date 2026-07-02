@@ -20,16 +20,17 @@ export default function Analytics() {
     setAnalytics] =
     useState(null);
 
-  useEffect(() => {
-    loadAnalytics();
-  }, []);
-
   async function loadAnalytics() {
     const data =
       await fetchAnalytics();
 
     setAnalytics(data);
   }
+
+  useEffect(() => {
+    loadAnalytics();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!analytics) {
     return (

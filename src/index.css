@@ -2,30 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  background-color: #0b1020;
-  color: white;
-  font-family: Inter, sans-serif;
-  overflow-x: hidden;
-}
-
-.glass {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  backdrop-filter: blur(18px);
-}
-
-.card-hover {
-  transition: all 0.35s ease;
-}
-
-.card-hover:hover {
-  transform: translateY(-8px);
-  border-color: rgba(59,130,246,0.4);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+@layer base {
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: #0F172A; /* Enterprise Background */
+    color: #F8FAFC;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
 }

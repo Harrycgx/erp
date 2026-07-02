@@ -1,0 +1,127 @@
+﻿
+Filename                        LineNumber Line                                                      
+--------                        ---------- ----                                                      
+ProductionJobDetail.js                   1 import React, { useState, useEffect } from "react";       
+ProductionJobDetail.js                   2 import { useParams } from "react-router-dom";             
+ProductionJobDetail.js                   3 import supabase from "../lib/supabase";                   
+ProductionJobDetail.js                   4 import PageContainer from "../components/ui/PageContain...
+ProductionJobDetail.js                   5 import BOMConsumptionTab from "../components/ui/BOMCons...
+useAuth.js                               1 import { useAuthContext } from "./AuthProvider";          
+usePermissions.js                        1 import useAuth from "./useAuth";                          
+productService.js                        1 import supabase from "../../../lib/supabase";             
+quotationService.js                      6 import supabase from "../../../lib/supabase";             
+pricingEngine.js                       123 // Alias for Quotations.jsx which imports calcPricing     
+useMediaQuery.js                         1 import { useEffect, useState } from 'react';              
+useQuotationBuilder.js                   1 import { useCallback, useMemo, useState } from 'react';   
+useQuotationBuilder.js                   2 import { buildQuotationFinancials } from '../services/q...
+useQuotationBuilder.js                   3 import {                                                  
+useQuotationBuilder.js                   9 import {                                                  
+supabase.js                              1 import { createClient } from '@supabase/supabase-js';     
+supabase.js                              3 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;    
+supabase.js                              4 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_A...
+inventoryLedgerService.js                6 import supabase from '../lib/supabase';                   
+orderHelpers.js                          1 import { ORDER_STAGES, getStageIndex, getStageProgress ...
+quoteEngine.js                           1 import { calculatePricing } from './calculatePricing';    
+quoteEngine.js                           2 import { calculateBoardArea } from './boardCalculations'; 
+activityService.js                       1 import supabase from '../lib/supabase';                   
+aiService.js                             1 import supabase from "../lib/supabase";                   
+analyticsService.js                      1 import supabase from "../lib/supabase";                   
+anomalyDetectionService.js               1 import { detectOperationalAnomalies } from '../utils/an...
+api.js                                   2   const baseUrl = import.meta.env.VITE_API_URL ?? '';     
+artworkService.js                        8 import supabase from "../lib/supabase";                   
+attendanceService.js                     1 import supabase from "../lib/supabase";                   
+auditLogService.js                       1 import supabase from "../lib/supabase";                   
+authService.js                           1 import supabase from '../lib/supabase';                   
+authService.js                           2 import { ROLES } from '../config/permissions';            
+automationService.js                     1 import { createAutomationWorkflows } from '../utils/aut...
+bomService.js                            1 import supabase from '../lib/supabase';                   
+customerPortalService.js                 1 import supabase from '../lib/supabase';                   
+customerPortalService.js                 2 import {                                                  
+customerPortalService.js                 9 import { approveQuotationWorkflow, rejectQuotationWorkf...
+customerPortalService.js                10 import { assertQuotationCustomerAccess, canCustomerActO...
+customerService.js                       1 import supabase from "../lib/supabase";                   
+dashboardService.js                      1 import supabase from '../lib/supabase';                   
+dispatchService.js                       1 import supabase from '../lib/supabase';                   
+employeeService.js                       1 import supabase from '../lib/supabase';                   
+financeService.js                        1 import supabase from "../lib/supabase";                   
+forecastingService.js                    1 import { forecastSalesTrend, forecastMaterialDemand, fo...
+inquiryService.js                        1 import supabase from '../lib/supabase';                   
+inventoryMovementService.js              1 import supabase from '../lib/supabase';                   
+inventoryReservationService.js           1 import { createProcurementRequest } from './procurement...
+inventoryReservationService.js           2 import { fetchInventoryItemById, updateInventoryItem } ...
+inventoryReservationService.js           3 import {                                                  
+inventoryReservationService.js           8 import supabase from '../lib/supabase';                   
+inventoryService.js                      9 import supabase from '../lib/supabase';                   
+invoiceService.js                        1 import supabase from '../lib/supabase';                   
+invoiceService.js                        2 import {                                                  
+invoiceService.js                        8 import { recordInvoiceLedgerEntry } from './ledgerServi...
+invoiceService.js                      157     const { fetchSalesOrderWithItems } = await import('...
+invoiceService.js                      299     const { fetchSalesOrderWithItems } = await import('...
+leaveService.js                          1 import supabase from '../lib/supabase';                   
+ledgerService.js                         1 import supabase from '../lib/supabase';                   
+ledgerService.js                         2 import { reconcilePaymentBalance } from './invoiceCalcu...
+orderService.js                          1 import supabase from "../lib/supabase";                   
+orderService.js                          3 import {                                                  
+paymentService.js                        1 import supabase from '../lib/supabase';                   
+paymentService.js                        2 import {                                                  
+paymentService.js                        7 import { fetchInvoiceById, updateInvoiceBalanceAfterPay...
+paymentService.js                        8 import { recordPaymentLedgerEntry } from './ledgerServi...
+payrollService.js                        1 import supabase from '../lib/supabase';                   
+pdfService.js                            1 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
+pdfService.js                            2 import supabase from '../lib/supabase';                   
+pdfService.js                            3 import { buildDocumentFilename, formatCurrency, formatD...
+predictionService.js                     1 import { forecastSales, forecastInventoryDemand, foreca...
+pricingService.js                        1 import supabase from "../lib/supabase";                   
+procurementService.js                    1 import supabase from "../lib/supabase";                   
+productionConsumptionService.js          1 import { fetchInventoryItemById, updateInventoryItem } ...
+productionConsumptionService.js          2 import {                                                  
+productionConsumptionService.js          6 import supabase from '../lib/supabase';                   
+productionPlanningService.js             1 import supabase from '../lib/supabase';                   
+productionService.js                     1 import supabase from "../lib/supabase";                   
+purchaseOrderService.js                  1 import supabase from '../lib/supabase';                   
+quotationApprovalService.js              1 import { convertQuotationToSalesOrder } from './quotati...
+quotationApprovalService.js              2 import {                                                  
+quotationCalculationService.js           6 import { calculateQuotePricing } from '../utils/pricing...
+quotationConversionService.js            1 import supabase from '../lib/supabase';                   
+quotationConversionService.js            2 import {                                                  
+quotationConversionService.js           10 import { fetchBOMForProduct, calculateMaterialRequireme...
+quotationConversionService.js           11 import {                                                  
+quotationConversionService.js           17 import {                                                  
+quotationConversionService.js           22 import { startProductionFromSalesOrder } from './produc...
+quotationPersistence.js                  1 import supabase from '../lib/supabase';                   
+quotationPersistence.js                  2 import { buildQuotationFinancials } from './quotationCa...
+quotationService.js                      1 import supabase from "../../../lib/supabase";             
+reportingService.js                      1 import { fetchAnalyticsData } from './analyticsService';  
+reportingService.js                      2 import { buildReportSummary } from '../utils/reportingH...
+salesOrderProductionService.js           1 import { startProductionFromSalesOrder, fetchProduction...
+salesOrderProductionService.js           2 import { fetchSalesOrderById } from './salesOrderService';
+salesOrderProductionService.js           3 import { SALES_ORDER_STATUSES, normalizeSalesOrderStatu...
+salesOrderService.js                     1 import supabase from '../lib/supabase';                   
+salesOrderService.js                     2 import { buildQuotationFinancials } from './quotationCa...
+salesOrderService.js                     3 import {                                                  
+supplierService.js                       1 import supabase from '../lib/supabase';                   
+vendorService.js                         1 import supabase from '../lib/supabase';                   
+forecastService.js                       1 import supabase from "../../lib/supabase";                
+analyticsService.js                      1 import supabase from "../../lib/supabase";                
+auditService.js                          1 import supabase from "../../lib/supabase";                
+financeService.js                        1 import supabase from "../../lib/supabase";                
+importService.js                         1 import supabase from "../../lib/supabase";                
+importService.js                         3 export async function uploadQuotationImport(              
+importService.js                        26       import_batch:                                       
+importService.js                        33         "import_staging_quotations"                       
+inventoryService.js                      1 import supabase from "../../lib/supabase";                
+notificationService.js                   1 import supabase from "../../lib/supabase";                
+orderService.js                          7 import supabase from "../../../lib/supabase";             
+pdfService.js                            1 import jsPDF from "jspdf";                                
+productionService.js                     1 import supabase from "../../lib/supabase";                
+workflowService.js                       1 import supabase from "../../lib/supabase";                
+useQuoteStore.js                         1 import { useMemo } from 'react';                          
+aiHelpers.js                             1 import { buildHealthScore } from './predictionHelpers';   
+financeHelpers.js                        1 import {                                                  
+predictionHelpers.js                     1 import { linearTrend } from './forecastingHelpers';       
+quotationFormatter.js                    1 import { formatCurrency, formatDate, getValidityDate } ...
+quotationState.js                        1 import { DEFAULT_TAX_RATE } from '../services/quotation...
+validationHelpers.js                     1 import { validateQuotationData } from '../services/quot...
+workflowIntegrity.js                     5 import { normalizeQuotationStatus, QUOTATION_STATUSES }...
+
+

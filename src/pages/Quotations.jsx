@@ -13,12 +13,10 @@ import {
   deleteQuotation,
 } from "../features/quotations/services/quotationService";
 import {
-  calcPricing,
   formatINR,
 } from "../features/quotations/utils/pricingEngine";
 import QuoteForm from "../features/quotations/QuoteForm";
 import QuoteDetail from "./QuoteDetail";
-import supabase from "../lib/supabase";
 
 // ─── Status config ────────────────────────────────────────────
 const STATUS_CONFIG = {
@@ -183,6 +181,7 @@ export default function Quotations() {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadQuotations();
   }, [loadQuotations]);
 

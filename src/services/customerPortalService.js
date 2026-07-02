@@ -1,9 +1,5 @@
 import supabase from '../lib/supabase';
 import {
-  addCustomerQuotationNote,
-  fetchQuotationById,
-  normalizeQuotationStatus,
-  QUOTATION_STATUSES,
   requestQuotationRevision,
 } from './quotationService';
 import { approveQuotationWorkflow, rejectQuotationWorkflow } from './quotationApprovalService';

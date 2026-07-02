@@ -1,60 +1,39 @@
 // ============================================================
 // QuoteForm.jsx
-// Multi-section quotation form with live pricing calculation
-// Sections: Customer | Box Specs | Printing | Pricing | Remarks
 // ============================================================
 
 import { useState, useEffect, useCallback } from "react";
 import { calculatePricing, formatINR, GSM_OPTIONS, BOX_TYPES, PLY_TYPES, FLUTE_TYPES, PRINTING_TYPES } from "./utils/pricingEngine";
 import supabase from "../../lib/supabase";
-// ─── Default empty form state ────────────────────────────────
-const EMPTY_FORM = {
-  // Relationships
-  customer_id: "",
-  product_id: "",
-  artwork_id: "",
-  // Customer
-  customer_name: "",
-  contact_person: "",
-  phone: "",
-  email: "",
-  gst_number: "",
-  // Box
-  box_type: "Regular Slotted Container (RSC)",
-  length: "",
-  width: "",
-  height: "",
-  ply_type: "3 Ply",
-  flute_type: "B Flute",
-  paper_gsm: 150,
-  // Printing
-  printing_type: "None",
-  printing_colors: 0,
-  // Commercial
-  quantity: "",
-  remarks: "",
-  margin_percent: 15,
-  gst_percent: 18,
+
+// ─── Numeric Sanitation Helper ───────────────────────────────
+const safeNum = (val) => {
+  const parsed = parseFloat(val);
+  return isNaN(parsed) || !isFinite(parsed) ? 0 : parsed;
 };
 
 // ─── Field-level validation rules ────────────────────────────
-function validate(form) {
+function validateFullForm(form) {
   const errors = {};
-  if (!form.customer_name.trim()) errors.customer_name = "Customer name is required.";
-  if (!form.contact_person.trim()) errors.contact_person = "Contact person is required.";
-  if (!form.phone.trim()) errors.phone = "Phone number is required.";
+  if (!form.customer_name?.trim()) errors.customer_name = "Customer name is required.";
+  if (!form.contact_person?.trim()) errors.contact_person = "Contact person is required.";
+  if (!form.phone?.trim()) errors.phone = "Phone number is required.";
   else if (!/^[6-9]\d{9}$/.test(form.phone.replace(/\s/g, "")))
     errors.phone = "Enter a valid 10-digit Indian mobile number.";
+  
   if (form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
     errors.email = "Enter a valid email address.";
   if (form.gst_number && !/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/.test(form.gst_number))
     errors.gst_number = "Enter a valid 15-character GSTIN.";
-  if (!form.length || Number(form.length) <= 0) errors.length = "Enter a valid length.";
-  if (!form.width || Number(form.width) <= 0) errors.width = "Enter a valid width.";
-  if (!form.height || Number(form.height) <= 0) errors.height = "Enter a valid height.";
-  if (!form.quantity || Number(form.quantity) < 1) errors.quantity = "Quantity must be at least 1.";
-  if (form.printing_type !== "None" && (!form.printing_colors || Number(form.printing_colors) < 1))
+  
+  if (!form.length || safeNum(form.length) <= 0) errors.length = "Enter a valid length.";
+  if (!form.width || safeNum(form.width) <= 0) errors.width = "Enter a valid width.";
+  if (!form.height || safeNum(form.height) <= 0) errors.height = "Enter a valid height.";
+  if (!form.quantity || safeNum(form.quantity) < 1) errors.quantity = "Quantity must be at least 1.";
+  
+  if (form.printing_type !== "None" && (!form.printing_colors || safeNum(form.printing_colors) < 1))
     errors.printing_colors = "Specify at least 1 colour for printing.";
+  
   return errors;
 }
 
@@ -92,24 +71,38 @@ function Field({ label, error, required, hint, children }) {
   );
 }
 
-function Input({ value, onChange, type = "text", placeholder, disabled, min, step }) {
+function Input({ value, onChange, onBlur, type = "text", placeholder, disabled, min, step }) {
   return (
     <input
       type={type}
       value={value}
       onChange={onChange}
+      onBlur={onBlur}
       placeholder={placeholder}
       disabled={disabled}
       min={min}
       step={step}
-      style={styles.input}
+      style={{
+        ...styles.input,
+        ...(disabled ? styles.inputDisabled : {}),
+      }}
     />
   );
 }
 
-function Select({ value, onChange, options, disabled }) {
+// Modified Select component to enforce uniform option parsing
+function Select({ value, onChange, onBlur, options, disabled }) {
   return (
-    <select value={value} onChange={onChange} disabled={disabled} style={styles.select}>
+    <select
+      value={value}
+      onChange={onChange}
+      onBlur={onBlur}
+      disabled={disabled}
+      style={{
+        ...styles.select,
+        ...(disabled ? styles.inputDisabled : {}),
+      }}
+    >
       {options.map((opt) => (
         <option key={opt.value ?? opt} value={opt.value ?? opt}>
           {opt.label ?? opt}
@@ -137,338 +130,485 @@ function PricingRow({ label, value, highlight, indent }) {
 // ─── Main Component ───────────────────────────────────────────
 
 export default function QuoteForm({ initialData, onSubmit, onCancel, isLoading }) {
-  const [form, setForm] = useState(() => {
-    if (!initialData) return EMPTY_FORM;
-    return {
-      ...EMPTY_FORM,
-      ...initialData,
-      length: initialData.length ?? "",
-      width: initialData.width ?? "",
-      height: initialData.height ?? "",
-      quantity: initialData.quantity ?? "",
-      printing_colors: initialData.printing_colors ?? 0,
-      margin_percent: initialData.margin_percent ?? 15,
-      gst_percent: initialData.gst_percent ?? 18,
-    };
-  });
+  
+  // ── Separated Architecture State Slices ──
+  const [identity, setIdentity] = useState(() => ({
+    customer_id: initialData?.customer_id ?? "",
+    product_id: initialData?.product_id ?? "",
+    artwork_id: initialData?.artwork_id ?? "",
+    customer_name: initialData?.customer_name ?? "",
+    contact_person: initialData?.contact_person ?? "",
+    phone: initialData?.phone ?? "",
+    email: initialData?.email ?? "",
+    gst_number: initialData?.gst_number ?? "",
+  }));
 
-const [errors, setErrors] = useState({});
-  const [pricing, setPricing] = useState(() => calculatePricing({}));
+  const [spec, setSpec] = useState(() => ({
+    box_type: initialData?.box_type ?? "Regular Slotted Container (RSC)",
+    length: initialData?.length ?? "",
+    width: initialData?.width ?? "",
+    height: initialData?.height ?? "",
+    ply_type: initialData?.ply_type ?? "3 Ply",
+    flute_type: initialData?.flute_type ?? "B Flute",
+    paper_gsm: initialData?.paper_gsm ?? 150,
+  }));
+
+  const [commercial, setCommercial] = useState(() => ({
+    printing_type: initialData?.printing_type ?? "None",
+    printing_colors: initialData?.printing_colors ?? 0,
+    quantity: initialData?.quantity ?? "",
+    remarks: initialData?.remarks ?? "",
+    margin_percent: initialData?.margin_percent ?? 15,
+    gst_percent: initialData?.gst_percent ?? 18,
+  }));
+
+  const [errors, setErrors] = useState({});
+  const [pricing, setPricing] = useState(null);
   const [touched, setTouched] = useState({});
-
-  // ── Relationship data
+  
   const [customers, setCustomers] = useState([]);
-  const [products,  setProducts]  = useState([]);
-  const [artworks,  setArtworks]  = useState([]);
-  const [productLocked, setProductLocked] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [artworks, setArtworks] = useState([]);
+  const [productLocked, setProductLocked] = useState(!!initialData?.product_id);
 
-  // Fetch customers on mount
+  // Fetch initial customers
   useEffect(() => {
     supabase.from("customers").select("id, company_name").order("company_name")
       .then(({ data }) => setCustomers(data || []));
   }, []);
 
-  // Fetch products when customer changes
+  // Fetch products
   useEffect(() => {
-    if (!form.customer_id) { setProducts([]); return; }
-    supabase.from("products").select("*").eq("customer_id", form.customer_id).eq("is_active", true)
+    if (!identity.customer_id) { 
+      setProducts([]); 
+      return; 
+    }
+    supabase.from("products").select("*").eq("customer_id", identity.customer_id)
       .then(({ data }) => setProducts(data || []));
-  }, [form.customer_id]);
+  }, [identity.customer_id]);
 
-  // Fetch artworks when product changes
+  // Fetch artworks
   useEffect(() => {
-    if (!form.product_id) { setArtworks([]); return; }
-    supabase.from("artworks").select("id, file_name, version, approval_status").eq("product_id", form.product_id)
+    if (!identity.product_id) { 
+      setArtworks([]); 
+      return; 
+    }
+    supabase.from("artworks").select("id, file_name, version, approval_status").eq("product_id", identity.product_id)
       .then(({ data }) => setArtworks(data || []));
-  }, [form.product_id]);
+  }, [identity.product_id]);
 
-  // Auto-fill box specs when product selected
+  // Pricing calculation matching UI compatibility structures safely
+  useEffect(() => {
+    const len = safeNum(spec.length);
+    const wid = safeNum(spec.width);
+    const hgt = safeNum(spec.height);
+    const qty = safeNum(commercial.quantity);
+
+    if (len > 0 && wid > 0 && hgt > 0 && qty > 0) {
+      try {
+        const calculated = calculatePricing({
+          length: len,
+          width: wid,
+          height: hgt,
+          ply_type: spec.ply_type,
+          flute_type: spec.flute_type,
+          paper_gsm: safeNum(spec.paper_gsm),
+          box_type: spec.box_type,
+          printing_type: commercial.printing_type,
+          printing_colors: safeNum(commercial.printing_colors),
+          quantity: qty,
+          margin_percent: safeNum(commercial.margin_percent),
+          gst_percent: safeNum(commercial.gst_percent),
+        });
+
+        if (calculated) {
+          setPricing({
+            material_cost: safeNum(calculated.material_cost),
+            print_cost: safeNum(calculated.printing_cost), // Name alignment fix
+            labour_cost: safeNum(calculated.labour_cost),
+            overhead_cost: 0,                              // Prevents layout undefined/NaN
+            subtotal: safeNum(calculated.subtotal),
+            margin_amount: safeNum(calculated.margin_amount),
+            taxable_amount: safeNum(calculated.subtotal),  // Name alignment fix
+            gst_amount: safeNum(calculated.gst_amount),
+            total_amount: safeNum(calculated.final_price), // Name alignment fix
+            unit_price: safeNum(calculated.unit_price),
+          });
+        }
+      } catch (err) {
+        console.error("Critical calculation loop intercepted:", err);
+        setPricing(null);
+      }
+    } else {
+      setPricing(null);
+    }
+  }, [
+    spec.length,
+    spec.width,
+    spec.height,
+    spec.ply_type,
+    spec.flute_type,
+    spec.paper_gsm,
+    spec.box_type,
+    commercial.printing_type,
+    commercial.printing_colors,
+    commercial.quantity,
+    commercial.margin_percent,
+    commercial.gst_percent,
+  ]);
+
+  // Handlers
   function handleProductChange(productId) {
     const product = products.find(p => p.id === productId);
     if (product) {
-      setForm(prev => ({
+      setIdentity(prev => ({ ...prev, product_id: productId, artwork_id: "" }));
+      setSpec(prev => ({
         ...prev,
-        product_id:    productId,
-        artwork_id:    "",
-        box_type:      product.box_type      ?? prev.box_type,
-        length:        product.length        ?? prev.length,
-        width:         product.width         ?? prev.width,
-        height:        product.height        ?? prev.height,
-        ply_type:      product.ply_type      ?? prev.ply_type,
-        flute_type:    product.flute_type    ?? prev.flute_type,
-        paper_gsm:     product.gsm           ?? prev.paper_gsm,
+        box_type: product.box_type ?? prev.box_type,
+        length: product.length ?? prev.length,
+        width: product.width ?? prev.width,
+        height: product.height ?? prev.height,
+        ply_type: product.ply_type ?? prev.ply_type,
+        flute_type: product.flute_type ?? prev.flute_type,
+        paper_gsm: product.gsm ?? prev.paper_gsm,
+      }));
+      setCommercial(prev => ({
+        ...prev,
         printing_type: product.printing_type ?? prev.printing_type,
       }));
       setProductLocked(true);
+      setErrors(prev => ({ ...prev, length: undefined, width: undefined, height: undefined }));
     } else {
-      setForm(prev => ({ ...prev, product_id: "", artwork_id: "" }));
+      setIdentity(prev => ({ ...prev, product_id: "", artwork_id: "" }));
       setProductLocked(false);
     }
     setArtworks([]);
   }
 
   function handleCustomerChange(customerId) {
-    setForm(prev => ({ ...prev, customer_id: customerId, product_id: "", artwork_id: "" }));
+    setIdentity(prev => ({ ...prev, customer_id: customerId, product_id: "", artwork_id: "" }));
     setProducts([]);
     setArtworks([]);
     setProductLocked(false);
   }
 
-  // ── Live pricing recalculation
-  useEffect(() => {
-    const result = calculatePricing({
-      length: Number(form.length),
-      width: Number(form.width),
-      height: Number(form.height),
-      ply_type: form.ply_type,
-      flute_type: form.flute_type,
-      paper_gsm: Number(form.paper_gsm),
-      box_type: form.box_type,
-      printing_type: form.printing_type,
-      printing_colors: Number(form.printing_colors),
-      quantity: Number(form.quantity),
-      margin_percent: Number(form.margin_percent),
-      gst_percent: Number(form.gst_percent),
-    });
-    setPricing(result);
-  }, [
-    form.length, form.width, form.height,
-    form.ply_type, form.flute_type, form.paper_gsm,
-    form.box_type, form.printing_type, form.printing_colors,
-    form.quantity, form.margin_percent, form.gst_percent,
-  ]);
-
-  const handleChange = useCallback((field) => (e) => {
-    const value = e.target.type === "number" ? e.target.value : e.target.value;
-    setForm((prev) => ({ ...prev, [field]: value }));
-    setTouched((prev) => ({ ...prev, [field]: true }));
-    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
+  const handleChange = useCallback((slice, field) => (e) => {
+    const value = e.target.value;
+    if (slice === "identity") setIdentity(prev => ({ ...prev, [field]: value }));
+    if (slice === "spec") setSpec(prev => ({ ...prev, [field]: value }));
+    if (slice === "commercial") setCommercial(prev => ({ ...prev, [field]: value }));
+    
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: undefined }));
+    }
   }, [errors]);
 
-  const handleBlur = useCallback((field) => () => {
-    setTouched((prev) => ({ ...prev, [field]: true }));
-  }, []);
+  const handleBlur = useCallback((slice, field) => () => {
+    setTouched(prev => ({ ...prev, [field]: true }));
+    const currentForm = { ...identity, ...spec, ...commercial };
+    const fieldErrors = validateFullForm(currentForm);
+    setErrors(prev => ({ ...prev, [field]: fieldErrors[field] }));
+  }, [identity, spec, commercial]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const validationErrors = validate(form);
+    const fullForm = { ...identity, ...spec, ...commercial };
+    const validationErrors = validateFullForm(fullForm);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       setTouched(Object.fromEntries(Object.keys(validationErrors).map((k) => [k, true])));
       return;
     }
-
-    const payload = {
-      ...form,
-      customer_id: form.customer_id || null,
-      product_id:  form.product_id  || null,
-      artwork_id:  form.artwork_id   || null,
-      length: Number(form.length),
-      width: Number(form.width),
-      height: Number(form.height),
-      quantity: Number(form.quantity),
-      printing_colors: Number(form.printing_colors),
-      margin_percent: Number(form.margin_percent),
-      gst_percent: Number(form.gst_percent),
-      ...pricing,
-    };
-    onSubmit(payload);
+    onSubmit({ ...fullForm, ...pricing });
   };
 
   const isEdit = !!initialData?.id;
+  const showPricing =
+    safeNum(spec.length) > 0 &&
+    safeNum(spec.width) > 0 &&
+    safeNum(spec.height) > 0 &&
+    safeNum(commercial.quantity) > 0;
 
   return (
     <div style={styles.wrapper}>
       <form onSubmit={handleSubmit} noValidate>
 
-        {/* ── Section 0: Customer / Product / Artwork ── */}
+        {/* ── Section 00: Customer & Product Link ──────────────── */}
         <div style={styles.section}>
           <SectionHeader number="00" title="Customer & Product" icon="🔗" />
           <FieldGroup columns={1}>
             <Field label="Customer" required>
-              <select
-                style={styles.select}
-                value={form.customer_id}
-                onChange={e => handleCustomerChange(e.target.value)}
-              >
+              <select style={styles.select} value={identity.customer_id} onChange={e => handleCustomerChange(e.target.value)}>
                 <option value="">— Select customer —</option>
-                {customers.map(c => (
-                  <option key={c.id} value={c.id}>{c.company_name}</option>
-                ))}
+                {customers.map(c => <option key={c.id} value={c.id}>{c.company_name}</option>)}
               </select>
             </Field>
           </FieldGroup>
           <FieldGroup columns={2}>
-            <Field label="Product" hint={!form.customer_id ? "Select a customer first" : ""}>
-              <select
-                style={styles.select}
-                value={form.product_id}
-                onChange={e => handleProductChange(e.target.value)}
-                disabled={!form.customer_id}
-              >
+            <Field label="Product" hint={!identity.customer_id ? "Select a customer first" : ""}>
+              <select style={styles.select} value={identity.product_id} onChange={e => handleProductChange(e.target.value)} disabled={!identity.customer_id}>
                 <option value="">— Select product —</option>
-                {products.map(p => (
-                  <option key={p.id} value={p.id}>{p.product_name}</option>
-                ))}
+                {products.map(p => <option key={p.id} value={p.id}>{p.product_name}</option>)}
               </select>
             </Field>
-            <Field label="Artwork" hint={!form.product_id ? "Select a product first" : ""}>
-              <select
-                style={styles.select}
-                value={form.artwork_id}
-                onChange={e => setForm(prev => ({ ...prev, artwork_id: e.target.value }))}
-                disabled={!form.product_id}
-              >
+            <Field label="Artwork" hint={!identity.product_id ? "Select a product first" : ""}>
+              <select style={styles.select} value={identity.artwork_id} onChange={e => setIdentity(prev => ({ ...prev, artwork_id: e.target.value }))} disabled={!identity.product_id}>
                 <option value="">— Select artwork —</option>
-                {artworks.map(a => (
-                  <option key={a.id} value={a.id}>
-                    {a.file_name}{a.version ? ` v${a.version}` : ""} · {a.approval_status ?? "Pending"}
-                  </option>
-                ))}
+                {artworks.map(a => <option key={a.id} value={a.id}>{a.file_name} · {a.approval_status ?? "Pending"}</option>)}
               </select>
             </Field>
           </FieldGroup>
-          {productLocked && (
-            <p style={{ margin: 0, fontSize: "0.75rem", color: "#4ade80" }}>
-              ✓ Box specifications auto-filled from product. Fields are read-only.
-            </p>
-          )}
         </div>
 
-        
-        {/* ── Section 1: Customer Details ── */}
+        {/* ── Section 01: Customer Info ─────────────────────────── */}
         <div style={styles.section}>
-          <SectionHeader number="01" title="Customer Details" icon="🏢" />
+          <SectionHeader number="01" title="Customer Info" icon="🏢" />
           <FieldGroup columns={2}>
-            <Field label="Customer Name" required error={touched.customer_name && errors.customer_name}>
-              <Input value={form.customer_name} onChange={handleChange("customer_name")} onBlur={handleBlur("customer_name")} placeholder="e.g. Reliance Industries Ltd" />
+            <Field label="Company / Customer Name" required error={errors.customer_name}>
+              <Input
+                value={identity.customer_name}
+                onChange={handleChange("identity", "customer_name")}
+                onBlur={handleBlur("identity", "customer_name")}
+                placeholder="e.g. Sharma Packaging Pvt Ltd"
+              />
             </Field>
-            <Field label="Contact Person" required error={touched.contact_person && errors.contact_person}>
-              <Input value={form.contact_person} onChange={handleChange("contact_person")} placeholder="e.g. Ramesh Kumar" />
+            <Field label="Contact Person" required error={errors.contact_person}>
+              <Input
+                value={identity.contact_person}
+                onChange={handleChange("identity", "contact_person")}
+                onBlur={handleBlur("identity", "contact_person")}
+                placeholder="e.g. Ramesh Sharma"
+              />
             </Field>
-            <Field label="Phone" required error={touched.phone && errors.phone} hint="10-digit mobile number">
-              <Input value={form.phone} onChange={handleChange("phone")} placeholder="9876543210" />
+            <Field label="Phone" required error={errors.phone}>
+              <Input
+                value={identity.phone}
+                onChange={handleChange("identity", "phone")}
+                onBlur={handleBlur("identity", "phone")}
+                type="tel"
+                placeholder="10-digit mobile number"
+              />
             </Field>
-            <Field label="Email" error={touched.email && errors.email}>
-              <Input type="email" value={form.email} onChange={handleChange("email")} placeholder="purchase@company.com" />
+            <Field label="Email" error={errors.email}>
+              <Input
+                value={identity.email}
+                onChange={handleChange("identity", "email")}
+                onBlur={handleBlur("identity", "email")}
+                type="email"
+                placeholder="contact@example.com"
+              />
             </Field>
-            <Field label="GST Number" error={touched.gst_number && errors.gst_number} hint="15-character GSTIN (optional)">
-              <Input value={form.gst_number} onChange={handleChange("gst_number")} placeholder="29ABCDE1234F1Z5" />
+            <Field label="GSTIN" error={errors.gst_number} hint="Optional · 15-character GST number">
+              <Input
+                value={identity.gst_number}
+                onChange={handleChange("identity", "gst_number")}
+                onBlur={handleBlur("identity", "gst_number")}
+                placeholder="22AAAAA0000A1Z5"
+              />
             </Field>
           </FieldGroup>
         </div>
 
-        {/* ── Section 2: Box Specifications ── */}
+        {/* ── Section 02: Box Specifications ───────────────────── */}
         <div style={styles.section}>
           <SectionHeader number="02" title="Box Specifications" icon="📦" />
-          <FieldGroup columns={1}>
-            <Field label="Box Type" required>
-              <Select value={form.box_type} onChange={handleChange("box_type")} options={BOX_TYPES} disabled={productLocked} />
-            </Field>
-          </FieldGroup>
-          <FieldGroup columns={3}>
-            <Field label="Length (mm)" required error={touched.length && errors.length} hint="Inner dimension">
-              <Input type="number" value={form.length} onChange={handleChange("length")} placeholder="300" min="1" step="1" />
-            </Field>
-            <Field label="Width (mm)" required error={touched.width && errors.width} hint="Inner dimension">
-              <Input type="number" value={form.width} onChange={handleChange("width")} placeholder="200" min="1" step="1" />
-            </Field>
-            <Field label="Height (mm)" required error={touched.height && errors.height} hint="Inner dimension">
-              <Input type="number" value={form.height} onChange={handleChange("height")} placeholder="150" min="1" step="1" />
-            </Field>
-          </FieldGroup>
-          {form.length && form.width && form.height && (
-            <div style={styles.blankSizeChip}>
-              📐 Blank Size: {pricing.blank_length_mm} × {pricing.blank_width_mm} mm &nbsp;|&nbsp; Board Area: {pricing.board_area_sqm} m²/box
+          {productLocked && (
+            <div style={styles.lockBanner}>
+              <span>🔒</span>
+              <span style={{ flex: 1 }}>Dimensions auto-filled from product.</span>
+              <button
+                type="button"
+                style={styles.unlockBtn}
+                onClick={() => setProductLocked(false)}
+              >
+                Unlock to edit
+              </button>
             </div>
           )}
-          <FieldGroup columns={3}>
-            <Field label="Ply Type" required>
-              <Select value={form.ply_type} onChange={handleChange("ply_type")} options={PLY_TYPES} />
-            </Field>
-            <Field label="Flute Type" required>
-              <Select value={form.flute_type} onChange={handleChange("flute_type")} options={FLUTE_TYPES} />
-            </Field>
-            <Field label="Paper GSM" required>
+          <FieldGroup columns={1}>
+            <Field label="Box Type">
               <Select
-                value={form.paper_gsm}
-                onChange={handleChange("paper_gsm")}
-                options={GSM_OPTIONS.map((g) => ({ value: g, label: `${g} GSM` }))}
+                value={spec.box_type}
+                onChange={handleChange("spec", "box_type")}
+                options={BOX_TYPES}
+                disabled={productLocked}
               />
             </Field>
           </FieldGroup>
-        </div>
-
-        {/* ── Section 3: Printing ── */}
-        <div style={styles.section}>
-          <SectionHeader number="03" title="Printing" icon="🎨" />
-          <FieldGroup columns={2}>
-            <Field label="Printing Type" required>
-              <Select value={form.printing_type} onChange={handleChange("printing_type")} options={PRINTING_TYPES} />
-            </Field>
-            <Field
-              label="Number of Colours"
-              error={touched.printing_colors && errors.printing_colors}
-              hint={form.printing_type === "None" ? "Not applicable" : ""}
-            >
-              <Input
-                type="number"
-                value={form.printing_colors}
-                onChange={handleChange("printing_colors")}
-                min="0"
-                step="1"
-                disabled={form.printing_type === "None"}
-                placeholder="1"
-              />
-            </Field>
-          </FieldGroup>
-        </div>
-
-        {/* ── Section 4: Commercial ── */}
-        <div style={styles.section}>
-          <SectionHeader number="04" title="Commercial" icon="💼" />
           <FieldGroup columns={3}>
-            <Field label="Quantity (pcs)" required error={touched.quantity && errors.quantity}>
-              <Input type="number" value={form.quantity} onChange={handleChange("quantity")} placeholder="1000" min="1" step="1" />
+            <Field label="Length (mm)" required error={errors.length}>
+              <Input
+                value={spec.length}
+                onChange={handleChange("spec", "length")}
+                onBlur={handleBlur("spec", "length")}
+                type="number"
+                placeholder="0"
+                min="1"
+                disabled={productLocked}
+              />
             </Field>
-            <Field label="Margin %" hint="Default: 15%">
-              <Input type="number" value={form.margin_percent} onChange={handleChange("margin_percent")} min="0" max="100" step="0.5" />
+            <Field label="Width (mm)" required error={errors.width}>
+              <Input
+                value={spec.width}
+                onChange={handleChange("spec", "width")}
+                onBlur={handleBlur("spec", "width")}
+                type="number"
+                placeholder="0"
+                min="1"
+                disabled={productLocked}
+              />
             </Field>
-            <Field label="GST %" hint="Default: 18%">
-              <Input type="number" value={form.gst_percent} onChange={handleChange("gst_percent")} min="0" max="28" step="0.5" />
+            <Field label="Height (mm)" required error={errors.height}>
+              <Input
+                value={spec.height}
+                onChange={handleChange("spec", "height")}
+                onBlur={handleBlur("spec", "height")}
+                type="number"
+                placeholder="0"
+                min="1"
+                disabled={productLocked}
+              />
             </Field>
           </FieldGroup>
-          <Field label="Remarks / Special Instructions">
-            <textarea
-              value={form.remarks}
-              onChange={handleChange("remarks")}
-              placeholder="Any special requirements, colour codes, delivery instructions..."
-              rows={3}
-              style={styles.textarea}
-            />
-          </Field>
         </div>
 
-        {/* ── Section 5: Live Pricing Summary ── */}
-        <div style={styles.pricingSection}>
-          <SectionHeader number="05" title="Pricing Summary" icon="📊" />
-          <p style={styles.pricingNote}>Auto-calculated · Updates as you type</p>
-          <div style={styles.pricingTable}>
-            <PricingRow label="Paper Consumption" value={`${pricing.paper_consumption} kg/box`} indent />
-            <PricingRow label="Material Cost" value={formatINR(pricing.material_cost)} indent />
-            <PricingRow label="Printing Cost" value={formatINR(pricing.printing_cost)} indent />
-            <PricingRow label="Labour Cost" value={formatINR(pricing.labour_cost)} indent />
-            <div style={styles.pricingDivider} />
-            <PricingRow label={`Margin (${form.margin_percent}%)`} value={formatINR(pricing.margin_amount)} indent />
-            <PricingRow label="Subtotal" value={formatINR(pricing.subtotal)} />
-            <PricingRow label={`GST (${form.gst_percent}%)`} value={formatINR(pricing.gst_amount)} indent />
-            <div style={styles.pricingDivider} />
-            <PricingRow label="Unit Price (excl. GST)" value={formatINR(pricing.unit_price)} highlight />
-            <PricingRow label="Total Final Price (incl. GST)" value={formatINR(pricing.final_price)} highlight />
+        {/* ── Section 03: Paper & Board ─────────────────────────── */}
+        <div style={styles.section}>
+          <SectionHeader number="03" title="Paper & Board" icon="🧱" />
+          <FieldGroup columns={3}>
+            <Field label="Ply Type">
+              <Select
+                value={spec.ply_type}
+                onChange={handleChange("spec", "ply_type")}
+                options={PLY_TYPES}
+                disabled={productLocked}
+              />
+            </Field>
+            <Field label="Flute Type">
+              <Select
+                value={spec.flute_type}
+                onChange={handleChange("spec", "flute_type")}
+                options={FLUTE_TYPES}
+                disabled={productLocked}
+              />
+            </Field>
+            <Field label="Paper GSM">
+              <Select
+                value={spec.paper_gsm}
+                onChange={handleChange("spec", "paper_gsm")}
+                options={GSM_OPTIONS.map(g => ({ value: g, label: `${g} GSM` }))}
+                disabled={productLocked}
+              />
+            </Field>
+          </FieldGroup>
+        </div>
+
+        {/* ── Section 04: Printing ──────────────────────────────── */}
+        <div style={styles.section}>
+          <SectionHeader number="04" title="Printing" icon="🖨️" />
+          <FieldGroup columns={2}>
+            <Field label="Printing Type">
+              <Select
+                value={commercial.printing_type}
+                onChange={handleChange("commercial", "printing_type")}
+                options={PRINTING_TYPES}
+              />
+            </Field>
+            {commercial.printing_type !== "None" && (
+              <Field label="Number of Colours" required error={errors.printing_colors}>
+                <Input
+                  value={commercial.printing_colors}
+                  onChange={handleChange("commercial", "printing_colors")}
+                  onBlur={handleBlur("commercial", "printing_colors")}
+                  type="number"
+                  placeholder="1 – 6"
+                  min="1"
+                />
+              </Field>
+            )}
+          </FieldGroup>
+        </div>
+
+        {/* ── Section 05: Commercial ────────────────────────────── */}
+        <div style={styles.section}>
+          <SectionHeader number="05" title="Commercial" icon="💰" />
+          <FieldGroup columns={3}>
+            <Field label="Quantity (pcs)" required error={errors.quantity}>
+              <Input
+                value={commercial.quantity}
+                onChange={handleChange("commercial", "quantity")}
+                onBlur={handleBlur("commercial", "quantity")}
+                type="number"
+                placeholder="e.g. 1000"
+                min="1"
+              />
+            </Field>
+            <Field label="Margin (%)" hint="Pre-tax profit margin">
+              <Input
+                value={commercial.margin_percent}
+                onChange={handleChange("commercial", "margin_percent")}
+                onBlur={handleBlur("commercial", "margin_percent")}
+                type="number"
+                placeholder="15"
+                min="0"
+                step="0.5"
+              />
+            </Field>
+            <Field label="GST (%)">
+              <Select
+                value={commercial.gst_percent}
+                onChange={handleChange("commercial", "gst_percent")}
+                options={[
+                  { value: 0,  label: "0% — Exempt" },
+                  { value: 5,  label: "5%" },
+                  { value: 12, label: "12%" },
+                  { value: 18, label: "18% (Standard)" },
+                ]}
+              />
+            </Field>
+          </FieldGroup>
+          <FieldGroup columns={1}>
+            <Field label="Remarks">
+              <textarea
+                value={commercial.remarks}
+                onChange={handleChange("commercial", "remarks")}
+                placeholder="Special instructions, delivery terms, validity period…"
+                rows={3}
+                style={styles.textarea}
+              />
+            </Field>
+          </FieldGroup>
+        </div>
+
+        {/* ── Pricing Summary (live, shows once inputs are filled) ── */}
+        {showPricing && pricing && (
+          <div style={{ ...styles.section, ...styles.pricingSection }}>
+            <SectionHeader number="∑" title="Pricing Summary" icon="📊" />
+            <div style={styles.pricingGrid}>
+
+              <div style={styles.pricingBlock}>
+                <p style={styles.pricingBlockLabel}>Cost Breakdown</p>
+                <PricingRow label="Material Cost"   value={formatINR(pricing.material_cost)}  indent />
+                <PricingRow label="Print Cost"      value={formatINR(pricing.print_cost)}     indent />
+                <PricingRow label="Labour Cost"     value={formatINR(pricing.labour_cost)}    indent />
+                <PricingRow label="Overhead"        value={formatINR(pricing.overhead_cost)}  indent />
+                <PricingRow label="Subtotal (Cost)" value={formatINR(pricing.subtotal)} />
+              </div>
+
+              <div style={styles.pricingBlock}>
+                <p style={styles.pricingBlockLabel}>Final Price</p>
+                <PricingRow label="Margin Amount"           value={formatINR(pricing.margin_amount)}   indent />
+                <PricingRow label="Taxable Value"           value={formatINR(pricing.taxable_amount)} />
+                <PricingRow label={`GST @ ${commercial.gst_percent}%`} value={formatINR(pricing.gst_amount)} indent />
+                <PricingRow label="Total (incl. GST)"       value={formatINR(pricing.total_amount)}   highlight />
+                <PricingRow label="Unit Price / Piece"      value={formatINR(pricing.unit_price)}     highlight />
+              </div>
+
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* ── Actions ── */}
+        {/* ── Actions ───────────────────────────────────────────── */}
         <div style={styles.actions}>
           <button type="button" onClick={onCancel} style={styles.cancelBtn} disabled={isLoading}>
             Cancel
@@ -487,189 +627,215 @@ const [errors, setErrors] = useState({});
 
 const styles = {
   wrapper: {
-    fontFamily: "'DM Sans', 'Segoe UI', sans-serif",
+    background: "#0d1117",
     color: "#e2e8f0",
+    fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
+    fontSize: "13px",
+    padding: "0 0 2rem",
     maxWidth: "900px",
     margin: "0 auto",
-    padding: "0 0 2rem",
   },
   section: {
     background: "#111827",
-    borderRadius: "12px",
     border: "1px solid #1e293b",
-    padding: "1.5rem",
+    borderRadius: "8px",
+    padding: "1.25rem 1.5rem",
     marginBottom: "1rem",
   },
   pricingSection: {
-    background: "linear-gradient(135deg, #0f172a 0%, #111827 100%)",
-    borderRadius: "12px",
-    border: "1.5px solid #1e40af",
-    padding: "1.5rem",
-    marginBottom: "1rem",
+    background: "#0f172a",
+    border: "1px solid #1e3a5f",
   },
   sectionHeader: {
     display: "flex",
     alignItems: "center",
-    gap: "0.75rem",
-    marginBottom: "1.25rem",
-    paddingBottom: "0.75rem",
+    gap: "0.6rem",
+    marginBottom: "1rem",
+    paddingBottom: "0.6rem",
     borderBottom: "1px solid #1e293b",
   },
   sectionBadge: {
-    background: "#1e40af",
-    color: "#e2e8f0",
-    borderRadius: "6px",
-    padding: "2px 8px",
-    fontSize: "0.7rem",
-    fontWeight: 700,
-    letterSpacing: "0.05em",
+    background: "#1e3a5f",
+    color: "#60a5fa",
     fontFamily: "monospace",
+    fontSize: "11px",
+    fontWeight: 700,
+    padding: "2px 7px",
+    borderRadius: "4px",
+    letterSpacing: "0.05em",
+    flexShrink: 0,
   },
   sectionIcon: {
-    fontSize: "1.2rem",
+    fontSize: "15px",
+    flexShrink: 0,
   },
   sectionTitle: {
     margin: 0,
-    fontSize: "1rem",
-    fontWeight: 700,
-    color: "#f1f5f9",
-    letterSpacing: "-0.01em",
+    fontSize: "12px",
+    fontWeight: 600,
+    color: "#94a3b8",
+    letterSpacing: "0.08em",
+    textTransform: "uppercase",
   },
   fieldGroup: {
     display: "grid",
-    gap: "1rem",
-    marginBottom: "1rem",
+    gap: "0.6rem 1rem",
+    marginBottom: "0.6rem",
   },
   field: {
     display: "flex",
     flexDirection: "column",
-    gap: "0.35rem",
+    gap: "4px",
   },
   label: {
-    fontSize: "0.8rem",
-    fontWeight: 600,
-    color: "#94a3b8",
-    letterSpacing: "0.02em",
+    fontSize: "10px",
+    fontWeight: 700,
+    color: "#475569",
     textTransform: "uppercase",
+    letterSpacing: "0.07em",
   },
   required: {
     color: "#f87171",
     marginLeft: "3px",
   },
-  input: {
-    padding: "0.55rem 0.75rem",
-    borderRadius: "8px",
-    border: "1.5px solid #1e293b",
-    fontSize: "0.9rem",
-    color: "#e2e8f0",
-    background: "#0f172a",
-    outline: "none",
-    transition: "border-color 0.15s",
-    width: "100%",
-    boxSizing: "border-box",
-  },
-  select: {
-    padding: "0.55rem 0.75rem",
-    borderRadius: "8px",
-    border: "1.5px solid #1e293b",
-    fontSize: "0.9rem",
-    color: "#e2e8f0",
-    background: "#0f172a",
-    outline: "none",
-    width: "100%",
-    cursor: "pointer",
-  },
-  textarea: {
-    padding: "0.55rem 0.75rem",
-    borderRadius: "8px",
-    border: "1.5px solid #1e293b",
-    fontSize: "0.9rem",
-    color: "#e2e8f0",
-    background: "#0f172a",
-    outline: "none",
-    width: "100%",
-    resize: "vertical",
-    fontFamily: "inherit",
-    boxSizing: "border-box",
-  },
   hint: {
     margin: 0,
-    fontSize: "0.75rem",
-    color: "#64748b",
+    fontSize: "11px",
+    color: "#334155",
+    fontStyle: "italic",
   },
   errorMsg: {
     margin: 0,
-    fontSize: "0.75rem",
+    fontSize: "11px",
     color: "#f87171",
-    fontWeight: 500,
   },
-  blankSizeChip: {
-    background: "rgba(30,64,175,0.12)",
-    border: "1px solid #bfdbfe",
-    borderRadius: "8px",
-    padding: "0.5rem 0.75rem",
-    fontSize: "0.8rem",
-    color: "#93c5fd",
-    fontWeight: 500,
-    marginBottom: "1rem",
-  },
-  pricingNote: {
-    fontSize: "0.75rem",
-    color: "#64748b",
-    margin: "-0.5rem 0 1rem",
-    fontStyle: "italic",
-  },
-  pricingTable: {
-    borderRadius: "8px",
-    overflow: "hidden",
+  input: {
+    background: "#0d1117",
     border: "1px solid #1e293b",
+    borderRadius: "5px",
+    color: "#e2e8f0",
+    fontSize: "13px",
+    padding: "6px 10px",
+    outline: "none",
+    width: "100%",
+    boxSizing: "border-box",
+  },
+  inputDisabled: {
+    opacity: 0.45,
+    cursor: "not-allowed",
+  },
+  select: {
+    background: "#0d1117",
+    border: "1px solid #1e293b",
+    borderRadius: "5px",
+    color: "#e2e8f0",
+    fontSize: "13px",
+    padding: "6px 10px",
+    outline: "none",
+    width: "100%",
+    boxSizing: "border-box",
+    cursor: "pointer",
+  },
+  textarea: {
+    background: "#0d1117",
+    border: "1px solid #1e293b",
+    borderRadius: "5px",
+    color: "#e2e8f0",
+    fontSize: "13px",
+    padding: "8px 10px",
+    outline: "none",
+    width: "100%",
+    boxSizing: "border-box",
+    resize: "vertical",
+    fontFamily: "inherit",
+    lineHeight: 1.5,
+  },
+  lockBanner: {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.5rem",
+    background: "rgba(251,191,36,0.06)",
+    border: "1px solid rgba(251,191,36,0.18)",
+    borderRadius: "5px",
+    padding: "6px 12px",
+    marginBottom: "0.85rem",
+    fontSize: "12px",
+    color: "#fbbf24",
+  },
+  unlockBtn: {
+    background: "rgba(251,191,36,0.12)",
+    border: "1px solid rgba(251,191,36,0.25)",
+    borderRadius: "4px",
+    color: "#fbbf24",
+    fontSize: "11px",
+    fontWeight: 600,
+    padding: "3px 10px",
+    cursor: "pointer",
+    flexShrink: 0,
+  },
+  pricingGrid: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "1rem",
+  },
+  pricingBlock: {
+    background: "#0d1117",
+    border: "1px solid #1e293b",
+    borderRadius: "6px",
+    overflow: "hidden",
+  },
+  pricingBlockLabel: {
+    margin: 0,
+    padding: "5px 1rem",
+    fontSize: "10px",
+    fontWeight: 700,
+    color: "#334155",
+    textTransform: "uppercase",
+    letterSpacing: "0.08em",
     background: "#0f172a",
+    borderBottom: "1px solid #1e293b",
   },
   pricingRow: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: "0.55rem 1rem",
-    borderBottom: "1px solid #1a2332",
+    padding: "5px 1rem",
+    borderBottom: "1px solid #0f172a",
   },
   pricingLabel: {
-    fontSize: "0.875rem",
-    color: "#94a3b8",
+    fontSize: "12px",
+    color: "#64748b",
   },
   pricingValue: {
-    fontSize: "0.875rem",
-    fontVariantNumeric: "tabular-nums",
-  },
-  pricingDivider: {
-    height: "2px",
-    background: "#1e293b",
-    margin: "0.25rem 0",
+    fontSize: "12px",
+    fontFamily: "monospace",
+    color: "#94a3b8",
   },
   actions: {
     display: "flex",
     justifyContent: "flex-end",
     gap: "0.75rem",
-    paddingTop: "0.5rem",
+    paddingTop: "0.25rem",
   },
   cancelBtn: {
-    padding: "0.65rem 1.5rem",
-    borderRadius: "8px",
-    border: "1.5px solid #1e293b",
-    background: "#0f172a",
-    color: "#94a3b8",
-    fontSize: "0.9rem",
-    fontWeight: 600,
+    background: "transparent",
+    border: "1px solid #1e293b",
+    borderRadius: "6px",
+    color: "#475569",
+    fontSize: "13px",
+    fontWeight: 500,
+    padding: "8px 20px",
     cursor: "pointer",
   },
   submitBtn: {
-    padding: "0.65rem 2rem",
-    borderRadius: "8px",
+    background: "#2563eb",
     border: "none",
-    background: "linear-gradient(135deg, #1e40af, #2563eb)",
-    color: "#e2e8f0",
-    fontSize: "0.9rem",
-    fontWeight: 700,
+    borderRadius: "6px",
+    color: "#fff",
+    fontSize: "13px",
+    fontWeight: 600,
+    padding: "8px 24px",
     cursor: "pointer",
-    boxShadow: "0 2px 8px rgba(37,99,235,0.35)",
+    letterSpacing: "0.02em",
   },
 };
