@@ -10,16 +10,16 @@ export default function FinanceLedger() {
   const [entries, setEntries] =
     useState([]);
 
-  useEffect(() => {
-    loadEntries();
-  }, []);
-
   async function loadEntries() {
     const data =
       await fetchLedgerEntries();
 
     setEntries(data);
   }
+
+  useEffect(() => {
+    loadEntries();
+  }, []);
 
   return (
     <PageContainer

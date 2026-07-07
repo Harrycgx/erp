@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function BoxIQ() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] overflow-x-hidden">

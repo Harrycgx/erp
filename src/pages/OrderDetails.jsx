@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import PageContainer from "../components/ui/PageContainer";
 import MaterialPlanningTab from "../features/production/MaterialPlanningTab";
 import supabase from "../lib/supabase";

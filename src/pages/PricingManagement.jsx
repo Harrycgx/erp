@@ -13,7 +13,6 @@ import {
   updateMaterialRate,
   createMarginRule,
   createCustomerContract,
-  formatINR,
 } from "../services/pricingService";
 import supabase from "../lib/supabase";
 
@@ -583,8 +582,6 @@ function AuditLog() {
     "pricing_margin_rules", "pricing_customer_contracts",
   ];
 
-  useEffect(() => { load(); }, [tableFilter]);
-
   async function load() {
     setLoading(true);
     try {
@@ -595,6 +592,8 @@ function AuditLog() {
       setLogs(data);
     } finally { setLoading(false); }
   }
+
+  useEffect(() => { load(); }, [tableFilter]);
 
   const ACTION_COLORS = {
     created:     { color: "#4ade80", bg: "rgba(74,222,128,0.1)" },

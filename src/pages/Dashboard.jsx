@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import supabase from "../lib/supabase";
 import { fetchProductionJobs } from "../services/productionService";
 
@@ -16,23 +16,16 @@ export default function Dashboard() {
     quotations: 0,
     dispatches: 0,
     jobs: 0,
-    invoicesDue: 0,
-    revenue: 0,
     lowStock: 0,
   });
 
-  useEffect(() => {
-    loadDashboard();
-  }, []);
-
-  async function loadDashboard() {
+  const loadDashboard = useCallback(async () => {
     try {
       const [
         jobsRes,
         quotationsRes,
         ordersRes,
         dispatchRes,
-        invoiceRes,
       ] = await Promise.all([
         fetchProductionJobs(),
 
@@ -47,27 +40,11 @@ export default function Dashboard() {
         supabase
           .from("dispatches")
           .select("*", { count: "exact", head: true }),
-
-        supabase
-          .from("invoices")
-          .select("invoice_amount,due_amount"),
       ]);
 
       const jobsData = Array.isArray(jobsRes)
         ? jobsRes
         : jobsRes?.data || [];
-
-      const revenue =
-        invoiceRes.data?.reduce(
-          (sum, row) => sum + Number(row.invoice_amount || 0),
-          0
-        ) || 0;
-
-      const dueAmount =
-        invoiceRes.data?.reduce(
-          (sum, row) => sum + Number(row.due_amount || 0),
-          0
-        ) || 0;
 
       setJobs(jobsData);
 
@@ -76,14 +53,17 @@ export default function Dashboard() {
         quotations: quotationsRes.count || 0,
         dispatches: dispatchRes.count || 0,
         jobs: jobsData.length || 0,
-        invoicesDue: dueAmount,
-        revenue,
         lowStock: 0,
       });
     } catch (err) {
       console.error(err);
     }
-  }
+  }, []);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Dashboard data resolves asynchronously before state updates.
+    loadDashboard();
+  }, [loadDashboard]);
 
   const filteredJobs = jobs.filter((job) =>
     JSON.stringify(job)
@@ -96,9 +76,9 @@ export default function Dashboard() {
 
      <KPIStrip
   items={[
-    { label: "Orders", value: 6 },
-    { label: "Quotes", value: 7 },
-    { label: "Jobs", value: 5 }
+    { label: "Orders", value: stats.orders },
+    { label: "Quotes", value: stats.quotations },
+    { label: "Jobs", value: stats.jobs }
   ]}
 />
 

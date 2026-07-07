@@ -3,7 +3,7 @@
 // Location: src/services/inventoryLedgerService.js
 // ============================================================
 
-import supabase from '../lib/supabase';
+import supabase from '../../../lib/supabase';
 
 export const MOVEMENT_TYPES = ['Stock In', 'Stock Out', 'Adjustment'];
 

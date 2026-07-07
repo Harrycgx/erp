@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { 
   LayoutDashboard, FileText, ShoppingCart, Factory, 
-  Box, Wallet, Brain, Users, Settings, ClipboardList, Landmark,
+  Box, Wallet, Users, Settings, ClipboardList, Landmark,
   Layers // Explicitly added to handle Products & BOM master data
 } from 'lucide-react';
 

@@ -2,14 +2,10 @@ import ProductionCard from './ProductionCard';
 import ProductionAlerts from './ProductionAlerts';
 import ProductionQueue from './ProductionQueue';
 import DispatchReadyBoard from './DispatchReadyBoard';
-import ProductionStageBadge from './ProductionStageBadge';
-import ProductionTimeline from './ProductionTimeline';
 import {
   PRODUCTION_STAGES,
   normalizeStage,
   formatStageLabel,
-  formatDate,
-  getPriorityClass,
   isOverdue,
 } from '../../utils/productionHelpers';
 
@@ -31,15 +27,6 @@ export default function ProductionBoard({ jobs = [], onStageChange, onSelectJob,
   const dispatchReadyJobs = normalizedJobs.filter((job) => job.normalizedStage === 'dispatch_ready');
   const completedJobs = normalizedJobs.filter((job) => job.normalizedStage === 'delivered');
   const pendingJobs = normalizedJobs.filter((job) => ['pending', 'paper_ordered', 'printing', 'punching', 'pasting', 'qc'].includes(job.normalizedStage));
-
-  const priorityCounts = normalizedJobs.reduce(
-    (acc, job) => {
-      const level = job.priority || 'Normal';
-      acc[level] = (acc[level] || 0) + 1;
-      return acc;
-    },
-    { Urgent: 0, High: 0, Normal: 0 }
-  );
 
   const handleDrop = (event, stage) => {
     event.preventDefault();

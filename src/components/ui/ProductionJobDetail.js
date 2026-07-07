@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import supabase from "../lib/supabase";
-import PageContainer from "../components/ui/PageContainer";
-import BOMConsumptionTab from "../components/ui/BOMConsumptionTab";
+import supabase from "../../lib/supabase";
+import PageContainer from "./PageContainer";
+import BOMConsumptionTab from "./BOMConsumptionTab";
 
 export default function ProductionJobDetail() {
   const { id } = useParams();

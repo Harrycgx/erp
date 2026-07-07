@@ -1,35 +1,42 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { useNavigate, useLocation } from 'react-router-dom';
+import useAuth from '../../features/auth/useAuth';
 
 export default function Login() {
-  const { login, getRoleHomePath } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const from = location.state?.from || '/dashboard';
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log("[TRACE:1] handleSubmit() ENTERED", { email: email.trim(), passwordLength: password.length });
     setError('');
 
     if (!email.trim() || !password.trim()) {
+      console.log("[TRACE:1a] handleSubmit() ABORTED — empty fields");
       setError('Please enter both email and password.');
       return;
     }
 
     try {
       setLoading(true);
-      const { profile } = await login({ email, password });
-      
-      // Strict role-based redirect
-      const destination = getRoleHomePath(profile?.role);
-      navigate(destination, { replace: true });
+      console.log("[TRACE:2] Calling login({ email, password })...");
+      const loginResult = await login({ email, password });
+      console.log("[TRACE:7] login() RETURNED successfully", { hasUser: !!loginResult?.user, hasProfile: !!loginResult?.profile });
+      navigate(from, { replace: true });
+      console.log("[TRACE:8] navigate() called — redirecting to", from);
     } catch (err) {
+      console.log("[TRACE:6] login() REJECTED / THREW", { message: err?.message, name: err?.name, stack: err?.stack?.substring(0, 200) });
       setError(err?.message || 'Unable to sign in. Please check your staff credentials.');
     } finally {
       setLoading(false);
+      console.log("[TRACE:9] handleSubmit() FINISHED (finally block)");
     }
   };
 

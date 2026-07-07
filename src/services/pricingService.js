@@ -1,26 +1,6 @@
 import supabase from "../lib/supabase";
 
-// ─── Constants & Configuration ──────────────────────────────────
-const PLY_LAYERS = { "2 Ply": 2, "3 Ply": 3, "5 Ply": 5, "7 Ply": 7 };
-const FLUTE_TAKEUP = { 
-    "A Flute": 1.52, "B Flute": 1.32, "C Flute": 1.45, 
-    "E Flute": 1.26, "F Flute": 1.22, "BC Flute": 1.38, "EB Flute": 1.30 
-};
-const LABOUR_COST_PER_PLY = { "2 Ply": 0.8, "3 Ply": 1.2, "5 Ply": 2.0, "7 Ply": 2.8 };
-const PRINTING_COST_PER_COLOR_PER_SQM = { 
-    "None": 0, "Flexo Printing": 1.8, "Offset Printing": 3.2, 
-    "Digital Printing": 5.5, "Screen Printing": 2.4 
-};
-const BOX_SURCHARGE = { 
-    "Regular Slotted Container (RSC)": 0, "Half Slotted Container (HSC)": 0.5, 
-    "Full Overlap Container (FOL)": 0.8, "Die Cut Box": 2.5, "Tray": 1.8, 
-    "Telescope Box": 1.5, "Custom": 3.0 
-};
-
 // ─── Internal Helper Functions ──────────────────────────────────
-/** Validates and rounds numeric values to prevent floating point errors */
-const round = (val, dec = 2) => Math.round(val * Math.pow(10, dec)) / Math.pow(10, dec);
-
 /** Logs pricing service actions for diagnostic purposes */
 const logAction = (action, payload) => {
     console.debug(`[PricingService] Executing: ${action}`, payload);

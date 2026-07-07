@@ -6,19 +6,15 @@
 // - Print / PDF trigger
 // ============================================================
 
-import { useRef, useState } from "react";
-import {
-  approveQuotation,
-  convertToOrder,
-} from "./services/quotationService";
-import { formatINR } from "./pricingEngine";
+import { useState } from "react";
 import {
   submitQuotation,
   approveQuotation,
   rejectQuotation,
   cancelQuotation,
   convertToOrder,
-} from "./quotationService";
+} from "./services/quotationService";
+import { formatINR } from "./utils/pricingEngine";
 
 const STATUS_COLORS = {
   Draft:     { bg: "#f3f4f6", text: "#374151", dot: "#9ca3af" },
@@ -94,7 +90,6 @@ export default function QuoteDetail({ quotation, onEdit, onClose, onRefresh }) {
   const [rejectReason, setRejectReason] = useState("");
   const [error, setError] = useState(null);
   const [successMsg, setSuccessMsg] = useState(null);
-  const printRef = useRef();
 
   if (!quotation) return null;
 

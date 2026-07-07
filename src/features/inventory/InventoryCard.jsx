@@ -1,5 +1,4 @@
 import { getStockStatus, buildMaterialLabel, formatUnit } from '../../utils/inventoryHelpers';
-import { calculateWastageValue } from '../../utils/stockCalculations';
 
 export default function InventoryCard({ item, onSelect }) {
   return (

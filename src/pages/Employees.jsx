@@ -36,10 +36,6 @@ export default function Employees() {
   const [employees, setEmployees] =
     useState([]);
 
-  useEffect(() => {
-    loadEmployees();
-  }, []);
-
   async function loadEmployees() {
     const { data, error } =
       await supabase
@@ -56,6 +52,10 @@ export default function Employees() {
 
     setEmployees(data || []);
   }
+
+  useEffect(() => {
+    loadEmployees();
+  }, []);
 
   const activeEmployees =
     employees.filter(

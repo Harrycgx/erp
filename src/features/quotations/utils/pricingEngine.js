@@ -11,11 +11,6 @@ const PAPER_COST_PER_KG = {
 
 const PLY_LAYERS = { "2 Ply": 2, "3 Ply": 3, "5 Ply": 5, "7 Ply": 7 };
 
-const FLUTE_THICKNESS_MM = {
-  "A Flute": 4.8, "B Flute": 3.0, "C Flute": 3.6,
-  "E Flute": 1.6, "F Flute": 0.8, "BC Flute": 6.0, "EB Flute": 4.6,
-};
-
 const FLUTE_TAKEUP = {
   "A Flute": 1.52, "B Flute": 1.32, "C Flute": 1.45,
   "E Flute": 1.26, "F Flute": 1.22, "BC Flute": 1.38, "EB Flute": 1.30,
@@ -46,7 +41,7 @@ function getPaperCostPerKg(gsm) {
   return PAPER_COST_PER_KG[300];
 }
 
-function calculateBlankSize(length, width, height, fluteType) {
+function calculateBlankSize(length, width, height) {
   const blankLength = 2 * (length + width) + 40;
   const blankWidth = 2 * (height + width / 2) + 20;
   return { blankLengthMm: blankLength, blankWidthMm: blankWidth };

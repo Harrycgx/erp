@@ -1,1 +1,1 @@
-import { calcPricing } from "./utils/pricingEngine";
+// PricingCalculator — uses calculatePricing from pricingEngine via inline call

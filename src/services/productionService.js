@@ -98,7 +98,7 @@ export async function fetchProductionJobBySalesOrderId(salesOrderId) {
  * Transactional Sub-routine Orchestration: Resolves order metrics, assembles payloads 
  * passing strict database NOT NULL fields, and dispatches records safely into production lines.
  */
-export async function startProductionFromSalesOrder({ salesOrderId, actorId = null, notes = '' } = {}) {
+export async function startProductionFromSalesOrder({ salesOrderId } = {}) {
   if (!salesOrderId) {
     return { data: null, error: new Error("Pipeline Failure: Cannot start production without salesOrderId.") };
   }

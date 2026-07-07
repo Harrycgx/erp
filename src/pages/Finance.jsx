@@ -40,10 +40,6 @@ export default function Finance() {
   const [invoices, setInvoices] =
     useState([]);
 
-  useEffect(() => {
-    loadInvoices();
-  }, []);
-
   async function loadInvoices() {
     try {
       const result =
@@ -56,6 +52,10 @@ export default function Finance() {
       console.error(error);
     }
   }
+
+  useEffect(() => {
+    loadInvoices();
+  }, []);
 
   const totalRevenue =
     invoices.reduce(

@@ -1,5 +1,4 @@
 import OrderStatusBadge from './OrderStatusBadge';
-import { formatCurrency } from '../../utils/pdfHelpers';
 
 export default function OrderCard({ order, onSelect }) {
   return (

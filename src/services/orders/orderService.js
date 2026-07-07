@@ -4,7 +4,7 @@
 // Handles: CRUD, workflow transitions, order & job creation
 // ============================================================
 
-import supabase from "../../../lib/supabase";
+import supabase from "../../lib/supabase";
 
 // ─── FETCH ───────────────────────────────────────────────────
 

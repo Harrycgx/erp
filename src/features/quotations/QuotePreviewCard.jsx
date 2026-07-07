@@ -24,7 +24,7 @@ export default function QuotePreviewCard({ quote, customer }) {
         <p><span className="font-semibold text-white">Flute:</span> {quote.flute_type}</p>
         <p><span className="font-semibold text-white">Printing:</span> {quote.printing_type}</p>
         <p><span className="font-semibold text-white">Lamination:</span> {quote.lamination}</p>
-        <p><span className="font-semibold text-white">Created:</span> {quote.created_at ? format(new Date(quote.created_at), 'dd MMM yyyy') : 'Draft'}</p>
+        <p><span className="font-semibold text-white">Created:</span> {quote.created_at ? formatDate(quote.created_at) : 'Draft'}</p>
       </div>
     </div>
   );

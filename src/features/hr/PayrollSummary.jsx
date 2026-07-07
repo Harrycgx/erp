@@ -1,7 +1,6 @@
 export default function PayrollSummary({ payroll = [], onGenerate }) {
   const totalPayroll = payroll.reduce((sum, item) => sum + Number(item.net_salary || 0), 0);
   const pending = payroll.filter((item) => item.payment_status === 'Pending').length;
-  const processed = payroll.filter((item) => item.payment_status === 'Processed').length;
   const paid = payroll.filter((item) => item.payment_status === 'Paid').length;
 
   return (

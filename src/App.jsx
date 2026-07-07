@@ -1,4 +1,4 @@
-﻿import React, { lazy, Suspense } from "react";
+﻿import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Components & Layouts
@@ -6,6 +6,7 @@ import WorkspaceShell from "./components/layout/WorkspaceShell";
 import ProtectedRoute from "./features/auth/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import AI from "./pages/AI";
+import Login from "./pages/auth/Login";
 
 // Lazy-loaded pages
 const AuditLogs = lazy(() => import("./pages/AuditLogs"));
@@ -18,7 +19,7 @@ const AIInsights = lazy(() => import("./pages/AIInsights"));
 const Employees = lazy(() => import("./pages/Employees"));
 const Inventory = lazy(() => import("./pages/Inventory"));
 const Orders = lazy(() => import("./pages/Orders"));
-const CreateOrder = lazy(() => import("./pages/CreateOrder")); // 👈 Added order creation page
+const CreateOrder = lazy(() => import("./pages/CreateOrder"));
 const Finance = lazy(() => import("./pages/Finance"));
 const Procurement = lazy(() => import("./pages/Procurement"));
 const Customers = lazy(() => import("./pages/Customers"));
@@ -32,6 +33,10 @@ const ArtworkMaster = lazy(() => import("./pages/ArtworkMaster"));
 const Settings = lazy(() => import("./pages/Settings"));
 
 const router = createBrowserRouter([
+  {
+    path: "/login",
+    element: <Login />,
+  },
   {
     path: "/",
     element: <WorkspaceShell />,
@@ -51,11 +56,8 @@ const router = createBrowserRouter([
       { path: "products", element: <ProtectedRoute><ProductMaster /></ProtectedRoute> },
       { path: "quotations", element: <ProtectedRoute><Quotations /></ProtectedRoute> },
       { path: "orders", element: <ProtectedRoute><Orders /></ProtectedRoute> },
-      
-      // ⚠️ CRITICAL: "orders/new" MUST be registered BEFORE "orders/:id"
       { path: "orders/new", element: <ProtectedRoute><CreateOrder /></ProtectedRoute> },
       { path: "orders/:id", element: <ProtectedRoute><OrderDetails /></ProtectedRoute> },
-      
       { path: "production", element: <ProtectedRoute><Production /></ProtectedRoute> },
       { path: "inventory", element: <ProtectedRoute><Inventory /></ProtectedRoute> },
       { path: "inventory-ledger", element: <ProtectedRoute><InventoryLedger /></ProtectedRoute> },

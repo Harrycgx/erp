@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import StockMovementTable from './StockMovementTable';
-import { getStockStatus, formatUnit } from '../../utils/inventoryHelpers';
+import { getStockStatus } from '../../utils/inventoryHelpers';
 import { calculateWastageValue, getInventoryHealth } from '../../utils/stockCalculations';
 import { fetchStockMovements, insertStockMovement, updateInventoryItem } from '../../services/inventoryService';
 

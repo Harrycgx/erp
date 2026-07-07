@@ -49,6 +49,15 @@ function StatCard({ label, value, color }) {
   );
 }
 
+function Row({ label, value }) {
+  return (
+    <div style={st.detailRow}>
+      <span style={st.detailLabel}>{label}</span>
+      <span style={st.detailValue}>{value ?? "—"}</span>
+    </div>
+  );
+}
+
 // ─── Detail Panel ─────────────────────────────────────────────
 function ProductDetail({ product, onEdit, onClose, onToggleActive, onDelete }) {
   const [busy, setBusy] = useState(false);
@@ -56,15 +65,6 @@ function ProductDetail({ product, onEdit, onClose, onToggleActive, onDelete }) {
   async function act(fn) {
     setBusy(true);
     try { await fn(); } finally { setBusy(false); }
-  }
-
-  function Row({ label, value }) {
-    return (
-      <div style={st.detailRow}>
-        <span style={st.detailLabel}>{label}</span>
-        <span style={st.detailValue}>{value ?? "—"}</span>
-      </div>
-    );
   }
 
   return (

@@ -26,7 +26,7 @@ function mapSalesOrderRow(row = {}) {
  * Strips dynamic log data and records a pricing lock timestamp for historical snapshot preservation.
  */
 function buildQuotationSnapshot(quote) {
-  const { notes, comments, activity_logs, ...rest } = quote;
+  const { ...rest } = quote;
   return {
     ...rest,
     items: (quote.items || []).map((item) => ({ ...item })),

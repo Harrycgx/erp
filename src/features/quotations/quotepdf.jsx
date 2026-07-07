@@ -6,7 +6,7 @@
 // ============================================================
 
 import { forwardRef } from "react";
-import { formatINR } from "./pricingEngine";
+import { formatINR } from "./utils/pricingEngine";
 
 // ─── PDF Template (rendered off-screen, passed to react-to-print) ──
 

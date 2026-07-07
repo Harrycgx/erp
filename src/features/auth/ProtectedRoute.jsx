@@ -1,9 +1,11 @@
 import useAuth from "./useAuth";
+import { useLocation, Navigate } from "react-router-dom";
 
 export default function ProtectedRoute({
   children,
   allowedRoles = [],
 }) {
+  const location = useLocation();
   const {
     user,
     roles,
@@ -19,11 +21,7 @@ export default function ProtectedRoute({
   }
 
   if (!user) {
-    return (
-      <div className="p-10 text-red-400">
-        Unauthorized
-      </div>
-    );
+    return <Navigate to="/login" state={{ from: location.pathname }} replace />;
   }
 
   const allowed =

@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function BOMConsumptionTab({ usageData, jobActualQty, jobPlannedQty }) {
   const uniqueMaterialsCount = usageData.length;
   const hasVariance = usageData.some(item => Number(item.variance) !== 0);

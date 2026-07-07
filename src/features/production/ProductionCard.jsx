@@ -1,7 +1,6 @@
 import ProductionStageBadge from './ProductionStageBadge';
 import {
   buildJobHeadline,
-  buildJobSubline,
   formatDate,
   getPriorityClass,
   isOverdue,

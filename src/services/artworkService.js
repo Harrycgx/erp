@@ -134,7 +134,7 @@ export async function deleteArtwork(id, fileUrl) {
       const url  = new URL(fileUrl);
       const path = url.pathname.split(`/${BUCKET}/`)[1];
       if (path) await supabase.storage.from(BUCKET).remove([path]);
-    } catch (_) {
+    } catch (_e) {
       // non-fatal: file may already be gone
     }
   }
@@ -158,7 +158,7 @@ export async function getArtworkDownloadUrl(fileUrl) {
 
     if (error) throw new Error(error.message);
     return data.signedUrl;
-  } catch (_) {
+  } catch (_e) {
     return fileUrl; // fallback
   }
 }

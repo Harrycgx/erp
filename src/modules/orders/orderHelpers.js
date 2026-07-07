@@ -1,4 +1,4 @@
-import { ORDER_STAGES, getStageIndex, getStageProgress } from './orderStatus';
+import { getStageProgress } from './orderStatus';
 
 const estimateDays = {
   'Quote Requested': 10,

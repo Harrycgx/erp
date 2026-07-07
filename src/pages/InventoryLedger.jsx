@@ -13,16 +13,16 @@ export default function InventoryLedger() {
   const [search, setSearch] =
     useState("");
 
-  useEffect(() => {
-    loadLedger();
-  }, []);
-
   async function loadLedger() {
     const data =
       await fetchInventoryLedger();
 
     setLedger(data || []);
   }
+
+  useEffect(() => {
+    loadLedger();
+  }, []);
 
   const filteredLedger =
     ledger.filter((entry) =>

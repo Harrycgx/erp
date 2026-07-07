@@ -47,11 +47,6 @@ export default function Orders() {
   const [orders, setOrders] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
-  const [selectedOrders, setSelectedOrders] = useState([]);
-
-  useEffect(() => {
-    loadOrders();
-  }, []);
 
   async function loadOrders() {
     try {
@@ -63,6 +58,10 @@ export default function Orders() {
       console.error("Order Register Fetch Defect:", error);
     }
   }
+
+  useEffect(() => {
+    loadOrders();
+  }, []);
 
   // Manufacturing KPI Engine Calculations
   const awaitingPlanning = orders.filter(o => !o.material_status || o.material_status === "pending").length;
@@ -94,7 +93,7 @@ export default function Orders() {
   };
 
   const handleBulkAction = (action) => {
-    console.log(`Executing execution dispatch sequence: ${action} on orders:`, selectedOrders);
+    console.log(`Executing execution dispatch sequence: ${action}`);
     alert(`Bulk ${action} dispatched for selected rows.`);
   };
 

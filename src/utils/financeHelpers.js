@@ -23,8 +23,6 @@ export function calculateInvoiceTotalsLegacy({ subtotal = 0, gstRate = 0 }) {
   );
 }
 
-export { calculateInvoiceTotals } from '../services/invoiceCalculationService';
-
 export function getInvoiceStatus({ total = 0, paid = 0, dueDate, status }) {
   if (status) {
     const normalized = String(status).toLowerCase();

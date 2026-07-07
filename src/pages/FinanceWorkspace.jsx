@@ -9,8 +9,6 @@ export default function FinanceWorkspace() {
   const [ledger, setLedger] = useState([]);
   const [search, setSearch] = useState("");
 
-  useEffect(() => { loadData(); }, []);
-
   async function loadData() {
     const [invRes, ledRes] = await Promise.all([
       supabase.from("invoices").select("*").order("created_at", { ascending: false }),
@@ -24,6 +22,8 @@ export default function FinanceWorkspace() {
     })));
     setLedger(ledRes.data || []);
   }
+
+  useEffect(() => { loadData(); }, []);
 
   const stats = useMemo(() => {
     const revenue = invoices.reduce((s, i) => s + Number(i.invoice_amount || 0), 0);

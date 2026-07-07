@@ -1,6 +1,5 @@
 import { Outlet, NavLink } from "react-router-dom";
 import { Brain } from "lucide-react";
-import NotificationBell from "./components/ui/NotificationBell";
 
 const navItems = [
   { label: "Dashboard", path: "/dashboard" },

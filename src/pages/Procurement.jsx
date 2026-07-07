@@ -44,10 +44,6 @@ export default function Procurement() {
     setPurchaseOrders,
   ] = useState([]);
 
-  useEffect(() => {
-    loadPurchaseOrders();
-  }, []);
-
   async function loadPurchaseOrders() {
     try {
       const result =
@@ -62,6 +58,10 @@ export default function Procurement() {
       console.error(error);
     }
   }
+
+  useEffect(() => {
+    loadPurchaseOrders();
+  }, []);
 
   const totalProcurement =
     purchaseOrders.reduce(

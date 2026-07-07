@@ -11,7 +11,7 @@ const sortConfig = {
   status: 'status',
 };
 
-export default function QuoteTable({ quotations, customers, onView, onEdit, onDelete }) {
+export default function QuoteTable({ quotations, customers, onView, onEdit }) {
   const [sortKey, setSortKey] = useState('date');
   const [sortDirection, setSortDirection] = useState('desc');
   const [page, setPage] = useState(1);
@@ -95,7 +95,7 @@ export default function QuoteTable({ quotations, customers, onView, onEdit, onDe
                   <tr key={quote.id} className="border-b border-slate-800 hover:bg-slate-900/70">
                     <td className="px-4 py-4 text-white">{quote.quote_number || quote.id}</td>
                     <td className="px-4 py-4 text-slate-300">{customer?.company_name || 'Unknown'}</td>
-                    <td className="px-4 py-4 text-slate-300">{new Date(quote.created_at || Date.now()).toLocaleDateString()}</td>
+                    <td className="px-4 py-4 text-slate-300">{quote.created_at ? new Date(quote.created_at).toLocaleDateString() : '—'}</td>
                     <td className="px-4 py-4"><QuoteStatusBadge status={quote.status} /></td>
                     <td className="px-4 py-4 text-slate-300">Rs {Number(quote.total || 0).toFixed(2)}</td>
                     <td className="px-4 py-4">

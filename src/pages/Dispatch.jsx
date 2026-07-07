@@ -55,8 +55,6 @@ export default function Dispatch() {
     await loadDispatches();
   }
 
-  const totalDispatches = dispatches.length;
-  const deliveredDispatches = dispatches.filter((item) => item.status === "delivered");
   const pendingDispatches = dispatches.filter((item) => item.status !== "delivered");
 
   return (

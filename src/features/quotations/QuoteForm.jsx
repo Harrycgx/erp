@@ -164,7 +164,6 @@ export default function QuoteForm({ initialData, onSubmit, onCancel, isLoading }
 
   const [errors, setErrors] = useState({});
   const [pricing, setPricing] = useState(null);
-  const [touched, setTouched] = useState({});
   
   const [customers, setCustomers] = useState([]);
   const [products, setProducts] = useState([]);
@@ -304,7 +303,6 @@ export default function QuoteForm({ initialData, onSubmit, onCancel, isLoading }
   }, [errors]);
 
   const handleBlur = useCallback((slice, field) => () => {
-    setTouched(prev => ({ ...prev, [field]: true }));
     const currentForm = { ...identity, ...spec, ...commercial };
     const fieldErrors = validateFullForm(currentForm);
     setErrors(prev => ({ ...prev, [field]: fieldErrors[field] }));
@@ -316,7 +314,6 @@ export default function QuoteForm({ initialData, onSubmit, onCancel, isLoading }
     const validationErrors = validateFullForm(fullForm);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
-      setTouched(Object.fromEntries(Object.keys(validationErrors).map((k) => [k, true])));
       return;
     }
     onSubmit({ ...fullForm, ...pricing });
