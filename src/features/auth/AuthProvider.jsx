@@ -1,7 +1,9 @@
 import {
   createContext,
   useContext,
+  useCallback,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 
@@ -9,30 +11,50 @@ import supabase from "../../lib/supabase";
 
 const AuthContext = createContext();
 
+// In-flight cache: if fetchProfile() is called twice for the same userId
+// while the first call is still resolving (e.g. login()'s own fetch and the
+// onAuthStateChange listener's fetch both firing for the same sign-in), the
+// second call reuses the first's promise instead of firing a duplicate query.
+const inFlightProfileFetches = new Map();
+
 async function fetchProfile(userId) {
-  console.log("[TRACE:PF1] fetchProfile() ENTERED", { userId });
-  const { data, error } = await supabase
-    .from("profiles")
-    .select("id, email, full_name, role")
-    .eq("id", userId)
-    .limit(1);
-
-  console.log("[TRACE:PF2] fetchProfile() query result", {
-    hasError: !!error,
-    errorMessage: error?.message,
-    errorCode: error?.code,
-    hasData: !!data,
-    dataLength: data?.length,
-    firstRow: data?.[0],
-  });
-
-  if (error || !data || data.length === 0) {
-    console.log("[TRACE:PF3] fetchProfile() returning NULL");
-    return null;
+  if (inFlightProfileFetches.has(userId)) {
+    return inFlightProfileFetches.get(userId);
   }
 
-  console.log("[TRACE:PF4] fetchProfile() returning profile", data[0]);
-  return data[0];
+  const promise = (async () => {
+    console.log("[TRACE:PF1] fetchProfile() ENTERED", { userId });
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("id, email, full_name, role")
+      .eq("id", userId)
+      .limit(1);
+
+    console.log("[TRACE:PF2] fetchProfile() query result", {
+      hasError: !!error,
+      errorMessage: error?.message,
+      errorCode: error?.code,
+      hasData: !!data,
+      dataLength: data?.length,
+      firstRow: data?.[0],
+    });
+
+    if (error || !data || data.length === 0) {
+      console.log("[TRACE:PF3] fetchProfile() returning NULL");
+      return null;
+    }
+
+    console.log("[TRACE:PF4] fetchProfile() returning profile", data[0]);
+    return data[0];
+  })();
+
+  inFlightProfileFetches.set(userId, promise);
+
+  try {
+    return await promise;
+  } finally {
+    inFlightProfileFetches.delete(userId);
+  }
 }
 
 function rolesFromProfile(profile) {
@@ -40,17 +62,10 @@ function rolesFromProfile(profile) {
   return [profile.role];
 }
 
-export function AuthProvider({
-  children,
-}) {
-  const [user, setUser] =
-    useState(null);
-
-  const [roles, setRoles] =
-    useState([]);
-
-  const [loading, setLoading] =
-    useState(true);
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
+  const [roles, setRoles] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     console.log("[TRACE:INIT1] AuthProvider useEffect() MOUNTED");
@@ -61,8 +76,7 @@ export function AuthProvider({
         console.log("[TRACE:INIT3] Calling supabase.auth.getSession()...");
         const {
           data: { session },
-        } =
-          await supabase.auth.getSession();
+        } = await supabase.auth.getSession();
 
         console.log("[TRACE:INIT4] getSession() returned", {
           hasSession: !!session,
@@ -71,9 +85,7 @@ export function AuthProvider({
           userEmail: session?.user?.email,
         });
 
-        const currentUser =
-          session?.user ?? null;
-
+        const currentUser = session?.user ?? null;
         setUser(currentUser);
 
         if (currentUser) {
@@ -84,10 +96,11 @@ export function AuthProvider({
           console.log("[TRACE:INIT5a] No session — user is null");
         }
       } catch (error) {
-        console.error(
-          "[TRACE:INIT-ERR] loadUser() CATCH",
-          { message: error?.message, name: error?.name, stack: error?.stack?.substring(0, 300) }
-        );
+        console.error("[TRACE:INIT-ERR] loadUser() CATCH", {
+          message: error?.message,
+          name: error?.name,
+          stack: error?.stack?.substring(0, 300),
+        });
       } finally {
         setLoading(false);
         console.log("[TRACE:INIT6] loadUser() FINISHED — loading set to false");
@@ -97,33 +110,33 @@ export function AuthProvider({
     loadUser();
 
     console.log("[TRACE:INIT7] Registering onAuthStateChange listener...");
-    const {
-      data: listener,
-    } =
-      supabase.auth.onAuthStateChange(
-        async (
-          _event,
-          session
-        ) => {
-          console.log("[TRACE:AUTH-CHANGE] onAuthStateChange FIRED", {
-            event: _event,
-            hasSession: !!session,
-            userId: session?.user?.id,
-          });
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        console.log("[TRACE:AUTH-CHANGE] onAuthStateChange FIRED", {
+          event: _event,
+          hasSession: !!session,
+          userId: session?.user?.id,
+        });
 
-          const currentUser =
-            session?.user ?? null;
+        const currentUser = session?.user ?? null;
+        setUser(currentUser);
 
-          setUser(currentUser);
-
-          if (currentUser) {
-            const profile = await fetchProfile(currentUser.id);
-            setRoles(rolesFromProfile(profile));
-          } else {
-            setRoles([]);
-          }
+        if (!currentUser) {
+          setRoles([]);
+          return;
         }
-      );
+
+        // Deferred: fetchProfile() calls supabase.from(...), which needs the
+        // client's internal auth lock. Calling it synchronously in this
+        // callback deadlocks against signInWithPassword/getSession, which
+        // are still holding that lock when this fires.
+        setTimeout(() => {
+          fetchProfile(currentUser.id).then((profile) => {
+            setRoles(rolesFromProfile(profile));
+          });
+        }, 0);
+      }
+    );
     console.log("[TRACE:INIT8] onAuthStateChange listener registered");
 
     return () => {
@@ -132,8 +145,11 @@ export function AuthProvider({
     };
   }, []);
 
-  const login = async ({ email, password }) => {
-    console.log("[TRACE:3] login() ENTERED", { email, passwordLength: password?.length });
+  const login = useCallback(async ({ email, password }) => {
+    console.log("[TRACE:3] login() ENTERED", {
+      email,
+      passwordLength: password?.length,
+    });
 
     console.log("[TRACE:4] Calling supabase.auth.signInWithPassword()...");
     const signInPromise = supabase.auth.signInWithPassword({
@@ -152,7 +168,9 @@ export function AuthProvider({
       errorMessage: error?.message,
       errorName: error?.name,
       errorCode: error?.code,
-      fullError: error ? JSON.stringify(error, Object.getOwnPropertyNames(error)) : null,
+      fullError: error
+        ? JSON.stringify(error, Object.getOwnPropertyNames(error))
+        : null,
       hasData: !!data,
       hasUser: !!data?.user,
       hasSession: !!data?.session,
@@ -185,30 +203,26 @@ export function AuthProvider({
     setUser(authUser);
     setRoles(rolesFromProfile(profile));
 
-    console.log("[TRACE:5f] login() RETURNING", { user: authUser.id, profile: profile.id });
+    console.log("[TRACE:5f] login() RETURNING", {
+      user: authUser.id,
+      profile: profile.id,
+    });
     return { user: authUser, profile };
-  };
+  }, []);
 
-  const logout = async () => {
+  const logout = useCallback(async () => {
     await supabase.auth.signOut();
     setUser(null);
     setRoles([]);
-  };
+  }, []);
 
-  const value = {
-    user,
-    roles,
-    loading,
-    login,
-    logout,
-  };
+  const value = useMemo(
+    () => ({ user, roles, loading, login, logout }),
+    [user, roles, loading, login, logout]
+  );
 
   return (
-    <AuthContext.Provider
-      value={value}
-    >
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
   );
 }
 
