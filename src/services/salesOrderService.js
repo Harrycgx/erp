@@ -41,7 +41,7 @@ function buildQuotationSnapshot(quote) {
 export async function fetchNextSalesOrderNumberPreview() {
   const { count, error } = await supabase
     .from('sales_orders')
-    .select('order_id', { count: 'exact', head: true });
+    .select('id', { count: 'exact', head: true });
 
   if (error) {
     console.error("BoxIQ fetchNextSalesOrderNumberPreview Error:", error.message);
@@ -57,7 +57,7 @@ export async function fetchSalesOrderByQuotationId(quotationId) {
   const result = await supabase
     .from('sales_orders')
     .select('*')
-    .eq('quote_id', quotationId)
+    .eq('quotation_id', quotationId)
     .order('created_at', { ascending: false })
     .limit(1)
     .maybeSingle();
@@ -121,14 +121,14 @@ export async function createSalesOrderFromQuotation(quote, options = {}) {
   const { quotation: calculated, totals } = validation.financials;
 
   const salesOrderPayload = {
-    order_number: previewNumber,
-    quote_id: quote.id,
+    sales_order_number: previewNumber,
+    quotation_id: quote.id,
     customer_id: quote.customer_id,
     company_id: quote.company_id || null,
     order_source: options.order_source || 'Quotation',
     created_by: options.actorId || quote.created_by || null,
     status: SALES_ORDER_STATUSES.PENDING,
-    total_value_snapshot: totals.total_amount || totals.total || 0,
+    total_amount: totals.total_amount || totals.total || 0,
     pricing_snapshot: {
       production_stage: 'pending',
       payment_status: 'pending',
@@ -197,7 +197,7 @@ export async function createSalesOrderFromQuotation(quote, options = {}) {
  */
 export async function deleteSalesOrder(id) {
   await supabase.from('sales_order_items').delete().eq('sales_order_id', id);
-  return supabase.from('sales_orders').delete().eq('order_id', id);
+  return supabase.from('sales_orders').delete().eq('id', id);
 }
 
 /**
@@ -213,7 +213,7 @@ export async function fetchSalesOrders() {
  * Fetches a single sales order utilizing the explicit unique database identifier.
  */
 export async function fetchSalesOrderById(id) {
-  const result = await supabase.from('sales_orders').select('*').eq('order_id', id).single();
+  const result = await supabase.from('sales_orders').select('*').eq('id', id).single();
   if (result.error) return result;
   return { data: mapSalesOrderRow(result.data), error: null };
 }
@@ -223,7 +223,7 @@ export async function fetchSalesOrderById(id) {
  */
 export async function fetchSalesOrderWithItems(id) {
   const [orderResult, itemsResult] = await Promise.all([
-    supabase.from('sales_orders').select('*').eq('order_id', id).single(),
+    supabase.from('sales_orders').select('*').eq('id', id).single(),
     supabase.from('sales_order_items').select('*').eq('sales_order_id', id).order('created_at', { ascending: true }),
   ]);
 
@@ -251,7 +251,7 @@ export async function updateSalesOrderStatus(id, status, extra = {}) {
     ...extra,
   };
 
-  const result = await supabase.from('sales_orders').update(payload).eq('order_id', id).select('*').single();
+  const result = await supabase.from('sales_orders').update(payload).eq('id', id).select('*').single();
   if (result.error) return result;
   return { data: mapSalesOrderRow(result.data), error: null };
 }
