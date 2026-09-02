@@ -24,8 +24,8 @@ export default function ProductionMetrics() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-semibold text-slate-900">Production Analytics</h3>
-        <p className="mt-1 text-sm text-slate-500">Weekly performance overview</p>
+        <h3 className="text-lg font-semibold text-slate-900">Production Analytics <span className="text-xs font-normal text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full">MOCK DATA</span></h3>
+        <p className="mt-1 text-sm text-slate-500">Hardcoded demonstration values — not connected to real production database (SCHEMA / ADMIN blocked).</p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">

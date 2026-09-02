@@ -1,3 +1,4 @@
+// MOCK DATA — not connected to real dispatch database (SCHEMA / ADMIN blocked)
 const dispatches = [
   { id: 'DIS001', customer: 'Premium Retail Inc', weight: '240kg', status: 'ready', priority: 'urgent', eta: 'Today' },
   { id: 'DIS002', customer: 'Tech Packaging Co', weight: '180kg', status: 'ready', priority: 'high', eta: 'Today' },

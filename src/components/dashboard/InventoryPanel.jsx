@@ -20,8 +20,8 @@ export default function InventoryPanel() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-semibold text-slate-900">Inventory Levels</h3>
-        <p className="mt-1 text-sm text-slate-500">Real-time stock monitoring</p>
+        <h3 className="text-lg font-semibold text-slate-900">Inventory Levels <span className="text-xs font-normal text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full">MOCK DATA</span></h3>
+        <p className="mt-1 text-sm text-slate-500">Hardcoded demonstration values — not connected to real inventory database (SCHEMA / ADMIN blocked).</p>
       </div>
 
       <div className="space-y-6">

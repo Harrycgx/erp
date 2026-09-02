@@ -63,9 +63,9 @@ export default function BoxIQ() {
             </div>
 
             <div className="mt-12 flex flex-wrap gap-8 text-sm font-semibold text-slate-500">
-              <span>120+ Brands</span>
-              <span>10K+ Shipments</span>
-              <span>98% On-Time Dispatch</span>
+              <span>90% Repeat Orders</span>
+              <span>Notebook Orders</span>
+              <span>2-3 Concurrent Jobs</span>
             </div>
           </div>
 
@@ -86,10 +86,10 @@ export default function BoxIQ() {
       <section className="border-y border-black/5 bg-white">
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-6 py-10 text-center md:grid-cols-4">
           {[
-            ["10K+", "Shipments Delivered"],
-            ["120+", "Brands Served"],
-            ["98%", "On-Time Dispatch"],
-            ["24h", "Quote Response Time"],
+            ["90%", "Repeat Orders"],
+            ["2-3", "Concurrent Jobs"],
+            ["~₹20L/mo", "Revenue"],
+            ["20-25", "Workers"],
           ].map(([number, text], i) => (
             <div key={i}>
               <div className="text-3xl font-black">{number}</div>
@@ -270,13 +270,13 @@ export default function BoxIQ() {
 
             <div className="mt-12 grid grid-cols-2 gap-6">
               <div className="rounded-3xl border border-black/5 bg-white p-8 shadow-sm">
-                <div className="text-4xl font-black">5L+</div>
-                <div className="mt-2 text-slate-500">Monthly Capacity</div>
+                <div className="text-4xl font-black">~₹20L</div>
+                <div className="mt-2 text-slate-500">Monthly Revenue (verif.)</div>
               </div>
 
               <div className="rounded-3xl border border-black/5 bg-white p-8 shadow-sm">
-                <div className="text-4xl font-black">24/7</div>
-                <div className="mt-2 text-slate-500">Production Support</div>
+                <div className="text-4xl font-black">Semi-Auto</div>
+                <div className="mt-2 text-slate-500">Machines (verif.)</div>
               </div>
             </div>
           </div>

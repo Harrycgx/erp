@@ -57,9 +57,9 @@ export default function Landing() {
           </div>
 
           <div className="flex gap-8 flex-wrap text-sm text-gray-400">
-            <div>120+ Brands</div>
-            <div>98% On-Time Dispatch</div>
-            <div>Pan India Delivery</div>
+            <div>90% Repeat Orders</div>
+            <div>2-3 Concurrent Jobs</div>
+            <div>WhatsApp / Call / Notebook</div>
           </div>
         </div>
 
